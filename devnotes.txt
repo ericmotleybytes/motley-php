@@ -1,0 +1,4 @@
+Development Notes:
+
+Useful Internet Resources:
+- https://www.loggly.com/ultimate-guide/php-logging-libraries/
