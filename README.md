@@ -1,2 +1,2 @@
 # motley-php
-Usefule PHP utility classes
+Useful PHP utility classes
