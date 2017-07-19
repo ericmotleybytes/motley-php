@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * @brief     File for Motley::GuidGenerator.
+ * @brief    File for Motley::GuidGenerator.
  * @details   This file has the source code for the Motley::GuidGenerator class.
  * @see       Motley::GuidGenerator
  * @author    Eric Alan Christiansen
@@ -10,6 +10,7 @@
  *            MIT License. See <https://opensource.org/licenses/MIT>.
  */
 namespace Motley;
+
 /**
  * @brief   Generate unique 128 bit GUIDs/UUIDs as 32 hex characters.
  * @details This class includes routines to generate GUIDs (Globally Unique
@@ -32,9 +33,13 @@ class GuidGenerator {
     /**
      * @brief class instance constructor.
      */
-    public function __construct() {
-        $this->upperFlag  = FALSE;
-        $this->dashesFlag = FALSE;
+    public function __construct(boolean $upFlag=null, boolean $dashFlag=null) {
+        if($upFlag!=null) {
+            $this->upperFlag  = FALSE;
+        }
+        if($dashFlag!=null) {
+            $this->dashesFlag = FALSE;
+        }
     }
 
     /**
