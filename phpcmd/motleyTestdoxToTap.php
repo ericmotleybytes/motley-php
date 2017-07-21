@@ -3,6 +3,13 @@
 /**
  * @file
  * @brief Convert phpunit testdox format unit test results to TAP format
+ * @details This file contains the a command line program which can
+ *   convert testdox format unit test results (e.g., from PHPUnit) to
+ *   TAP format results.
+ * @verbatim
+ * Usage:
+ *   motleyTestDoxToTap [<input-file> [<output-file>]]
+ * @endverbatim
  */
 
  $inputFilename  = 'php://stdin';  # default input

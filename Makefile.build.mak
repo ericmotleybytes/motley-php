@@ -14,7 +14,10 @@ helpbuild:
 build: bin \
   bin/motleyGuid \
   bin/motleyTestdoxToTap \
-  phplib/Motley/GuidGenerator.chk
+  phplib/Motley/GuidGenerator.chk \
+  doxygen/html \
+  doxygen/html/index.html \
+  doxygen/latex/refman.pdf
 	@echo "[build complete]"
 
 bin:
@@ -39,10 +42,26 @@ phpcmd/motleyTestdoxToTap.chk : phpcmd/motleyTestdoxToTap.php
 phplib/Motley/GuidGenerator.chk : phplib/Motley/GuidGenerator.php
 	php --syntax-check $< > $@
 
+doxygen/html :
+	mkdir -p $@
+
+doxygen/html/index.html : \
+  Doxyfile \
+  $(wildcard phplib/Motley/*.php)
+	@echo "doxygen building documentation..."
+	doxygen $< > doxygen/doxygen.log 2>&1
+
+doxygen/latex/refman.pdf : \
+  doxygen/html/index.html \
+  doxygen/latex/refman.tex
+	@echo "generating '$@'..."
+	cd doxygen/latex; make > ../latex.log 2>&1
+
 #### Cleaning built stuff ####
 
 .PHONY: clean
 clean: cleantest
-	rm -f phpcmd/*.chk
-	rm -f phplib/Motley/*.chk
-	rm -f bin/*
+	rm  -f phpcmd/*.chk
+	rm  -f phplib/Motley/*.chk
+	rm  -f bin/*
+	rm -rf doxygen

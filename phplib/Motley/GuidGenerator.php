@@ -5,7 +5,6 @@
  * @details   This file has the source code for the Motley::GuidGenerator class.
  * @see       Motley::GuidGenerator
  * @author    Eric Alan Christiansen
- * @date      2017
  * @copyright Copyright (c) 2017, Eric Alan Christiansen.
  *            MIT License. See <https://opensource.org/licenses/MIT>.
  */

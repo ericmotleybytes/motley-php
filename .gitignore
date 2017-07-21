@@ -1,4 +1,5 @@
 bin/*
+doxygen/*
 scratch/*
 share/*
 vendor/*
