@@ -1,0 +1,14 @@
+{
+    "name": "ericmotleybytes/motley-php",
+    "description": "Useful PHP utility classes and programs",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Eric Alan Christiansen",
+            "email": "eric@motleybytes.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}

@@ -2,32 +2,35 @@
 # This file designed to be included by Makefile.
 ###
 
+.PHONY: helptest
+helptest :
+	@echo "Test Options:"
+	@echo "  make test      # run unit tests as needed."
+	@echo "  make cleantest # purge test data, forces full retest."
+
 #### Testing stuff ####
 
-#.PHONY: test
-test: test/auxilium.taplog test/auxilium.tapchk
+.PHONY: test
+test: test/motleyphp.tapchk
+	auxchecktap $<
+	@echo "[tests complete]"
 
-test/auxilium.taplog : bin/auxenv \
-  bin/auxsource \
-  bin/auxwhere \
-  bin/auxalias \
-  bin/auxchecktap \
-  bin/auxguid \
-  bin/auxilium \
-  $(wildcard test/*.bash) \
-  $(wildcard test/*.bats)
-	cd test; bats -t . | tee auxilium.taplog
+test/motleyphp.testdox: \
+  $(wildcard test/*Test.php) \
+  $(wildcard bin/*) \
+  $(wildcard phplib/Motley/*.php)
+	phpunit test --testdox-text $@ --whitelist phplib --coverage-text=test/motleyphp.cov.txt
 
-test/auxilium.tapchk : test/auxilium.taplog
-	bin/auxchecktap $< > $@
+test/motleyphp.taplog : test/motleyphp.testdox
+	bin/motleyTestdoxToTap $< $@
 
-.PHONY: checktest
-checktest: test/auxilium.tapchk
-	bin/auxchecktap $<
+test/motleyphp.tapchk : test/motleyphp.taplog
+	auxchecktap $< > $@
 
 #### Cleaning test logs ####
 
 .PHONY: cleantest
 cleantest:
-	rm -f test/auxilium.taplog
-	rm -f test/auxilium.tapchk
+	rm -f test/motleyphp.testdox
+	rm -f test/motleyphp.taplog
+	rm -f test/motleyphp.tapchk

@@ -33,12 +33,16 @@ class GuidGenerator {
     /**
      * @brief class instance constructor.
      */
-    public function __construct(boolean $upFlag=null, boolean $dashFlag=null) {
-        if($upFlag!=null) {
-            $this->upperFlag  = FALSE;
+    public function __construct(bool $upFlag=null, bool $dashFlag=null) {
+        if($upFlag==null) {
+            $this->upperFlag = FALSE;
+        } else {
+            $this->upperFlag = $upFlag;
         }
-        if($dashFlag!=null) {
+        if($dashFlag==null) {
             $this->dashesFlag = FALSE;
+        } else {
+            $this->dashesFlag = $dashFlag;
         }
     }
 
@@ -55,20 +59,40 @@ class GuidGenerator {
 
     /**
      * @brief Control if resultant hex characters upper or lower case.
+     * @param bool $flag - TRUE means upper case, FALSE lower case.
+     * @returns Previous value of $this->upperFlag.
      */
-    public function setUpperFlag(boolean $flag) {
+    public function setUpperFlag(bool $flag) : bool {
         $oldUpperFlag = $this->upperFlag;
         $this->upperFlag = $flag;
         return $oldUpperFlag;
     }
 
     /**
-     * @brief Control if resultant hex characters include dash separators.
+     * @brief Return true if resultant hex characters upper case.
+     * @returns TRUE is using upper case, else FALSE.
      */
-    public function setDashesFlag(boolean $flag) {
+    public function getUpperFlag() : bool {
+        return $this->upperFlag;
+    }
+
+    /**
+     * @brief Control if resultant hex characters include dash separators.
+     * @param boolean $flag - TRUE means embedded dashes, FALSE no dashes.
+     * @returns Previous value of $this->dashesFlag.
+     */
+    public function setDashesFlag(bool $flag) : bool {
         $oldDashesFlag = $this->dashesFlag;
         $this->dashesFlag = $flag;
         return $oldDashesFlag;
+    }
+
+    /**
+     * @brief Return true if resultant hex characters embed dashes.
+     * @returns TRUE if embedding dashes, else FALSE.
+     */
+    public function getDashesFlag() : bool {
+        return $this->dashesFlag;
     }
 
     /**
@@ -77,7 +101,7 @@ class GuidGenerator {
      *         at http://php.net/manual/en/function.com-create-guid.php
      * @returns A string with a hex representation of the 128 bit GUID.
      */
-    public function generateGuid() {
+    public function generateGuid() : string {
         $result = NULL;
         if (function_exists('openssl_random_pseudo_bytes') === true) {
             // OSX/Linux generation method
@@ -96,6 +120,7 @@ class GuidGenerator {
                 $result = str_replace('-','',$result);
             }
         } else {
+            // generic fallback method
             mt_srand((double)microtime() * 10000);
             $charid = strtolower(md5(uniqid(rand(), true)));
             if ($this->dashesFlag) {

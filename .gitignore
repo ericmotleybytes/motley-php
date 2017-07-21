@@ -1,3 +1,5 @@
 scratch/*
 bin/*
 MyProject.komodoproject
+vendor/*
+*.chk

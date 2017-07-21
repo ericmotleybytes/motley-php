@@ -7,28 +7,42 @@ helpbuild:
 	@echo "Common building usage:"
 	@echo "  make helpbuild     # display this screen."
 	@echo "  make build         # build stuff."
-	@echo "  make test          # run tests."
-	@echo "  make checktest     # run tests and remember results."
 	@echo "Common build cleanup usage:"
 	@echo "  make clean         # clean stuff."
 
 .PHONY: build
-build: bins
-
-.PHONY: bins
-bins: bin bin/motley_guid
+build: bin \
+  bin/motleyGuid \
+  bin/motleyTestdoxToTap \
+  phplib/Motley/GuidGenerator.chk
+	@echo "[build complete]"
 
 bin:
 	mkdir $@
 	chmod $(DIRMODE) $@
 
-bin/motley_guid : phpcmd/motley_guid.php
+bin/motleyGuid : phpcmd/motleyGuid.php phpcmd/motleyGuid.chk
+	cp $< $@
+	chmod $(BINMODE) $@
+
+phpcmd/motleyGuid.chk : phpcmd/motleyGuid.php
+	php --syntax-check $< > $@
+
+bin/motleyTestdoxToTap : phpcmd/motleyTestdoxToTap.php phpcmd/motleyTestdoxToTap.chk
 	php --syntax-check $<
 	cp $< $@
 	chmod $(BINMODE) $@
 
+phpcmd/motleyTestdoxToTap.chk : phpcmd/motleyTestdoxToTap.php
+	php --syntax-check $< > $@
+
+phplib/Motley/GuidGenerator.chk : phplib/Motley/GuidGenerator.php
+	php --syntax-check $< > $@
+
 #### Cleaning built stuff ####
 
 .PHONY: clean
-clean:
-	rm -f bin/motley_guid
+clean: cleantest
+	rm -f phpcmd/*.chk
+	rm -f phplib/Motley/*.chk
+	rm -f bin/*

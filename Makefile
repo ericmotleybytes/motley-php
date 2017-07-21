@@ -20,6 +20,8 @@ ifndef VERBOSE
 MAKEFLAGS += --no-print-directory
 endif
 
+.DELETE_ON_ERROR:
+
 .PHONY: all
 all : help
 
@@ -31,6 +33,7 @@ help:
 	@echo "  make               # display this screen."
 	@echo "  make help          # display this screen."
 	@echo "  make helpbuild     # help building/cleaning sources."
+	@echo "  make helptest      # help testing."
 	@echo "  make helpinstall   # help install/uninstall."
 	@echo "  make helpgit       # help common git tasks."
 	@echo "  make helprel       # help common GitHub release tasks."
