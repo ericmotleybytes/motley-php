@@ -1,5 +1,6 @@
-scratch/*
 bin/*
-MyProject.komodoproject
+scratch/*
+share/*
 vendor/*
 *.chk
+MyProject.komodoproject
