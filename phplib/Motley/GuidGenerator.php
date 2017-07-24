@@ -1,37 +1,30 @@
 <?php
 /**
+ * Class source code file.
  * @file
- * @brief    File for Motley::GuidGenerator.
- * @details   This file has the source code for the Motley::GuidGenerator class.
- * @see       Motley::GuidGenerator
  * @author    Eric Alan Christiansen
- * @copyright Copyright (c) 2017, Eric Alan Christiansen.
+ * @copyright Copyright (c) 2017, Eric Alan Christiansen.\n
  *            MIT License. See <https://opensource.org/licenses/MIT>.
  */
 namespace Motley;
 
-/**
- * @brief   Generate unique 128 bit GUIDs/UUIDs as 32 hex characters.
- * @details This class includes routines to generate GUIDs (Globally Unique
- *          IDentifies), also called UUIDs (Universally Unique IDentifiers)
- *          in accordance with UUID V4 standards
- *          (see <https://en.wikipedia.org/wiki/Universally_unique_identifier>).
- * @remark  This file uses Doxygen compatible comments.
- */
+/// Generate unique 128 bit GUIDs/UUIDs as 32 hex characters.
+/// This class includes routines to generate GUIDs (Globally Unique
+///   IDentifiers), also called UUIDs (Universally Unique IDentifiers)
+///   in accordance with UUID V4 standards (see
+///   <https://en.wikipedia.org/wiki/Universally_unique_identifier>).
 class GuidGenerator {
 
-    /**
-     * @brief   Global Motley::GuidGenerator instance variable.
-     * @details An application global variable which contains the default sharable
-     *          global GuidGenerator object instance.
-     */
+    /// Global Motley::GuidGenerator instance variable.
+    /// An application global variable which contains the default sharable
+    ///   global GuidGenerator object instance.
     protected static $GlobalGuidGenerator = NULL;
     protected $upperFlag  = FALSE;  ///< Output GUID hex characters in uppercase?
     protected $dashesFlag = FALSE;  ///< Embed dashes in output hex?
 
-    /**
-     * @brief class instance constructor.
-     */
+    /// Class instance constructor.
+    /// @param $upFlag - True for uppercase hex letter, false for lower.
+    /// @param $dashFlag - True for embedded dashes, false for no dashes.
     public function __construct(bool $upFlag=null, bool $dashFlag=null) {
         if($upFlag==null) {
             $this->upperFlag = FALSE;
@@ -45,63 +38,44 @@ class GuidGenerator {
         }
     }
 
-    /**
-     * @brief Static function to get sharable, global, GuidGenerator instance.
-     * @returns An application sharable instance of Motley::GuidGenerator.
-     */
-    public static function getGlobalGuidGenerator() {
-        if (self::$GlobalGuidGenerator==NULL) {
-            self::$GlobalGuidGenerator = new GuidGenerator();
-        }
-        return self::$GlobalGuidGenerator;
-    }
-
-    /**
-     * @brief Control if resultant hex characters upper or lower case.
-     * @param bool $flag - TRUE means upper case, FALSE lower case.
-     * @returns Previous value of $this->upperFlag.
-     */
+    /// Control if resultant hex characters upper or lower case.
+    /// @param bool $flag - TRUE means upper case, FALSE lower case.
+    /// @returns Previous value of $this->upperFlag.
     public function setUpperFlag(bool $flag) : bool {
         $oldUpperFlag = $this->upperFlag;
         $this->upperFlag = $flag;
         return $oldUpperFlag;
     }
 
-    /**
-     * @brief Return true if resultant hex characters upper case.
-     * @returns TRUE is using upper case, else FALSE.
-     */
+    /// Return true if resultant hex characters upper case.
+    /// @returns TRUE is using upper case, else FALSE.
     public function getUpperFlag() : bool {
         return $this->upperFlag;
     }
 
-    /**
-     * @brief Control if resultant hex characters include dash separators.
-     * @param boolean $flag - TRUE means embedded dashes, FALSE no dashes.
-     * @returns Previous value of $this->dashesFlag.
-     */
+    /// Control if resultant hex characters include dash separators.
+    /// @param boolean $flag - TRUE means embedded dashes, FALSE no dashes.
+    /// @returns Previous value of $this->dashesFlag.
     public function setDashesFlag(bool $flag) : bool {
         $oldDashesFlag = $this->dashesFlag;
         $this->dashesFlag = $flag;
         return $oldDashesFlag;
     }
 
-    /**
-     * @brief Return true if resultant hex characters embed dashes.
-     * @returns TRUE if embedding dashes, else FALSE.
-     */
+    /// Return true if resultant hex characters embed dashes.
+    /// @returns TRUE if embedding dashes, else FALSE.
     public function getDashesFlag() : bool {
         return $this->dashesFlag;
     }
 
-    /**
-     * @brief Generate a new, unique V4 GUID/UUID.
-     * @remark Modeled after example code
-     *         at http://php.net/manual/en/function.com-create-guid.php
-     * @returns A string with a hex representation of the 128 bit GUID.
-     */
+    /// Generate a new, unique V4 GUID/UUID.
+    /// Modeled after example code
+    ///   at <http://php.net/manual/en/function.com-create-guid.php>.
+    /// @returns A string with a hex representation of the 128 bit GUID.
     public function generateGuid() : string {
         $result = NULL;
+        // @codeCoverageIgnoreStart
+        // Impossible to force all fallback logic.
         if (function_exists('openssl_random_pseudo_bytes') === true) {
             // OSX/Linux generation method
             $data = openssl_random_pseudo_bytes(16);
@@ -138,7 +112,27 @@ class GuidGenerator {
         } else {
             $result = strtolower($result);
         }
+        // @codeCoverageIgnoreEnd
         return $result;
     }
+
+    /// Static function to get sharable, global, GuidGenerator instance.
+    /// @return An application sharable instance of Motley::GuidGenerator.
+    public static function getGlobalGuidGenerator() {
+        if (self::$GlobalGuidGenerator==NULL) {
+            self::$GlobalGuidGenerator = new GuidGenerator();
+        }
+        return self::$GlobalGuidGenerator;
+    }
+
+    #/// Static function designed to run from command line utility.
+    #/// @return A status code, zero on success, non-zero on error.
+    #public static function commandRunner() {
+    #    $statusCode = 0;  # assume ok
+    #    $guidGen = new GuidGenerator();
+    #    # TBD
+    #    return $statusCode;
+    #}
+
 }
 ?>

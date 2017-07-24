@@ -1,19 +1,22 @@
 #!/usr/bin/env php
 <?php
-/**
- * @file
- * @brief Convert phpunit testdox format unit test results to TAP format
- * @details This file contains the a command line program which can
- *   convert testdox format unit test results (e.g., from PHPUnit) to
- *   TAP format results.
- * @verbatim
- * Usage:
- *   motleyTestDoxToTap [<input-file> [<output-file>]]
- * @endverbatim
- */
+/// Convert phpunit testdox format unit test results to TAP format.
+/// This file contains the a command line program which can
+/// convert testdox format unit test results (e.g., from PHPUnit) to
+/// TAP format results.\n
+/// See <https://testanything.org/> for more TAP information.\n
+/// See <https://phpunit.de/> for more PHPUnit testdox information.
+/// @file
+/// @verbatim
+/// Usage:
+///   motleyTestDoxToTap [<input-file> [<output-file>]]
+/// @endverbatim
 
- $inputFilename  = 'php://stdin';  # default input
- $outputFilename = 'php://stdout'; # default output
+$inputFilename  = 'php://stdin';  ///< Default input.
+$outputFilename = 'php://stdout'; ///< Default output.
+
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
+
 // parse command line options
 if (count($argv)>1) {
     if ($argv[1]!="-") {
@@ -73,5 +76,8 @@ for($idx=0; $idx<$testCount; $idx++) {
     }
 }
 fclose($oFile);
+
+#endif /* DOXYGEN_SHOULD_SKIP_THIS */
+
 exit(0);
 ?>

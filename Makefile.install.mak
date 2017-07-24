@@ -24,6 +24,7 @@ install : installinfo \
   $(PREFIX)/phplib \
   $(PREFIX)/phplib/Motley \
   $(PREFIX)/phplib/Motley/GuidGenerator.php \
+  $(PREFIX)/phplib/Motley/CommandLineArgumentSyntax.php \
   installinfo2
 
 .PHONY: installinfo
@@ -59,6 +60,11 @@ $(PREFIX)/phplib/Motley/GuidGenerator.php : phplib/Motley/GuidGenerator.php
 	cp -a "$<" "$@"
 	chmod $(SRCMODE) "$@"
 
+$(PREFIX)/phplib/Motley/CommandLineArgumentSyntax.php : \
+  phplib/Motley/CommandLineArgumentSyntax.php
+	cp -a "$<" "$@"
+	chmod $(SRCMODE) "$@"
+
 #### uninstall stuff ####
 
 .PHONY: uninstall
@@ -67,6 +73,7 @@ uninstall:
 	rm -f $(PREFIX)/bin/motleyGuid
 	rm -f $(PREFIX)/bin/motleyTestdoxToTap
 	rm -f $(PREFIX)/phplib/Motley/GuidGenerator.php
+	rm -f $(PREFIX)/phplib/Motley/CommandLineArgumentSyntax.php
 
 #### sys stuff ####
 

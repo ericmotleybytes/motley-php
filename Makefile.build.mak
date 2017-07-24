@@ -9,59 +9,70 @@ helpbuild:
 	@echo "  make build         # build stuff."
 	@echo "Common build cleanup usage:"
 	@echo "  make clean         # clean stuff."
+	@echo "Other:"
+	@echo "  make showdocwarn   # show documentation warnings."
+	@echo "  make showcov       # show coverage."
 
 .PHONY: build
 build: bin \
   bin/motleyGuid \
   bin/motleyTestdoxToTap \
-  phplib/Motley/GuidGenerator.chk \
-  doxygen/html \
-  doxygen/html/index.html \
-  doxygen/latex/refman.pdf
+  gen/doxygen/html \
+  gen/doxygen/html/index.html \
+  gen/doxygen/latex/refman.pdf
 	@echo "[build complete]"
 
 bin:
 	mkdir $@
 	chmod $(DIRMODE) $@
 
-bin/motleyGuid : phpcmd/motleyGuid.php phpcmd/motleyGuid.chk
+bin/motleyGuid : phpcmd/motleyGuid.php
 	cp $< $@
 	chmod $(BINMODE) $@
 
-phpcmd/motleyGuid.chk : phpcmd/motleyGuid.php
-	php --syntax-check $< > $@
-
-bin/motleyTestdoxToTap : phpcmd/motleyTestdoxToTap.php phpcmd/motleyTestdoxToTap.chk
-	php --syntax-check $<
+bin/motleyTestdoxToTap : phpcmd/motleyTestdoxToTap.php
 	cp $< $@
 	chmod $(BINMODE) $@
 
-phpcmd/motleyTestdoxToTap.chk : phpcmd/motleyTestdoxToTap.php
-	php --syntax-check $< > $@
-
-phplib/Motley/GuidGenerator.chk : phplib/Motley/GuidGenerator.php
-	php --syntax-check $< > $@
-
-doxygen/html :
+gen/doxygen/html :
 	mkdir -p $@
 
-doxygen/html/index.html : \
+gen/doxygen/html/index.html : \
   Doxyfile \
   $(wildcard phplib/Motley/*.php)
 	@echo "doxygen building documentation..."
-	doxygen $< > doxygen/doxygen.log 2>&1
+	doxygen $< > gen/doxygen/doxygen.log 2>&1
 
-doxygen/latex/refman.pdf : \
-  doxygen/html/index.html \
-  doxygen/latex/refman.tex
+gen/doxygen/latex/refman.pdf : \
+  gen/doxygen/html/index.html \
+  gen/doxygen/latex/refman.tex
 	@echo "generating '$@'..."
-	cd doxygen/latex; make > ../latex.log 2>&1
+	cd gen/doxygen/latex; make > ../latex.log 2>&1
+
+#### Other stuff ####
+.PHONY: showdocwarn
+showdocwarn:
+	@grep -e '\(warning:\)\|\(error:\)' gen/doxygen/doxygen.log
+
+.PHONY: showcov
+showcov:
+	@tail --lines=+3 test/motleyphp.cov.txt \
+          | sed -e s/^\ *$$//g \
+          | sed -e s/\ $$//g \
+          | sed -e /^\ *$$/d \
+          | sed -e s/^\ S/S/g \
+          | tail --lines=+7
+	@tail --lines=+3 test/motleyphp.cov.txt \
+          | sed -e s/^\ *$$//g \
+          | sed -e s/\ $$//g \
+          | sed -e /^\ *$$/d \
+          | sed -e s/^\ S/S/g \
+          | tail --lines=+3 \
+          | head --lines=4
 
 #### Cleaning built stuff ####
 
 .PHONY: clean
 clean: cleantest
-	rm  -f phpcmd/*.chk
-	rm  -f phplib/Motley/*.chk
 	rm  -f bin/*
-	rm -rf doxygen
+	rm -rf gen/doxygen
