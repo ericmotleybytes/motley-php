@@ -47,6 +47,5 @@ class Command {
     public function getCmdDescription() : string {
         return $this->cmdDescription;
     }
-
 }
 ?>

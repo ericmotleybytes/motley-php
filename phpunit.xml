@@ -22,7 +22,9 @@
         <log type="testdox-text"
             target="./test/motleyphp.testdox" />
         <log type="testdox-html"
-            target="./gen/phpunit/html/testdox"/>
+            target="./gen/phpunit/html/testdox.html"/>
+        <log type="testdox-xml"
+            target="./gen/phpunit/html/testdox.xml"/>
         <log type="coverage-text"
             target="./test/motleyphp.cov.txt"
             showUncoveredFiles="true" />
@@ -33,5 +35,8 @@
             hightlight="true"
             lowUpperBound="50"
             highlowerbound="80" />
+        <log type="coverage-xml"
+            target="./gen/phpunit/html/coverage-xml"
+            showUncoveredFiles="true" />
     </logging>
 </phpunit>

@@ -11,10 +11,11 @@ use Motley\CommandOpt;
 /// Represent a command line option group.
 class CommandOptGrp {
 
-    protected $optGrpName       = "";       ///< Option group name.
-    protected $optGrpDescription= "";       ///< Option group description.
-    protected $options          = array();  ///< CommandOpt objects in group.
-    protected $displayName      = "";       ///< Display name for option group.
+    protected $optGrpName        = "Options"; ///< Option group name.
+    protected $optGrpDescription =
+        "Command line options.";              ///< Option group description.
+    protected $options           = array();   ///< CommandOpt objects in group.
+    protected $displayName       = "";        ///< Display name for option group.
 
     /// Class instance constructor.
     public function __construct(string $name=null, string $desc=null) {
