@@ -6,6 +6,7 @@
 
 use PHPUnit\Framework\Testcase;
 use Motley\Command;
+use Motley\CommandArrange;
 
 /// Tests the Motley::Command class.
 class T221_MotleyCommandTest extends Testcase {
@@ -40,5 +41,32 @@ class T221_MotleyCommandTest extends Testcase {
         $this->assertEquals($cmdDesc1b,$cmd1->getCmdDescription());
     }
 
+    /// Test set/get display name functions.
+    public function testSetGetDisplayName() {
+        $cmdName = "NormalName";
+        $cmdDisplayName = "DisplayName";
+        $cmd = new Command($cmdName);
+        $this->assertEquals($cmdName,$cmd->getDisplayName());
+        $cmd->setDisplayName($cmdDisplayName);
+        $this->assertEquals($cmdDisplayName,$cmd->getDisplayName());
+    }
+
+    /// Test arrangement functions.
+    public function testAddGetClearArrangements() {
+        $cmd = new Command("cmd");
+        $arrang1 = new CommandArrange("a1");
+        $arrang2 = new CommandArrange("a2");
+        $exparr = array();
+        $this->assertEquals($exparr,$cmd->getArrangements());
+        $exparr[] = $arrang1;
+        $cmd->addArragement($arrang1);
+        $this->assertEquals($exparr,$cmd->getArrangements());
+        $exparr[] = $arrang2;
+        $cmd->addArragement($arrang2);
+        $this->assertEquals($exparr,$cmd->getArrangements());
+        $exparr = array();
+        $cmd->clearArrangements();
+        $this->assertEquals($exparr,$cmd->getArrangements());
+    }
 }
 ?>

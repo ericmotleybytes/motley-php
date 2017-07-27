@@ -5,7 +5,10 @@
 ///   MIT License. See <https://opensource.org/licenses/MIT>.
 
 use PHPUnit\Framework\Testcase;
-use Motley\Command;
+use Motley\CommandArrange;
+use Motley\CommandArg;
+use Motley\CommandOpt;
+use Motley\CommandOptGrp;
 
 /// Tests the Motley::Command class.
 class T221_MotleyCommandArrangeTest extends Testcase {
@@ -14,10 +17,10 @@ class T221_MotleyCommandArrangeTest extends Testcase {
     public function testNew() {
         $cmdArr1 = new CommandArrange();
         $this->assertInstanceOf(CommandArrange::class,$cmdArr1);
-        $cmdArr2 = new Command("cmdArr2");
+        $cmdArr2 = new CommandArrange("cmdArr2");
         $this->assertInstanceOf(CommandArrange::class,$cmdArr2);
-        $cmdArr3 = new Command("cmdArr3","A test instance.");
-        $this->assertInstanceOf(CommandArrange::class,$cmd3);
+        $cmdArr3 = new CommandArrange("cmdArr3","A test instance.");
+        $this->assertInstanceOf(CommandArrange::class,$cmdArr3);
     }
 
     /// Test setCmdArrangeName/getCmdArrangeName functions.
@@ -26,7 +29,7 @@ class T221_MotleyCommandArrangeTest extends Testcase {
         $cmdArrName1b = "cmdArr1b";
         $cmdArr1 = new CommandArrange($cmdArrName1a);
         $this->assertEquals($cmdArrName1a,$cmdArr1->getArrangeName());
-        $cmdArr1->setArrangeName($cmdArr1b);
+        $cmdArr1->setArrangeName($cmdArrName1b);
         $this->assertEquals($cmdArrName1b,$cmdArr1->getArrangeName());
     }
 
@@ -34,9 +37,9 @@ class T221_MotleyCommandArrangeTest extends Testcase {
     public function testSetGetCmdDescription() {
         $cmdArrDesc1a = "cmdArr description 1a.";
         $cmdArrDesc1b = "cmdArr description 1b.";
-        $cmdArr1 = new Command("cmdArr1",$cmdArrDesc1a);
+        $cmdArr1 = new CommandArrange("cmdArr1",$cmdArrDesc1a);
         $this->assertEquals($cmdArrDesc1a,$cmdArr1->getArrangeDescription());
-        $cmdArr1->setCmdDescription($cmdArrDesc1b);
+        $cmdArr1->setArrangeDescription($cmdArrDesc1b);
         $this->assertEquals($cmdArrDesc1b,$cmdArr1->getArrangeDescription());
     }
 
@@ -48,6 +51,23 @@ class T221_MotleyCommandArrangeTest extends Testcase {
         $this->assertEquals($arrangeName,$arrange->getDisplayName());
         $arrange->setDisplayName($arrangeDisplayName);
         $this->assertEquals($arrangeDisplayName,$arrange->getDisplayName());
+    }
+
+    /// Test define/get/clear arrangement component array.
+    public function testDefineGetClearArrangement() {
+        $arran = new CommandArrange("arran1");
+        $exparr = array();
+        $this->assertEquals($exparr,$arran->getArrangement());
+        $opt1 = new CommandOpt("opt1","opt1 desc",array("-x"));
+        $opt2 = new CommandOpt("opt2","opt2 desc",array("-y"));
+        $optgrp = new CommandOptGrp("optgrp");
+        $optgrp->addOption($opt2);
+        $arg = new CommandArg("arg1");
+        $components = array($opt1,$optgrp,$arg);
+        $arran->defineArrangement($components);
+        $this->assertEquals($components,$arran->getArrangement());
+        $arran->clearArrangement();
+        $this->assertEquals(array(),$arran->getArrangement());
     }
 }
 ?>

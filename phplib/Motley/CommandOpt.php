@@ -18,12 +18,21 @@ class CommandOpt {
     protected $optArgument      = null;     ///< Option argument, if any.
 
     /// Class instance constructor.
-    public function __construct(string $name=null, string $desc=null) {
+    /// @param $name - optional name for option.
+    /// @param $desc - optional description for option.
+    /// @param $switches - optional array of switches.
+    public function __construct(
+        string $name=null,
+        string $desc=null,
+        array $switches=null) {
         if(!is_null($name)) {
             $this->optName = $name;
         }
         if(!is_null($desc)) {
             $this->optDescription = $desc;
+        }
+        if(!is_null($switches)) {
+            $this->addOptSwitches($switches);
         }
         $guidGen = new GuidGenerator(false,false);
         $this->instanceGuid = $guidGen->generateGuid();
@@ -111,6 +120,7 @@ class CommandOpt {
                 continue;
             }
             if(!in_array($switch,$this->optSwitches)) {
+                # only add non-duplicates
                 $this->optSwitches[] = $switch;
             }
         }

@@ -3,3 +3,4 @@ Development Notes:
 Useful Internet Resources:
 - https://www.loggly.com/ultimate-guide/php-logging-libraries/ (general guide to php logging)
 - https://github.com/PHPointless/monolol (great php logger)
+- https://moquet.net/blog/distributing-php-cli/

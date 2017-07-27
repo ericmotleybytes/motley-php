@@ -15,6 +15,7 @@ class CommandOptGrp {
     protected $optGrpDescription =
         "Command line options.";              ///< Option group description.
     protected $options           = array();   ///< CommandOpt objects in group.
+    protected $switches          = array();   ///< Switches from all options.
     protected $displayName       = "";        ///< Display name for option group.
 
     /// Class instance constructor.
@@ -65,7 +66,17 @@ class CommandOptGrp {
                 return count($this->options);
             }
         }
+        $switches = array();
+        foreach($option->getOptSwitches() as $switch) {
+            if(in_array($switch,$this->switches)) {
+                $msg = "Switch '$switch' already used in group.";
+                trigger_error($msg,E_USER_WARNING);
+                return count($this->options);
+            }
+            $switches[] = $switch;
+        }
         $this->options[] = $option;
+        $this->switches = array_merge($this->switches,$switches);
         return count($this->options);
     }
 
@@ -77,7 +88,8 @@ class CommandOptGrp {
 
     /// Clear the list of options in the group.
     public function clearOptions() {
-        $this->options = array();
+        $this->options  = array();
+        $this->switches = array();
     }
 
     /// Set the option group display name for syntax help and so forth.

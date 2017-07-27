@@ -13,14 +13,15 @@ class CommandArrange {
     protected $arrName        = "Standard";         ///< Arrangement name.
     protected $arrDescription = "Standard usage.";  ///< Arrangement description.
     protected $displayName    = "";                 ///< Arrangement display name.
+    protected $components     = array();            ///< CommandOptGrp and CommandArg list.
 
     /// Class instance constructor.
     public function __construct(string $name=null, string $desc=null) {
         if(!is_null($name)) {
-            $this->argName = $name;
+            $this->arrName = $name;
         }
         if(!is_null($desc)) {
-            $this->argDescription = $desc;
+            $this->arrDescription = $desc;
         }
         $guidGen = new GuidGenerator(false,false);
         $this->instanceGuid = $guidGen->generateGuid();
@@ -67,20 +68,45 @@ class CommandArrange {
         return $name;
     }
 
-    /// Register a command line arrangement.
+    /// Define a command line arrangement.
     /// @param $components - An array of CommandOptGrp and CommandArg objects.
-    public function resisterArrangement(array $components) {
+    public function defineArrangement(array $components) {
+        # make a pass to verify only CommandOptGrp or CommandArg objects.
+        $validClassNames = array(
+            "Motley\CommandOptGrp",
+            "Motley\CommandOpt",
+            "Motley\CommandArg"
+        );
         foreach($components as $component) {
-            if (is_a($component,"Motley\CommandOptGrp")) {
-                
-            } elseif(is_a($component,"Motley\CommandArg")) {
-                
-            } else {
-                $msg = "Object is not a CommandOptGrp or CommandArc object.";
+            $classOk = false;
+            foreach($validClassNames as $validClassName) {
+                if(is_a($component,$validClassName)) {
+                    $classOk = true;
+                    break;
+                }
+            }
+            if(!$classOk) {
+                $msg = "Class " . get_class($component);
+                $msg = $msg . " is not in " . implode(" ",$validClassNames);
                 trigger_error($msg,E_USER_WARNING);
-                continue;
+                return;
             }
         }
+        # make a final pass to save components
+        foreach($components as $component) {
+            $this->components[] = $component;
+        }
+    }
+
+    /// Get the currently defined arrangement array.
+    /// @returns The arrangement component array of option groups, options, and args.
+    public function getArrangement() {
+        return $this->components;
+    }
+
+    /// Clear the arrangement component array.
+    public function clearArrangement() {
+        $this->components = array();
     }
 }
 ?>
