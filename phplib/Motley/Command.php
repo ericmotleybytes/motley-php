@@ -6,7 +6,11 @@
 namespace Motley;
 
 use Motley\CommandArg;
+use Motley\CommandOpt;
+use Motley\CommandOptGrp;
+use Motley\CommandDoubleDash;
 use Motley\CommandArrange;
+use Motley\UsageFormatter;
 
 /// Represent a command line option.
 class Command {
@@ -88,25 +92,121 @@ class Command {
         $this->cmdArrangements = array();
     }
 
-    /// Get help information.
-    /// @param $style - Style of help display information. Legal values
-    ///   include Command::PLAIN_STYLE ("plain').
-    public function getHelp(string $style=self::PLAIN_STYLE) : string {
-        if ($style==self::PLAIN_STYLE) {
-            $result = "Usage:" . PHP_EOL;
-            foreach($this->arrangements as $arrangement) {
-                # TBD
+    /// Get textual help information.
+    public function getHelp() : string {
+        $masterArgList = array();
+        $masterOptList = array();
+        $masterOptGrpList = array();
+        $fmt = new UsageFormatter();
+        $colWidth = $fmt->getColumnWidth();
+        $descCol = (int)($colWidth/3);
+        $descCol = min($descCol,40);
+        $descCol = max($descCol,4);
+        $fmt->setLeftIndent(0);
+        $fmt->setRightIndent(0);
+        $fmt->setContinueIndent(2);
+        $fmt->formatChunk("Name:");
+        $fmt->formatBreak();
+        $fmt->setLeftIndent(2);
+        $fmt->formatChunk($this->cmdName . " -");
+        $fmt->formatText($this->cmdDescription);
+        $fmt->formatBreak();
+        $fmt->setLeftIndent(0);
+        $fmt->formatChunk("Usage:");
+        $fmt->formatBreak();
+        $fmt->setLeftIndent(2);
+        foreach($this->cmdArrangements as $arrangement) {
+            $fmt->formatChunk($this->getDisplayName());
+            $components = $arrangement->getComponents();
+            foreach($components as $component) {
+                $obj = $component[CommandArrange::OBJ_KEY];
+                $opt = $component[CommandArrange::OPT_KEY];
+                $rep = $component[CommandArrange::REP_KEY];
+                if(is_a($obj,"\Motley\CommandArg")) {
+                    $masterArgList[] = $obj;
+                    $argString = $obj->getDisplayName();
+                    if($rep) {
+                        $argString .= " ...";
+                    }
+                    if($opt) {
+                        $argString = '[' . $argString . ']';
+                    }
+                    $fmt->formatChunk($argString);
+                } elseif(is_a($obj,"\Motley\CommandOpt")) {
+                    $masterOptList[] = $obj;
+                    $switchesString = $obj->getSwitchesString();
+                    if($opt) {
+                        $switchesString = '[' . $switchesString . ']';
+                    }
+                    $fmt->formatChunk($switchesString);
+                } elseif(is_a($obj,"\Motley\CommandOptGrp")) {
+                    $masterOptGrpList[] = $obj;
+                    $grpString = $obj->getDisplayName();
+                    if($opt) {
+                        $grpString = '[' . $grpString . ']';
+                    }
+                    $fmt->formatChunk($grpString);
+                } elseif(is_a($obj,"\Motley\CommandDoubleDash")) {
+                    $ddString = $obj->getDisplayName();
+                    if($opt) {
+                        $ddString = '[' . $ddString . ']';
+                    }
+                    $fmt->formatChunk($ddString);
+                }
             }
-            
+            $fmt->formatBreak();
         }
-        return $result;
+        # output argument help (if any)
+        if(count($masterArgList)>0) {
+            $fmt->setLeftIndent(0);
+            $fmt->formatChunk("Arguments:");
+            $fmt->formatBreak();
+            $fmt->setLeftIndent(2);
+            foreach($masterArgList as $arg) {
+                $fmt->formatChunk($arg->getDisplayName());
+                $fmt->formatText($arg->getArgDescription(),$descCol);
+                $fmt->formatBreak();
+            }
+        }
+        # output option group help (if any)
+        if(count($masterOptGrpList)>0) {
+            foreach($masterOptGrpList as $optGrp) {
+                $fmt->setLeftIndent(0);
+                $fmt->formatChunk($optGrp->getDisplayName() . ":");
+                $fmt->formatBreak();
+                $fmt->setLeftIndent(2);
+                $opts = $optGrp->getOptions();
+                foreach($opts as $opt) {
+                    $switchesString = $opt->getSwitchesString();
+                    $fmt->formatChunk($switchesString);
+                    $desc = $opt->getOptDescription();
+                    $fmt->formatText($desc,$descCol);
+                    $fmt->formatBreak();
+                }
+            }
+        }
+        # output options not in an option group
+        if(count($masterOptList)>0) {
+            $fmt->setLeftIndent(0);
+            $fmt->formatChunk("OtherOptions:");
+            $fmt->formatBreak();
+            $fmt->setLeftIndent(2);
+            foreach($masterOptList as $opt) {
+                $switchesString = $opt->getSwitchesString();
+                $fmt->formatChunk($switchesString);
+                $desc = $opt->getOptDescription();
+                $fmt->formatText($desc,$descCol);
+                $fmt->formatBreak();
+            }
+        }
+        return $fmt->getFormattedText();
     }
 
     /// Display help information to standard output.
     /// @param $style - Style of help display information.
     /// See Motley::Command::getHelp for legal values.
     public function displayHelp(string $style=self::PLAIN_STYLE) {
-        echo($this->getHelpText);
+        echo($this->getHelp());
     }
 }
 ?>

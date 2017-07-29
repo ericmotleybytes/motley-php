@@ -7,6 +7,7 @@
 use PHPUnit\Framework\Testcase;
 use Motley\CommandOpt;
 use Motley\CommandOptGrp;
+use Motley\UnitTestSupport;
 
 /// Tests the Motley::CommandOpt class.
 class T221_MotleyCommandOptGrpTest extends Testcase {
@@ -43,8 +44,9 @@ class T221_MotleyCommandOptGrpTest extends Testcase {
 
     /// Test add/get/clear options.
     public function testAddGetClearOptSwitches() {
-        $opt1 = new CommandOpt("opt1");
-        $opt2 = new CommandOpt("opt2");
+        $opt1 = new CommandOpt("opt1","",array("-a"));
+        $opt2 = new CommandOpt("opt2","",array("-b"));
+        $opt3 = new CommandOpt("opt3","",array("-b"));  // dup switch
         $optGrp = new CommandOptGrp("optGrp");
         $expOptions = array();
         $this->assertEquals($expOptions,$optGrp->getOptions());
@@ -57,9 +59,19 @@ class T221_MotleyCommandOptGrpTest extends Testcase {
         $this->assertEquals(2,$optCnt);
         $this->assertEquals($expOptions,$optGrp->getOptions());
         # try adding a dup option
-        $saveErrorReporting = error_reporting(0); # turn off error reporting
+        UnitTestSupport::engageCaptureHandler(E_USER_WARNING);
         $optCnt = $optGrp->addOption($opt2);
-        error_reporting($saveErrorReporting); # turn error reporting back on
+        UnitTestSupport::disengageCaptureHandler();
+        $errs = UnitTestSupport::getCapturedErrors();
+        $this->assertEquals(1,count($errs));
+        $this->assertEquals(2,$optCnt);
+        $this->assertEquals($expOptions,$optGrp->getOptions());
+        # try adding a duplicate switch
+        UnitTestSupport::engageCaptureHandler(E_USER_WARNING);
+        $optCnt = $optGrp->addOption($opt3);
+        UnitTestSupport::disengageCaptureHandler();
+        $errs = UnitTestSupport::getCapturedErrors();
+        $this->assertEquals(1,count($errs));
         $this->assertEquals(2,$optCnt);
         $this->assertEquals($expOptions,$optGrp->getOptions());
         # clear the options

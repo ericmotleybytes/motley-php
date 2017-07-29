@@ -116,7 +116,8 @@ class UsageFormatter {
         $chunk = str_replace("\r","",$chunk);
         $chunk = str_replace("\t"," ",$chunk);
         while(strlen($chunk)>0) {
-            # add defensive code to prevent accidental infinite looping
+            // add defensive code to prevent accidental infinite looping
+            // @codeCoverageIgnoreStart
             if($savedChunk==$chunk) {
                 $sameCount++;
                 if ($sameCount>3) {
@@ -127,6 +128,7 @@ class UsageFormatter {
             } else {
                 $sameCount = 0;
             }
+            // @codeCoverageIgnoreEnd
             # begin processing
             $last = count($lines) - 1;  # last line index
             // handle indenting
@@ -233,7 +235,6 @@ class UsageFormatter {
                 $result = substr($result,0,$maxlen);
             }
         }
-        $result .= $this->params[self::EOL];
         return $result;
     }
 
@@ -257,10 +258,14 @@ class UsageFormatter {
     public function getColumnWidth() : int {
         $cols = $this->getParam(self::COLUMNS);
         if($cols<=0) {
-            $cols = getenv("COLUMNS");
-            if ($cols===false) {
+            # try 'tput cols', although this does not work on all platforms
+            $out = exec('tput cols',$output,$stat);
+            if($stat==0) {
+                $cols=(int) $out;
+            } else {
                 $cols = self::DEFAULT_COLS;
             }
+            $this->setParam(self::COLUMNS,$cols);
         }
         return $cols;
     }

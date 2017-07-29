@@ -7,12 +7,14 @@ namespace Motley;
 
 use Motley\GuidGenerator;
 
-/// Represent a command line argument not bound to an option switch.
+/// Represent a command line argument.
 class CommandArg {
 
     protected $instanceGuid     = null;     ///< Unique guid for object instance.
     protected $validLiterals    = array();  ///< Valid literal arg values.
+    protected $validLitDescs    = array();  ///< Hash array of descriptions for literals.
     protected $validRegExs      = array();  ///< Valid regular expressions.
+    protected $validRxDescs     = array();  ///< Hash array of reg ex descriptions.
     protected $isFilename       = false;    ///< Arg is a filename
     protected $fileMustExist    = false;    ///< if file, must it exist.
     protected $fileMustNotExist = false;    ///< if file, must it not exist.
@@ -22,8 +24,8 @@ class CommandArg {
     protected $lastIsValid      = false;    ///< Was last arg value valid.
     protected $argName          = "";       ///< arg name.
     protected $argDescription   = "";       ///< arg description.
-    protected $isOptional       = false;    ///< Is arg optional.
     protected $displayName      = "";       ///< Argument display name.
+    protected $defaultValue     = "";       ///< Argument default value.
 
     /// Class instance constructor.
     public function __construct(string $name=null, string $desc=null) {
@@ -92,27 +94,16 @@ class CommandArg {
 
     /// Add a single valid literals.
     /// If the literal value is already on the valid list, then
-    /// it is ignored.
+    /// it only the description is updated.
     /// @param $lit - A literal valid value.
+    /// @param $desc - A description associated with this literal.
     /// @returns New number of valid literal values defined.
-    public function addValidLiteral(string $lit) : int {
+    public function addValidLiteral(string $lit, string $desc="") : int {
         if(!in_array($lit,$this->validLiterals)) {
+            # only add if not yet added
             $this->validLiterals[] = $lit;
         }
-        return count($this->validLiterals);
-    }
-
-    /// Add an array of valid literals.
-    /// If a literal value is already on the valid list, then
-    /// it is ignored.
-    /// @param $lits - An array of string values.
-    /// @returns New number of valid literal values defined.
-    public function addValidLiterals(array $lits) : int {
-        foreach($lits as $lit) {
-            if(!in_array($lit,$this->validLiterals)) {
-                $this->validLiterals[] = $lit;
-            }
-        }
+        $this->validLitDescs[$lit] = $desc;
         return count($this->validLiterals);
     }
 
@@ -122,9 +113,16 @@ class CommandArg {
         return $this->validLiterals;
     }
 
+    /// Get associative array mapping literal value to literal description.
+    /// @return An associative array of literal value to description.
+    public function getValidLitDescs() : array {
+        return $this->validLitDescs;
+    }
+
     /// Clear all valid literals.
     public function clearValidLiterals() {
         $this->validLiterals = array();
+        $this->validLitDescs = array();
     }
 
     /// Check if a candidate regular expression is properly formed.
@@ -149,31 +147,16 @@ class CommandArg {
 
     /// Add a single valid regular expressions.
     /// If the regular expression is already on the valid list, then
-    /// it is ignored.
+    /// the description is updated.
     /// @param $regEx - a string regex representation.
+    /// @param $desc - A dedcription of the regular expression.
     /// @return New number of valid regex values defined.
-    public function addValidRegEx(string $regEx) : int {
+    public function addValidRegEx(string $regEx, string $desc="") : int {
         if(!in_array($regEx,$this->validRegExs)) {
             if ($this->checkRegEx($regEx)) {
                 $this->validRegExs[] = $regEx;
             }
-        }
-        return count($this->validRegExs);
-    }
-
-    /// Add an array of valid regular expressions.
-    /// If a regular expression is already on the valid list, then
-    /// it is ignored.
-    /// @param $regExs - an array of string regexs.
-    /// @return New number of valid regex values defined.
-    public function addValidRegExs(array $regExs) : int {
-        foreach($regExs as $regEx) {
-            // add to array
-           if(!in_array($regEx,$this->validRegExs)) {
-                if ($this->checkRegEx($regEx)) {
-                    $this->validRegExs[] = $regEx;
-                }
-            }
+            $this->validRxDescs[$regEx] = $desc;
         }
         return count($this->validRegExs);
     }
@@ -184,9 +167,16 @@ class CommandArg {
         return $this->validRegExs;
     }
 
+    /// Get associative array mapping regular expressions descriptions.
+    /// @return An associative array of regular expression to description.
+    public function getValidRxDescs() : array {
+        return $this->validRxDescs;
+    }
+
     /// Clear all valid regexs.
     public function clearValidRegExs() {
-        $this->validRegExs = array();
+        $this->validRegExs  = array();
+        $this->validRxDescs = array();
     }
 
     /// Set/unset the requirement that the argument specify an existent file.
@@ -273,6 +263,10 @@ class CommandArg {
     ///   from the command line.
     /// @return true if the argument is valid, else false.
     public function validate(string $argument) : bool {
+        if($argument=="-") {
+            # replace "-" with default value
+            $argument = $this->defaultValue;
+        }
         $this->lastArgValue = $argument;
         $this->lastMessage  = "";
         $result = null;
@@ -336,18 +330,6 @@ class CommandArg {
         return $result;
     }
 
-    /// Set if argument is optional.
-    /// @param $flag - True for argument is optional, else false.
-    public function setIsOptional(bool $flag) {
-        $this->isOptional = $flag;
-    }
-
-    /// Get if argument is optional.
-    /// @return True if argument is optional, else false.
-    public function getIsOptional() : bool {
-        return $this->isOptional;
-    }
-
     /// Set the argument display name for syntax help and so forth.
     /// @param $name - The argument display name.
     public function setDisplayName(string $name) {
@@ -360,9 +342,23 @@ class CommandArg {
     public function getDisplayName() : string {
         $name = $this->displayName;
         if ($name == "") {
-            $name = $this->argName;
+            $name = '<' . trim($this->argName) . '>';
+            $name = str_replace(" ","_",$name);
         }
         return $name;
     }
+
+    /// Set the argument default value.
+    /// @param $defVal - The argument default value.
+    public function setDefaultValue(string $defVal) {
+        $this->defaultValue = $defVal;
+    }
+
+    /// Get the argument default value.
+    /// @return The argument default value.
+    public function getDefaultValue() : string {
+        return $this->defaultValue;
+    }
+
 }
 ?>

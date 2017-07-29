@@ -9,6 +9,8 @@ use Motley\CommandArrange;
 use Motley\CommandArg;
 use Motley\CommandOpt;
 use Motley\CommandOptGrp;
+use Motley\CommandDoubleDash;
+use Motley\UnitTestSupport;
 
 /// Tests the Motley::Command class.
 class T221_MotleyCommandArrangeTest extends Testcase {
@@ -53,21 +55,27 @@ class T221_MotleyCommandArrangeTest extends Testcase {
         $this->assertEquals($arrangeDisplayName,$arrange->getDisplayName());
     }
 
-    /// Test define/get/clear arrangement component array.
+    /// Test add/get/clear arrangement component array.
     public function testDefineGetClearArrangement() {
         $arran = new CommandArrange("arran1");
         $exparr = array();
-        $this->assertEquals($exparr,$arran->getArrangement());
+        $this->assertEquals($exparr,$arran->getComponents());
         $opt1 = new CommandOpt("opt1","opt1 desc",array("-x"));
         $opt2 = new CommandOpt("opt2","opt2 desc",array("-y"));
         $optgrp = new CommandOptGrp("optgrp");
         $optgrp->addOption($opt2);
         $arg = new CommandArg("arg1");
         $components = array($opt1,$optgrp,$arg);
-        $arran->defineArrangement($components);
-        $this->assertEquals($components,$arran->getArrangement());
-        $arran->clearArrangement();
-        $this->assertEquals(array(),$arran->getArrangement());
+        $arran->addOpt($opt1,false,false);
+        $arran->addOptGrp($optgrp,false);
+        $arran->addArg($arg);
+        $this->assertEquals(3,count($arran->getComponents()));
+        $dd = new CommandDoubleDash();
+        $arran->addDoubleDash($dd);
+        $this->assertEquals(4,count($arran->getComponents()));
+        $arran->clearComponents();
+        $this->assertEquals(array(),$arran->getComponents());
     }
+
 }
 ?>

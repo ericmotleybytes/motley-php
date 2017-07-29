@@ -85,22 +85,30 @@ class T220_MotleyCommandArgTest extends Testcase {
         $lit1 = "aaa";
         $lit2 = "bbb";
         $lit3 = "ccc";
+        $lit1desc = "aaa description.";
+        $lit2desc = "bbb description.";
+        $lit3desc = "ccc description.";
         $invalid1 = "bork";
         $invalid2 = "";
         $arr1 = array($lit1);
         $arr2 = array($lit2,$lit3);
         $arr3 = array_merge($arr1,$arr2);
         $this->assertEquals(0,count($arg1->getValidLiterals()));
-        $arg1->addValidLiteral($lit1);
+        $arg1->addValidLiteral($lit1,$lit1desc);
         $this->assertEquals(1,count($arg1->getValidLiterals()));
         $this->assertEquals($arr1,$arg1->getValidLiterals());
-        $arg1->addValidLiteral($lit1);  // try adding duplicate (ignored)
+        $arg1->addValidLiteral($lit1,$lit1desc);  // try adding dup (mostly ignored)
         $this->assertEquals(1,count($arg1->getValidLiterals()));
         $this->assertEquals($arr1,$arg1->getValidLiterals());
-        $arg1->addValidLiterals($arr2);
+        $arg1->addValidLiteral($lit2,$lit2desc);
+        $arg1->addValidLiteral($lit3,$lit3desc);
         $this->assertEquals($arr3,$arg1->getValidLiterals());
-        $arg1->addValidLiterals($arr2);  // try adding dups (ignored)
-        $this->assertEquals($arr3,$arg1->getValidLiterals());
+        # get back some descriptions
+        $descs = $arg1->getValidLitDescs();
+        $this->assertEquals($lit1desc,$descs[$lit1]);
+        $this->assertEquals($lit2desc,$descs[$lit2]);
+        $this->assertEquals($lit3desc,$descs[$lit3]);
+        # try some validations
         $this->assertTrue($arg1->validate($lit1));
         $this->assertTrue($arg1->validate($lit2));
         $this->assertTrue($arg1->validate($lit3));
@@ -116,6 +124,9 @@ class T220_MotleyCommandArgTest extends Testcase {
         $pat1 = '/^[0-9]+$/';
         $pat2 = '/^[a-z]+$/';
         $pat3 = '/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$/';
+        $pat1desc = "Numeric description.";
+        $pat2desc = "Lower description.";
+        $pat3desc = "Date description.";
         $valid1 = "42";
         $valid2 = "abc";
         $valid3 = "2017-07-23";
@@ -126,16 +137,21 @@ class T220_MotleyCommandArgTest extends Testcase {
         $arr2 = array($pat2,$pat3);
         $arr3 = array_merge($arr1,$arr2);
         $this->assertEquals(0,count($arg1->getValidRegExs()));
-        $arg1->addValidRegEx($pat1);
+        $arg1->addValidRegEx($pat1,$pat1desc);
         $this->assertEquals(1,count($arg1->getValidRegExs()));
         $this->assertEquals($arr1,$arg1->getValidRegExs());
-        $arg1->addValidRegEx($pat1);  // try adding duplicate (ignored)
+        $arg1->addValidRegEx($pat1,$pat1desc);  // try adding duplicate
         $this->assertEquals(1,count($arg1->getValidRegExs()));
         $this->assertEquals($arr1,$arg1->getValidRegExs());
-        $arg1->addValidRegExs($arr2);
+        $arg1->addValidRegEx($pat2,$pat2desc);
+        $arg1->addValidRegEx($pat3,$pat3desc);
         $this->assertEquals($arr3,$arg1->getValidRegExs());
-        $arg1->addValidRegExs($arr2);  // try adding dups (ignored)
-        $this->assertEquals($arr3,$arg1->getValidRegExs());
+        # check the descriptions
+        $descs = $arg1->getValidRxDescs();
+        $this->assertEquals($pat1desc,$descs[$pat1]);
+        $this->assertEquals($pat2desc,$descs[$pat2]);
+        $this->assertEquals($pat3desc,$descs[$pat3]);
+        # try some validations
         $this->assertTrue($arg1->validate($valid1));
         $this->assertTrue($arg1->validate($valid2));
         $this->assertTrue($arg1->validate($valid3));
@@ -248,22 +264,24 @@ class T220_MotleyCommandArgTest extends Testcase {
         $this->assertTrue($arg1->validate($nonexistingFile));
     }
 
-    /// Test set/get is argument optional functions.
-    public function testSetGetIsOptional() {
-        $arg1 = new CommandArg("arg1","arg11 description.");
-        $this->assertFalse($arg1->getIsOptional());
-        $arg1->setIsOptional(true);
-        $this->assertTrue($arg1->getIsOptional());
-    }
-
     /// Test set/get display name functions.
     public function testSetGetDisplayName() {
         $arg1Name = "Normal Name";
         $arg1DisplayName = "Display Name";
         $arg1 = new CommandArg($arg1Name);
-        $this->assertEquals($arg1Name,$arg1->getDisplayName());
+        $exp = "<Normal_Name>";
+        $this->assertEquals($exp,$arg1->getDisplayName());
         $arg1->setDisplayName($arg1DisplayName);
         $this->assertEquals($arg1DisplayName,$arg1->getDisplayName());
+    }
+
+    /// Test set/get default value
+    public function testSetGetDefaultValue() {
+        $arg = new CommandArg("arg");
+        $this->assertEquals("",$arg->getDefaultValue());
+        $defVal="bork";
+        $arg->setDefaultValue($defVal);
+        $this->assertEquals($defVal,$arg->getDefaultValue());
     }
 }
 ?>

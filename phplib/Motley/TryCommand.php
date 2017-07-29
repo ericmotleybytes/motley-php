@@ -16,7 +16,8 @@ class TryCommand extends Command {
         $argFile = new CommandArg("file","Any file.");
         $argFile->setIsFile(true);
         $arrange = new CommandArrange();
-        $arrange->defineArrangement(array($optGrp,$argFile));
+        $arrange->addOptGrp($optGrp);
+        $arrange->addArg($argFile);
         $this->addArragement($arrange);
     }
     public function runcmd($argv) {

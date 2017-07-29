@@ -4,8 +4,6 @@
 /// @copyright Copyright (c) 2017, Eric Alan Christiansen.
 ///   MIT License. See <https://opensource.org/licenses/MIT>.
 
-require_once(__DIR__.'/../phplib/Motley/GuidGenerator.php');
-
 use PHPUnit\Framework\Testcase;
 use Motley\GuidGenerator;
 

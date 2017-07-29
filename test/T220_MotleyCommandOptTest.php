@@ -128,6 +128,29 @@ class T220_MotleyCommandOptTest extends Testcase {
         $opt1->setOptArg($arg1a);
         $arg1b = $opt1->getOptArg();
         $this->assertEquals($arg1aGuid,$arg1b->getInstanceGuid());
+        $this->assertFalse($opt1->getOptArgOptional());
+        $opt2 = new CommandOpt("opt2","opt2 description.");
+        $arg2 = new CommandArg("arg2","arg2 description.");
+        $opt2->setOptArg($arg2,true);
+        $this->assertTrue($opt2->getOptArgOptional());
+    }
+
+    /// Test getSwitchesString.
+    public function testGetSwitchesString() {
+        $opt1 = new CommandOpt("opt1","Option a.");
+        $opt1->addOptSwitches(array("-a","--aaa"));
+        $exp="-a | --aaa";
+        $act = $opt1->getSwitchesString();
+        $this->assertEquals($exp,$act);
+        $arg1 = new CommandArg("arg1","Argument a.");
+        $opt1->setOptArg($arg1,false);
+        $exp='-a | --aaa=<arg1>';
+        $act = $opt1->getSwitchesString();
+        $this->assertEquals($exp,$act);
+        $opt1->setOptArg($arg1,true);
+        $exp='-a | --aaa[=<arg1>]';
+        $act = $opt1->getSwitchesString();
+        $this->assertEquals($exp,$act);
     }
 }
 ?>

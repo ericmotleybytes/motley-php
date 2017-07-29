@@ -16,6 +16,7 @@ class CommandOpt {
     protected $optDescription   = "";       ///< Option description.
     protected $optSwitches      = array();  ///< Option switch synonyms.
     protected $optArgument      = null;     ///< Option argument, if any.
+    protected $optArgOptional   = false;    ///< Is option argument optional.
 
     /// Class instance constructor.
     /// @param $name - optional name for option.
@@ -140,14 +141,77 @@ class CommandOpt {
 
     /// Set the option argument, if any.
     /// @param $argObj - An instance of Motley::CommandArg.
-    public function setOptArg(CommandArg $argObj=null) {
-        $this->optArgument = $argObj;
+    /// @param $isOpt - Is the argument portion of this option optional?
+    public function setOptArg(CommandArg $argObj=null, bool $isOpt=false) {
+        $this->optArgument    = $argObj;
+        $this->optArgOptional = $isOpt;
     }
 
     /// Get the option argument, if any.
     /// @return An instance of Motley::CommandArg or null.
     public function getOptArg() {
         return $this->optArgument;
+    }
+
+    /// Get the option argument optional flag.
+    /// @return True if the associated option argument is optional, else false;
+    public function getOptArgOptional() {
+        return $this->optArgOptional;
+    }
+
+    /// Get switches display string.
+    /// @return A textual notation for the option.
+    public function getSwitchesString() {
+        $result = "";
+        $switches = $this->optSwitches;
+        $switches1 = array();  // one dash switches
+        $switches2 = array();  // two dash switches
+        foreach($switches as $switch) {
+            if(substr($switch,0,2)=="--") {
+                $switches2[] = $switch;
+            } else {
+                $switches1[] = $switch;
+            }
+        }
+        $arg = $this->optArgument;
+        $argName="";
+        if(!is_null($arg)) {
+            $argName = $arg->getDisplayName();
+        }
+        foreach($switches1 as $switch) {
+            if (strlen($result)>0) {
+                $result .= ",";  // add delimiter
+            }
+            $result .= $switch;
+        }
+        if(!is_null($arg) and count($switches2)==0) {
+            # output option arg
+            if($this->getOptArgOptional()) {
+                $result .= " [" . $argName . "]";
+            } else {
+                $result .= " " . $argName;
+            }
+        }
+        if (count($switches1)>0 and count($switches2)>0) {
+            $result .= " | ";
+        }
+        $cnt=0;
+        foreach($switches2 as $switch) {
+            $cnt++;
+            if ($cnt>1) {
+                $result .= ",";  // add delimiter
+            }
+            $result .= $switch;
+        }
+        if (count($switches2)>0 and !is_null($arg)) {
+            # output argument
+            if($this->getOptArgOptional()) {
+                $result .= "[=" . $argName . "]";
+            } else {
+                $result .= "=" . $argName;
+            }
+        }
+        return $result;
     }
 }
 ?>
