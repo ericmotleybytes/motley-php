@@ -24,16 +24,7 @@ test/motleyphp.testdox: \
   $(wildcard test/*Test.php) \
   $(wildcard bin/*) \
   $(wildcard phplib/Motley/*.php)
-	@echo "DEBUG: begin phpunit."
 	phpunit --verbose --configuration=phpunit.xml
-	@echo "DEBUG: end phpunit."
-
-#	phpunit test --testdox-text $@ \
-#          --whitelist phplib/Motley \
-#          --coverage-text=test/motleyphp.cov.txt \
-#          --disallow-test-output \
-#          --fail-on-warning \
-#          --fail-on-risky
 
 test/motleyphp.taplog : test/motleyphp.testdox
 	bin/motleyTestdoxToTap $< $@

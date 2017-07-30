@@ -263,7 +263,10 @@ class UsageFormatter {
             if($stat==0) {
                 $cols=(int) $out;
             } else {
+                // @codeCoverageIgnoreStart
+                // Code ignore because tput always works on my linux.
                 $cols = self::DEFAULT_COLS;
+                // @codeCoverageIgnoreEnd
             }
             $this->setParam(self::COLUMNS,$cols);
         }

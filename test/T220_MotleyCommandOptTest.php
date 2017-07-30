@@ -151,6 +151,19 @@ class T220_MotleyCommandOptTest extends Testcase {
         $exp='-a | --aaa[=<arg1>]';
         $act = $opt1->getSwitchesString();
         $this->assertEquals($exp,$act);
+        $opt1->addOptSwitches(array("-b","--bbb"));
+        $exp='-a,-b | --aaa,--bbb[=<arg1>]';
+        $act = $opt1->getSwitchesString();
+        $this->assertEquals($exp,$act);
+        $opt1->clearOptSwitches();
+        $opt1->addOptSwitches(array("-a","-b"));
+        $exp='-a,-b [<arg1>]';
+        $act = $opt1->getSwitchesString();
+        $this->assertEquals($exp,$act);
+        $opt1->setOptArg($arg1,false);
+        $exp='-a,-b <arg1>';
+        $act = $opt1->getSwitchesString();
+        $this->assertEquals($exp,$act);
     }
 }
 ?>

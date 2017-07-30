@@ -282,6 +282,8 @@ class T220_MotleyCommandArgTest extends Testcase {
         $defVal="bork";
         $arg->setDefaultValue($defVal);
         $this->assertEquals($defVal,$arg->getDefaultValue());
+        $arg->validate("-"); // shorthand for default value
+        $this->assertEquals($defVal,$arg->getLastArgValue());
     }
 }
 ?>
