@@ -37,15 +37,15 @@ class GuidCommand extends Command {
         $mainArrange->addOptGrp($modGrp,true);
         $mainArrange->addDoubleDash($dblDash,true);
         $mainArrange->addArg($fakeArg,false,true);
-        $this->addArragement($mainArrange);
+        $this->addArrangement($mainArrange);
         # help arrangement
         $helpArrange = new CommandArrange();
         $helpArrange->addOpt($helpOpt);
-        $this->addArragement($helpArrange);
+        $this->addArrangement($helpArrange);
         # version arrangement
         $versArrange = new CommandArrange();
         $versArrange->addOpt($versOpt);
-        $this->addArragement($versArrange);
+        $this->addArrangement($versArrange);
     }
     public function runcmd(array $argv) : int {
         echo("Running " . $this->getCmdName() . PHP_EOL);

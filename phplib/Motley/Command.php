@@ -1,8 +1,10 @@
 <?php
-/// Class source code file.
-/// @file
+/// Source code file for the Motley::Command class.
 /// @copyright Copyright (c) 2017, Eric Alan Christiansen.\n
-///   MIT License. See <https://opensource.org/licenses/MIT>.
+/// MIT License. See <https://opensource.org/licenses/MIT>.
+/// @file
+### Note: This file uses Uses doxygen style annotation comments.
+### Note: This file possibly includes some PHPUnit comment directives.
 namespace Motley;
 
 use Motley\CommandArg;
@@ -10,17 +12,17 @@ use Motley\CommandOpt;
 use Motley\CommandOptGrp;
 use Motley\CommandDoubleDash;
 use Motley\CommandArrange;
+use Motley\CommandMessenger;
 use Motley\UsageFormatter;
 
 /// Represent a command line option.
 class Command {
 
-    const PLAIN_STYLE = "plain"; ///< Style for plain text help information.
-
-    protected $cmdName          = "";       ///< Command name.
-    protected $cmdDescription   = "";       ///< Command description.
-    protected $cmdArrangements  = array();  ///< Command opt/arg layouts.
-    protected $displayName      = "";       ///< Command display name.
+    protected $cmdName          = "";        ///< Command name.
+    protected $cmdDescription   = "";        ///< Command description.
+    protected $cmdArrangements  = array();   ///< Command opt/arg layouts.
+    protected $displayName      = "";        ///< Command display name.
+    protected $userMessenger    = null;      ///< CommandMessage object instance.
 
     /// Class instance constructor.
     /// @param $name - Command instance name.
@@ -32,6 +34,7 @@ class Command {
         if(!is_null($desc)) {
             $this->cmdDescription = $desc;
         }
+        $this->userMessenger = new CommandMessenger();
     }
 
     /// Set the command name.
@@ -77,7 +80,7 @@ class Command {
 
     /// Add command arrangement of option groups and arguments.
     /// @param $arrange - The command arrangement.
-    public function addArragement(CommandArrange $arrange) {
+    public function addArrangement(CommandArrange $arrange) {
         $this->cmdArrangements[] = $arrange;
     }
 
@@ -203,10 +206,42 @@ class Command {
     }
 
     /// Display help information to standard output.
-    /// @param $style - Style of help display information.
     /// See Motley::Command::getHelp for legal values.
-    public function displayHelp(string $style=self::PLAIN_STYLE) {
+    public function displayHelp() {
         echo($this->getHelp());
+    }
+
+    /// Get the user messenger object.
+    public function getMessenger() {
+        return $this->userMessenger;
+    }
+
+    /// Try to parse all defined arrangements against command line arguments.
+    /// @param $argv - The command line argument array.
+    /// @return An array of arrangements that match command line arguments.
+    public function parse(array $argv) : array {
+        $result = array();
+        foreach($this->cmdArrangements as $arrangement) {
+            $matched = $arrangement->parse($argv);
+            if ($matched===true) {
+                $result[] = $arrangement;
+            }
+        }
+        return $result;
+    }
+
+    /// Run a command using command line arguments.
+    /// @param $argv - The command line argument array.
+    /// @param $exit - If TRUE, the function exits the program with a statcode.
+    /// @return The final status code integer value, unless $exit.
+    public function run(array $argv, bool $exit=true) : int {
+        $matches = $this->parse($argv);
+        if (count($matches)>0) {
+            $statcode = 0;
+        } else {
+            $statcode = 1;
+        }
+        if($exit) exit($statcode); else return $statcode;
     }
 }
 ?>

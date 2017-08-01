@@ -1,8 +1,11 @@
 <?php
-/// Class source code file.
-/// @file
+/// Source code file for the Motley::CommandArrange class.
 /// @copyright Copyright (c) 2017, Eric Alan Christiansen.\n
-///   MIT License. See <https://opensource.org/licenses/MIT>.
+/// MIT License. See <https://opensource.org/licenses/MIT>.
+/// @file
+### Note: This file uses Uses doxygen style annotation comments.
+### Note: This file possibly includes some PHPUnit comment directives.
+
 namespace Motley;
 
 use Motley\GuidGenerator;
@@ -138,5 +141,15 @@ class CommandArrange {
     public function clearComponents() {
         $this->components = array();
     }
+
+    /// Try parsing command lines arguments.
+    /// @param The command line argument array.
+    /// @return TRUE if command line argement match arrangement, else false.
+    public function parse(array $argv) : bool {
+        $matched = false;
+        # TBD
+        return $matched;
+    }
+
 }
 ?>

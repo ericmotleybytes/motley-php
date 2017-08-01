@@ -12,12 +12,17 @@ use Motley\UnitTestSupport;
 /// Tests the Motley::UnitTestSupport class.
 class T205_MotleyUnitTestSupportTest extends Testcase {
 
+    protected $lastUnit = null;  ///< Last interesting UnitTestSupport instance.
+
     /// A unit test tear-down function to clean up possible test
     /// error handlers.
     protected function tearDown() {
         if (UnitTestSupport::$captureHandlerSet===true) {
             restore_error_handler();
             UnitTestSupport::$captureHandlerSet = false;
+        }
+        if(!is_null($this->lastUnit)) {
+            $this->lastUnit->cleanupTmp();
         }
     }
 
@@ -45,6 +50,7 @@ class T205_MotleyUnitTestSupportTest extends Testcase {
         $errorMsg   = "error";
         UnitTestSupport::engageCaptureHandler(E_USER_NOTICE|E_USER_WARNING|E_USER_ERROR);
         trigger_error($noticeMsg,E_USER_NOTICE);
+        
         $errs = UnitTestSupport::getCapturedErrors();
         $this->assertEquals(1,count($errs));
         $err = $errs[0];
@@ -63,6 +69,62 @@ class T205_MotleyUnitTestSupportTest extends Testcase {
         $this->assertEquals($errorMsg,$err[UnitTestSupport::ERRSTR]);
         UnitTestSupport::clearCapturedErrors();
         UnitTestSupport::disengageCaptureHandler();
+    }
+
+    /// Test the temporary dir/file routines.
+    public function testRecursiveDirectoryDelete() {
+        $unt = new UnitTestSupport();
+        $this->assertInstanceOf(UnitTestSupport::class,$unt);
+        $this->lastUnit = $unt;
+        $exp1 = '../../test/tmp';
+        $tmpdir1 = $unt->getTmpDirRoot();
+        $this->assertStringEndsWith($exp1,$tmpdir1);
+        $tmpdir2 = __DIR__ . '/tmp';
+        $unt->setTmpDirRoot($tmpdir2);
+        $this->assertEquals($tmpdir2,$unt->getTmpDirRoot());
+        $tmproot = $unt->createTmpRootDir();
+        $this->assertGreaterThan(0,strlen($tmproot));
+        $dircnt1 = count($unt->getTmpDirsCreated());
+        # make a specific tmp subdir
+        $subdir1 = $unt->createTmpSubDir("bork");
+        $this->assertStringEndsWith("bork",$subdir1);
+        $expcnt2 = $dircnt1 + 1;
+        $cDirs = $unt->getTmpDirsCreated();
+        $this->assertEquals($expcnt2,count($cDirs));
+        $tst = in_array($subdir1,$cDirs);
+        # make a random tmp subdir
+        $subdir2 = $unt->createTmpSubDir();
+        $expcnt3 = $expcnt2 + 1;
+        $cDirs = $unt->getTmpDirsCreated();
+        $this->assertEquals($expcnt3,count($cDirs));
+        $tst = in_array($subdir2,$cDirs);
+        # create a temp dummy file
+        $file1 = "$subdir2/borkbork.bork";
+        $dummy = "bork\n";
+        $file1a = $unt->createTmpDummyFile($file1,$dummy,100);
+        $this->assertEquals($file1,$file1a);
+        # create a rogue file
+        $fh = fopen($file1a,"r");
+        $line1 = fgets($fh);
+        fclose($fh);
+        $this->assertEquals($dummy,$line1);
+        # create a rogue subdir
+        $rogueDir = "$subdir2/rogue";
+        mkdir($rogueDir);
+        # test cleanup
+        $saveFiles = $unt->getTmpFilesCreated();
+        $saveDirs  = $unt->getTmpDirsCreated();
+        $xtraFile = "$subdir2/xtra.tmp";
+        $fh = fopen($xtraFile,"w");
+        fclose($fh);
+        $unt->cleanupTmp();
+        foreach($saveFiles as $file) {
+            $this->assertFileNotExists($file);
+        }
+        foreach($saveDirs as $dir) {
+            $this->assertFileNotExists($dir);
+        }
+        $this->lastUnit = null;
     }
 }
 ?>

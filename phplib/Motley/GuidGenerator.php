@@ -1,23 +1,22 @@
 <?php
-/**
- * Class source code file.
- * @file
- * @author    Eric Alan Christiansen
- * @copyright Copyright (c) 2017, Eric Alan Christiansen.\n
- *            MIT License. See <https://opensource.org/licenses/MIT>.
- */
+/// Source code file for the Motley::GuidGenerator class.
+/// @copyright Copyright (c) 2017, Eric Alan Christiansen.\n
+/// MIT License. See <https://opensource.org/licenses/MIT>.
+/// @file
+### Note: This file uses Uses doxygen style annotation comments.
+### Note: This file possibly includes some PHPUnit comment directives.
 namespace Motley;
 
 /// Generate unique 128 bit GUIDs/UUIDs as 32 hex characters.
 /// This class includes routines to generate GUIDs (Globally Unique
-///   IDentifiers), also called UUIDs (Universally Unique IDentifiers)
-///   in accordance with UUID V4 standards (see
-///   <https://en.wikipedia.org/wiki/Universally_unique_identifier>).
+/// IDentifiers), also called UUIDs (Universally Unique IDentifiers)
+/// in accordance with UUID V4 standards (see
+/// <https://en.wikipedia.org/wiki/Universally_unique_identifier>).
 class GuidGenerator {
 
     /// Global Motley::GuidGenerator instance variable.
     /// An application global variable which contains the default sharable
-    ///   global GuidGenerator object instance.
+    /// global GuidGenerator object instance.
     protected static $GlobalGuidGenerator = NULL;
     protected $upperFlag  = FALSE;  ///< Output GUID hex characters in uppercase?
     protected $dashesFlag = FALSE;  ///< Embed dashes in output hex?

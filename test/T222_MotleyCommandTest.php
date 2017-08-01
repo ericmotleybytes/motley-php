@@ -1,15 +1,15 @@
 <?php
-/// Unit test class source code file.
-/// @file
+/// Source code file for \T222_MotleyCommandTest unit testing class.
 /// @copyright Copyright (c) 2017, Eric Alan Christiansen.
 ///   MIT License. See <https://opensource.org/licenses/MIT>.
+/// @file
 
 use PHPUnit\Framework\Testcase;
 use Motley\Command;
 use Motley\CommandArrange;
 
 /// Tests the Motley::Command class.
-class T221_MotleyCommandTest extends Testcase {
+class T222_MotleyCommandTest extends Testcase {
 
     /// Test instantiation.
     public function testNew() {
@@ -59,14 +59,15 @@ class T221_MotleyCommandTest extends Testcase {
         $exparr = array();
         $this->assertEquals($exparr,$cmd->getArrangements());
         $exparr[] = $arrang1;
-        $cmd->addArragement($arrang1);
+        $cmd->addArrangement($arrang1);
         $this->assertEquals($exparr,$cmd->getArrangements());
         $exparr[] = $arrang2;
-        $cmd->addArragement($arrang2);
+        $cmd->addArrangement($arrang2);
         $this->assertEquals($exparr,$cmd->getArrangements());
         $exparr = array();
         $cmd->clearArrangements();
         $this->assertEquals($exparr,$cmd->getArrangements());
     }
+
 }
 ?>
