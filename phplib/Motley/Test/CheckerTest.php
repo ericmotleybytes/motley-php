@@ -18,8 +18,10 @@ class CheckerTest extends Testcase {
     /// error handlers.
     protected function tearDown() {
         if (UnitTestSupport::$captureHandlerSet===true) {
+            // @codeCoverageIgnoreStart
             restore_error_handler();
             UnitTestSupport::$captureHandlerSet = false;
+            // @codeCoverageIgnoreEnd
         }
     }
 
@@ -242,5 +244,37 @@ class CheckerTest extends Testcase {
         UnitTestSupport::disengageCaptureHandler();
     }
 
+    // Test the isAssociativeArray static function.
+    public function testIsAssociativeArray() {
+        $this->assertFalse(Checker::isAssociativeArray(""));
+        $this->assertFalse(Checker::isAssociativeArray("x"));
+        $this->assertFalse(Checker::isAssociativeArray(null));
+        $this->assertFalse(Checker::isAssociativeArray(true));
+        $this->assertFalse(Checker::isAssociativeArray(false));
+        $this->assertFalse(Checker::isAssociativeArray(0));
+        $this->assertFalse(Checker::isAssociativeArray(1));
+        $this->assertFalse(Checker::isAssociativeArray(42));
+        $this->assertFalse(Checker::isAssociativeArray(3.14157));
+        $this->assertFalse(Checker::isAssociativeArray(array()));
+        $this->assertFalse(Checker::isAssociativeArray(array("a","b")));
+        $this->assertTrue(Checker::isAssociativeArray(array("a"=>"A","b"=>"B")));
+    }
+
+    // Test the describeVar static function.
+    public function testDescribeVar() {
+        $this->assertEquals("(boolean/true)'1'",Checker::describeVar(true));
+        $this->assertEquals("(boolean/false)''",Checker::describeVar(false));
+        $this->assertEquals("(NULL)''",Checker::describeVar(null));
+        $this->assertEquals("(string)'abc'",Checker::describeVar("abc"));
+        $this->assertEquals("(integer)'42'",Checker::describeVar(42));
+        $this->assertEquals("[]",Checker::describeVar(array()));
+        $this->assertEquals("[(integer)'1',(integer)'2']",
+            Checker::describeVar(array(1,2)));
+        $this->assertEquals("{(string)'a'=>(integer)'1',(string)'b'=>(integer)'2'}",
+            Checker::describeVar(array("a"=>1,"b"=>2)));
+        # try a truncation
+        $this->assertEquals("(string)'abc...",
+            Checker::describeVar("abcdefghijklmnopqrstuvwxyz",15));
+    }
 }
 ?>

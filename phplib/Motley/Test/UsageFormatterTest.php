@@ -192,20 +192,6 @@ class UsageFormatterTest extends Testcase {
         $this->assertEquals("bork",$fmt->getEOL());
     }
 
-    /// Call a protected or private function in a class under test.
-    /// This is a unit test helper function.
-    /// @param $obj - Instantiated class object.
-    /// @param $funcName - The name of the function to call.
-    /// @param $argArr - Array of function arguments.
-    /// @return Whatever the called function returns.
-    protected function invokeFunction(&$obj, $funcName, array $argArr=array()) {
-        $reflect  = new \ReflectionClass(get_class($obj));
-        $function = $reflect->getMethod($funcName);
-        $function->setAccessible(true);
-        $result = $function->invokeArgs($obj,$argArr);
-        return $result;
-    }
-
     /// Test get/get param.
     public function testGetSetParam() {
         $fmt = new UsageFormatter();

@@ -7,15 +7,11 @@
 ### Note: This file possibly includes some PHPUnit comment directives.
 namespace Motley;
 
-use Motley\GuidGenerator;
 use Motley\CommandArg;
 
 /// Represent a command line option.
-class CommandOpt {
+class CommandOpt extends CommandComponent {
 
-    protected $instanceGuid     = null;     ///< Unique guid for object instance.
-    protected $optName          = "";       ///< Option name.
-    protected $optDescription   = "";       ///< Option description.
     protected $optSwitches      = array();  ///< Option switch synonyms.
     protected $optArgument      = null;     ///< Option argument, if any.
     protected $optArgOptional   = false;    ///< Is option argument optional.
@@ -24,74 +20,12 @@ class CommandOpt {
     /// @param $name - optional name for option.
     /// @param $desc - optional description for option.
     /// @param $switches - optional array of switches.
-    public function __construct(
-        string $name=null,
-        string $desc=null,
+    public function __construct(string $name=null, string $desc=null,
         array $switches=null) {
-        if(!is_null($name)) {
-            $this->optName = $name;
-        }
-        if(!is_null($desc)) {
-            $this->optDescription = $desc;
-        }
+        parent::__construct($name,$desc);
         if(!is_null($switches)) {
             $this->addOptSwitches($switches);
         }
-        $guidGen = new GuidGenerator(false,false);
-        $this->instanceGuid = $guidGen->generateGuid();
-    }
-
-    public function __clone() {
-        // get a new instance guid for the cloned copy
-        $guidGen = new GuidGenerator(false,false);
-        $this->instanceGuid = $guidGen->generateGuid();
-    }
-
-    /// Get a newly instantiated instance copy. Safer and more flexible
-    /// to use than the php built in 'clone' command.
-    /// @param $name - new object argument name. If not specified or
-    ///   if null, the opt name from the source object is unchanged.
-    /// @param $desc - new object argument description. If not specified or
-    ///   if null, the opt description from the source object is unchanged.
-    public function copy(string $name=null, string $desc=null) : CommandOpt {
-        $objCopy = clone $this;
-        if(!is_null($name)) {
-            $objCopy->setOptName($name);
-        }
-        if(!is_null($desc)) {
-            $objCopy->setOptDescription($desc);
-        }
-        return $objCopy;
-    }
-
-    /// Set the option name.
-    /// @param $name - the new option name.
-    public function setOptName(string $name) {
-        $this->optName = $name;
-    }
-
-    /// Get the option name.
-    /// @return the current option name.
-    public function getOptName() : string {
-        return $this->optName;
-    }
-
-    /// Set the option description.
-    /// @param $desc - the new option description.
-    public function setOptDescription(string $desc) {
-        $this->optDescription = $desc;
-    }
-
-    /// Get the option description.
-    /// @return the current option description.
-    public function getOptDescription() : string {
-        return $this->optDescription;
-    }
-
-    /// Get the object instance GUID.
-    /// @return The unique instance GUID.
-    public function getInstanceGuid() : string {
-        return $this->instanceGuid;
     }
 
     /// Check option switch format.
@@ -117,11 +51,9 @@ class CommandOpt {
     public function addOptSwitches(array $switches) : int {
         foreach($switches as $switch) {
             $check = $this->checkOptSwitch($switch);
-            if($check===false) {
-                $msg = "Bad switch format ($switch).";
-                trigger_error($msg,E_USER_WARNING);
+            if (!$this->chkW->checkNotFalse($check,"Bad switch format ($switch).")) {
                 continue;
-            }
+            };
             if(!in_array($switch,$this->optSwitches)) {
                 # only add non-duplicates
                 $this->optSwitches[] = $switch;
@@ -215,5 +147,103 @@ class CommandOpt {
         }
         return $result;
     }
+
+    /// Validate a command line option switch (and argument).
+    /// @param $param - A command line parameter.
+    /// @return TRUE if $param is valid, else FALSE.
+    public function validate(string $param) : bool {
+        if(substr($param,0,2)=="--") {
+            // "--..." form
+            $firstEquals = strpos($param,"=");
+            if ($firstEquals!==false) {
+                // found an equals sign
+                $switchPart = substr($param,0,$firstEquals);
+                $argPart = substr($param,$firstEquals+1);
+            } else {
+                // no equals sign found.
+                $switchPart = $param;
+                $argPart = null;
+            }
+        } elseif (substr($param,0,1)=="-") {
+            // "-..." form
+            $firstSpace = strpos($param," ");
+            if ($firstSpace!==false) {
+                // found a space
+                $switchPart = substr($param,0,$firstSpace);
+                $argPart = substr($param,$firstSpace+1);
+            } else {
+                $switchPart = $param;
+                $argPart = null;
+            }
+        } else {
+            // not a '-' or '--' switch
+            $result = false;
+            $message = "'$param' is a valid option switch.";
+            $this->saveLastParam($param,$result,$message);
+            return $result;
+        }
+        #echo("DBG: param='$param'\n");
+        #echo("DBG: switchPart='$switchPart'\n");
+        #echo("DBG: argPart='$argPart'\n");
+        // validate $switchPart.
+        $switchMatched = false;
+        foreach($this->getOptSwitches() as $switch) {
+            if ($switchPart==$switch) {
+                $switchMatched = true;
+                break;
+            }
+        }
+        if ($switchMatched==false) {
+            // switch part did not match.
+            $result = false;
+            $message = "'$param' does not match any switches expected here.";
+            $this->saveLastParam($param,$result,$message);
+            return $result;
+        }
+        if (!is_null($this->optArgument)) {
+            // There is an associated arg, validate $argPart
+            $arg = $this->optArgument;
+            $argOpt = $this->optArgOptional;
+            if($argOpt and is_null($argPart)) {
+                $argPart = "-";  // shorthand for arg default value, if any.
+            }
+            if(is_null($argPart)) {
+                $result = false;
+                $message = "'$param' does not have a mandatory argument part.";
+                $this->saveLastParam($param,$result,$message);
+                return $result;
+            }
+            $result = $arg->validate($argPart);
+            $params = array($switchPart,$arg->getLastParamValue());
+            if($result) {
+                $message = "'$param' switch and argument ok.";
+                $this->saveLastParam($params,$result,$message);
+                return $result;
+            } else {
+                $message = $arg->getLastParamMessage();
+                $this->saveLastParam($params,$result,$message);
+                return $result;
+            }
+        } else {
+            // no associated arg, $argPart should be null.
+            if(is_null($argPart)) {
+                $result = true;
+                $message = "'$param' switch ok.";
+                $this->saveLastParam($param,$result,$message);
+                return $result;
+            } else {
+                $result = false;
+                $message = "'$param' has unexpected argument value.";
+                $this->saveLastParam($param,$result,$message);
+                return $result;
+            }
+        }
+        // It should be impossible to reach here, but defensive code follows.
+        // @codeCoverageIgnoreStart
+        trigger_error("Unexpected path.",E_USER_ERROR);
+        return false;
+        // @codeCoverageIgnoreEnd
+    }
+
 }
 ?>

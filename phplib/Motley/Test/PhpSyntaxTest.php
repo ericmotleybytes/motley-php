@@ -26,8 +26,11 @@ class PhpSyntaxTest extends Testcase {
             $dirHandle = opendir($srcDir);
             $this->assertTrue($dirHandle!==FALSE);
             if ($dirHandle===FALSE) {
-                $this->assertTrue($dirHandle!==FALSE,"Error on opendir($srcDir)");
+                // @codeCoverageIgnoreStart
+                $msg = "Error on opendir($srcDir)";
+                trigger_error($msg,E_USER_WARNING);
                 continue;
+                // @codeCoverageIgnoreEnd
             }
             while(($file = readdir($dirHandle))!==FALSE) {
                 if (substr($file,-4)==".php") {

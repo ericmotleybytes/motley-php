@@ -7,6 +7,8 @@
 ### Note: This file possibly includes some PHPUnit comment directives.
 namespace Motley;
 
+use Motley\Checker;
+
 /// Represent a component of a command line arrangement.
 class CommandComponent {
 
@@ -16,6 +18,8 @@ class CommandComponent {
     protected $lastParamValue   = "";    ///< The last param value.
     protected $lastParamIsValid = false; ///< Was the last param valid.
     protected $lastParamMessage = "";    ///< Possible error message about last param.
+    protected $chkW             = null;  ///< Warning checker.
+    protected $chkE             = null;  ///< Error checker.
 
     /// Class instance constructor.
     /// @param $name - The object name.
@@ -27,6 +31,8 @@ class CommandComponent {
         if(!is_null($desc)) {
             $this->description = $desc;
         }
+        $this->chkW = new Checker(E_USER_WARNING);
+        $this->chkE = new Checker(E_USER_ERROR);
     }
 
     /// Get the object name.
@@ -70,15 +76,19 @@ class CommandComponent {
     }
 
     /// Save the last command line parameter processed.
-    protected function saveLastParam(string $param, bool $isValid, string $message) {
+    protected function saveLastParam($param, bool $isValid, string $message) {
         $this->lastParamValue   = $param;
         $this->lastParamIsValid = $isValid;
-        $this->lastParamMessage = $message;
+        if($isValid) {
+            $this->lastParamMessage = "VALID: $message";
+        } else {
+            $this->lastParamMessage = "INVALID: $message";
+        }
     }
 
     /// get the last param value.
     /// @return The last command line parameter processed.
-    public function getLastParamValue() : string {
+    public function getLastParamValue() {
         return $this->lastParamValue;
     }
 
@@ -96,7 +106,7 @@ class CommandComponent {
 
     /// Validate a command line parameter.
     public function validate(string $param) : bool {
-        $result  = false;;
+        $result  = false;
         $message = "All params invalid until child overrides validate function!";
         $this->saveLastParam($param,$result,$message);
         return $result;

@@ -35,5 +35,17 @@ class CommandDoubleDashTest extends Testcase {
         $this->assertEquals($desc,$dd->getDescription());
     }
 
+    /// Test validate.
+    public function testValidate() {
+        $dd = new CommandDoubleDash();
+        $s1 = "--";
+        $isValid = $dd->validate($s1);
+        $this->assertTrue($isValid);
+        $this->assertEquals($s1,$dd->getLastParamValue());
+        $s1 = "bork";
+        $isValid = $dd->validate($s1);
+        $this->assertFalse($isValid);
+        $this->assertEquals($s1,$dd->getLastParamValue());
+    }
 }
 ?>

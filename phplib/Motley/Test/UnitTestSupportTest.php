@@ -21,6 +21,7 @@ class UnitTestSupportTest extends Testcase {
     /// A unit test tear-down function to clean up possible test
     /// error handlers.
     protected function tearDown() {
+        // @codeCoverageIgnoreStart
         if (UnitTestSupport::$captureHandlerSet===true) {
             restore_error_handler();
             UnitTestSupport::$captureHandlerSet = false;
@@ -28,6 +29,7 @@ class UnitTestSupportTest extends Testcase {
         if(!is_null($this->lastUnit)) {
             $this->lastUnit->cleanupTmp();
         }
+        // @codeCoverageIgnoreEnd
     }
 
     /// Test invokeFunction.

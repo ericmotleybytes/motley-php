@@ -23,63 +23,15 @@ class CommandArgTest extends Testcase {
         $this->assertInstanceOf(CommandArg::class,$arg3);
     }
 
-    /// Test cloning.
-    public function testClone() {
-        $arg1 = new CommandArg("arg1","this is arg1");
-        $this->assertInstanceOf(CommandArg::class,$arg1);
-        $arg2 = clone $arg1;
-        $this->assertInstanceOf(CommandArg::class,$arg2);
-        $this->assertEquals($arg1->getArgName(),$arg2->getArgName());
-        $this->assertEquals($arg1->getArgDescription(),
-            $arg2->getArgDescription());
-        $this->assertNotEquals($arg1->getInstanceGuid(),
-            $arg2->getInstanceGuid());
-    }
-
-    /// Test copy functions.
-    public function testCopy() {
-        $arg1 = new CommandArg("arg1","this is arg1");
-        $this->assertInstanceOf(CommandArg::class,$arg1);
-        $arg2 = $arg1->copy();
-        $this->assertInstanceOf(CommandArg::class,$arg2);
-        $this->assertEquals($arg1->getArgName(),$arg2->getArgName());
-        $this->assertEquals($arg1->getArgDescription(),
-            $arg2->getArgDescription());
-        $this->assertNotEquals($arg1->getInstanceGuid(),
-            $arg2->getInstanceGuid());
-        $arg3name = "arg3";
-        $arg3desc = "this is arg3";
-        $arg3 = $arg1->copy($arg3name,$arg3desc);
-        $this->assertEquals($arg3name,$arg3->getArgName());
-        $this->assertEquals($arg3desc,$arg3->getArgDescription());
-    }
-
-    /// Test setArgName/getArgName functions.
-    public function testSetGetArgName() {
-        $argName1a = "arg1a";
-        $argName1b = "arg1b";
-        $arg1 = new CommandArg($argName1a);
-        $this->assertEquals($argName1a,$arg1->getArgName());
-        $arg1->setArgName($argName1b);
-        $this->assertEquals($argName1b,$arg1->getArgName());
-    }
-
-    /// Test setArgDescription/getArgDescription functions.
-    public function testSetGetArgDescription() {
-        $argDesc1a = "arg description 1a.";
-        $argDesc1b = "arg description 1b.";
-        $arg1 = new CommandArg("arg1",$argDesc1a);
-        $this->assertEquals($argDesc1a,$arg1->getArgDescription());
-        $arg1->setArgDescription($argDesc1b);
-        $this->assertEquals($argDesc1b,$arg1->getArgDescription());
-    }
-
-    /// Test getInstanceGuid function.
-    public function testGetInstanceGuid() {
-        $arg1 = new CommandArg();
-        $guid = $arg1->getInstanceGuid();
-        $this->assertEquals(32,strlen($guid));
-        $this->assertRegExp('/^[0-9a-f]{32}$/',$guid);
+    /// Test overridden getDisplayName function.
+    public function testGetDisplayName() {
+        $arg1name = "arg1";
+        $arg1 = new CommandArg($arg1name);
+        $exp1 = '<' . $arg1name . '>';
+        $this->assertEquals($exp1,$arg1->getDisplayName());
+        $dispName = '<MyArgument>';
+        $arg1->setDisplayName($dispName);
+        $this->assertEquals($dispName,$arg1->getDisplayName());
     }
 
     /// Test valid literals and validate functions.
@@ -194,36 +146,27 @@ class CommandArgTest extends Testcase {
         $arg1 = new CommandArg("arg1","arg1 description.");
         $arg1->addValidRegEx('/^[0-9a-z]*$/');
         $expVals = array();
-        $this->assertEquals("",$arg1->getLastArgValue());
-        $this->assertEquals("",$arg1->getLastMessage());
-        $this->assertFalse($arg1->getLastIsValid());
-        $this->assertEquals($expVals,$arg1->getAllArgValues());
+        $this->assertEquals("",$arg1->getLastParamValue());
+        $this->assertEquals("",$arg1->getLastParamMessage());
+        $this->assertFalse($arg1->getLastParamIsValid());
         # validate a valid value
         $val = "42";
-        $expVals[] = $val;
         $this->assertTrue($arg1->validate($val));
-        $this->assertTrue($arg1->getLastIsValid());
-        $this->assertEquals($val,$arg1->getLastArgValue());
-        $this->assertRegExp('/^valid.*$/',$arg1->getLastMessage());
-        $this->assertEquals($expVals,$arg1->getAllArgValues());
+        $this->assertTrue($arg1->getLastParamIsValid());
+        $this->assertEquals($val,$arg1->getLastParamValue());
+        $this->assertRegExp('/^VALID.*$/',$arg1->getLastParamMessage());
         # validate another valid value
         $val = "good";
-        $expVals[] = $val;
         $this->assertTrue($arg1->validate($val));
-        $this->assertTrue($arg1->getLastIsValid());
-        $this->assertEquals($val,$arg1->getLastArgValue());
-        $this->assertRegExp('/^valid.*$/',$arg1->getLastMessage());
-        $this->assertEquals($expVals,$arg1->getAllArgValues());
+        $this->assertTrue($arg1->getLastParamIsValid());
+        $this->assertEquals($val,$arg1->getLastParamValue());
+        $this->assertRegExp('/^VALID.*$/',$arg1->getLastParamMessage());
         # validate an invalid value
         $val = "BAD";
         $this->assertFalse($arg1->validate($val));
-        $this->assertFalse($arg1->getLastIsValid());
-        $this->assertEquals($val,$arg1->getLastArgValue());
-        $this->assertRegExp('/^invalid.*$/',$arg1->getLastMessage());
-        $this->assertEquals($expVals,$arg1->getAllArgValues());
-        # clear the history of valid values
-        $arg1->clearAllArgValues();
-        $this->assertEquals(array(),$arg1->getAllArgValues());
+        $this->assertFalse($arg1->getLastParamIsValid());
+        $this->assertEquals($val,$arg1->getLastParamValue());
+        $this->assertRegExp('/^INVALID.*$/',$arg1->getLastParamMessage());
     }
 
     /// Test good checkRegEx.
@@ -286,7 +229,8 @@ class CommandArgTest extends Testcase {
         $arg->setDefaultValue($defVal);
         $this->assertEquals($defVal,$arg->getDefaultValue());
         $arg->validate("-"); // shorthand for default value
-        $this->assertEquals($defVal,$arg->getLastArgValue());
+        $this->assertEquals($defVal,$arg->getLastParamValue());
     }
+
 }
 ?>

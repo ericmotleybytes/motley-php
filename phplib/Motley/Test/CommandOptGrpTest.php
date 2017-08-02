@@ -25,26 +25,6 @@ class CommandOptGrpTest extends Testcase {
         $this->assertInstanceOf(CommandOptGrp::class,$optGrp3);
     }
 
-    /// Test setOptGrpName/getOptGrpName functions.
-    public function testSetGetOptGrpName() {
-        $optGrpName1a = "optGrp1a";
-        $optGrpName1b = "opt1Grpb";
-        $optGrp1 = new CommandOptGrp($optGrpName1a);
-        $this->assertEquals($optGrpName1a,$optGrp1->getOptGrpName());
-        $optGrp1->setOptGrpName($optGrpName1b);
-        $this->assertEquals($optGrpName1b,$optGrp1->getOptGrpName());
-    }
-
-    /// Test setOptGrpDescription/getOptGrpDescription functions.
-    public function testSetGetOptGrpDescription() {
-        $optGrpDesc1a = "opt group description 1a.";
-        $optGrpDesc1b = "opt group description 1b.";
-        $optGrp1 = new CommandOptGrp("optGrp1",$optGrpDesc1a);
-        $this->assertEquals($optGrpDesc1a,$optGrp1->getOptGrpDescription());
-        $optGrp1->setOptGrpDescription($optGrpDesc1b);
-        $this->assertEquals($optGrpDesc1b,$optGrp1->getOptGrpDescription());
-    }
-
     /// Test add/get/clear options.
     public function testAddGetClearOptSwitches() {
         $opt1 = new CommandOpt("opt1","",array("-a"));
@@ -81,16 +61,6 @@ class CommandOptGrpTest extends Testcase {
         $expOptions = array();
         $optGrp->clearOptions();
         $this->assertEquals($expOptions,$optGrp->getOptions());
-    }
-
-    /// Test set/get display name functions.
-    public function testSetGetDisplayName() {
-        $optGrpName = "Normal Name";
-        $optGrpDisplayName = "Display Name";
-        $optGrp = new CommandOptGrp($optGrpName);
-        $this->assertEquals($optGrpName,$optGrp->getDisplayName());
-        $optGrp->setDisplayName($optGrpDisplayName);
-        $this->assertEquals($optGrpDisplayName,$optGrp->getDisplayName());
     }
 
 }

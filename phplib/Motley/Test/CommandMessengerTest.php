@@ -25,8 +25,10 @@ class CommandMessengerTest extends Testcase {
     /// A unit test tear-down function.
     protected function tearDown() {
         if (UnitTestSupport::$captureHandlerSet===true) {
+            // @codeCoverageIgnoreStart
             restore_error_handler();
             UnitTestSupport::$captureHandlerSet = false;
+            // @codeCoverageIgnoreEnd
         }
         if(!is_null($this->lastUnit)) {
             $this->lastUnit->cleanupTmp();

@@ -46,9 +46,9 @@ class CommandMessenger {
         $this->msgTypes[] = self::ERROR_MSG;
         $this->msgTypes[] = self::DEBUG_MSG;
         // initialize max display level parameters
-        $this->maxDebugLvl[self::VERBO_MSG] = self::VERBOSITY_LOW_LVL;
-        $this->maxDebugLvl[self::ERROR_MSG] = self::ERROR_WARNING_LVL;
-        $this->maxDebugLvl[self::DEBUG_MSG] = self::DEBUG_NONE_LVL;
+        $this->maxDispLvl[self::VERBO_MSG] = self::VERBOSITY_LOW_LVL;
+        $this->maxDispLvl[self::ERROR_MSG] = self::ERROR_WARNING_LVL;
+        $this->maxDispLvl[self::DEBUG_MSG] = self::DEBUG_NONE_LVL;
         // initialize message destinations
         $this->msgDest[self::VERBO_MSG] = self::DEFAULT_VERBO_DEST;
         $this->msgDest[self::ERROR_MSG] = self::DEFAULT_ERROR_DEST;

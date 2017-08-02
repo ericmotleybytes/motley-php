@@ -175,5 +175,65 @@ class Checker {
             return false;
         }
     }
+
+    # define some static functions that often help checking.
+
+    /// Test if a variable in an associative array.
+    /// @param $var - The variable to test.
+    /// @return TRUE if $var is an associative array, else false.
+    public static function isAssociativeArray($var) {
+        if (!is_array($var)) {
+            return false;
+        }
+        $compare = array_diff_key($var,array_keys(array_keys($var)));
+        if (count($compare)==0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /// Describe a variable type and value(s) as a length limited string.
+    /// @param $var - The variable to describe.
+    /// @param $maxLength - Optional, the maximum length of the result.
+    /// @return A string description of the variable, length limited.
+    public static function describeVar($var, int $maxLength=80) : string {
+        $result = "";
+        if(is_array($var)) {
+            if(self::isAssociativeArray($var)) {
+                $result .= '{';
+                $parts = array();
+                foreach($var as $k => $v) {
+                    $parts[] = self::describeVar($k) . '=>' . self::describeVar($v);
+                }
+                $result .= implode(",",$parts);
+                $result .= '}';
+            } else {
+                $result .= '[';
+                $parts = array();
+                foreach($var as $v) {
+                    $parts[] = self::describeVar($v,$maxLength);
+                }
+                $result .= implode(",",$parts);
+                $result .= ']';
+            }
+        } else {
+            $typ = gettype($var);
+            if($typ=="boolean") {
+                if($var===true) {
+                    $typ .= "/true";
+                } else {
+                    $typ .= "/false";
+                }
+            }
+            $str = strval($var);
+            $result .= "($typ)'$str'";
+        }
+        $result = trim($result);
+        if(strlen($result)>$maxLength) {
+            $result = substr($result,0,$maxLength-3) . "...";
+        }
+        return $result;
+    }
 }
 ?>

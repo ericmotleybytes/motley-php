@@ -7,12 +7,11 @@
 ### Note: This file possibly includes some PHPUnit comment directives.
 namespace Motley;
 
-use Motley\GuidGenerator;
+use Motley\CommandComponent;
 
 /// Represent a command line argument.
-class CommandArg {
+class CommandArg extends CommandComponent {
 
-    protected $instanceGuid     = null;     ///< Unique guid for object instance.
     protected $validLiterals    = array();  ///< Valid literal arg values.
     protected $validLitDescs    = array();  ///< Hash array of descriptions for literals.
     protected $validRegExs      = array();  ///< Valid regular expressions.
@@ -20,80 +19,13 @@ class CommandArg {
     protected $isFilename       = false;    ///< Arg is a filename
     protected $fileMustExist    = false;    ///< if file, must it exist.
     protected $fileMustNotExist = false;    ///< if file, must it not exist.
-    protected $lastArgValue     = "";       ///< Last arg value validated.
-    protected $allArgValues     = array();  ///< All validated arg values.
-    protected $lastMessage      = "";       ///< Last validation message.
-    protected $lastIsValid      = false;    ///< Was last arg value valid.
-    protected $argName          = "";       ///< arg name.
-    protected $argDescription   = "";       ///< arg description.
-    protected $displayName      = "";       ///< Argument display name.
     protected $defaultValue     = "";       ///< Argument default value.
 
     /// Class instance constructor.
     /// @param $name - The object name.
     /// @param $desc - The object description.
     public function __construct(string $name=null, string $desc=null) {
-        if(!is_null($name)) {
-            $this->argName = $name;
-        }
-        if(!is_null($desc)) {
-            $this->argDescription = $desc;
-        }
-        $guidGen = new GuidGenerator(false,false);
-        $this->instanceGuid = $guidGen->generateGuid();
-    }
-
-    public function __clone() {
-        // get a new instance guid for the cloned copy
-        $guidGen = new GuidGenerator(false,false);
-        $this->instanceGuid = $guidGen->generateGuid();
-    }
-
-    /// Get a newly instantiated instance copy. Safer and more flexible
-    /// to use than the php built in 'clone' command.
-    /// @param $name - new object argument name. If not specified or
-    ///   if null, the arg name from the source object is unchanged.
-    /// @param $desc - new object argument description. If not specified or
-    ///   if null, the arg description from the source object is unchanged.
-    public function copy(string $name=null, string $desc=null) : CommandArg {
-        $objCopy = clone $this;
-        if(!is_null($name)) {
-            $objCopy->setArgName($name);
-        }
-        if(!is_null($desc)) {
-            $objCopy->setArgDescription($desc);
-        }
-        return $objCopy;
-    }
-
-    /// Set the arg name.
-    /// @param $name - the new arg name.
-    public function setArgName(string $name) {
-        $this->argName = $name;
-    }
-
-    /// Get the arg name.
-    /// @return the current arg name.
-    public function getArgName() : string {
-        return $this->argName;
-    }
-    
-    /// Set the arg description.
-    /// @param $desc - the new arg description.
-    public function setArgDescription(string $desc) {
-        $this->argDescription = $desc;
-    }
-
-    /// Get the arg description.
-    /// @return the current arg description.
-    public function getArgDescription() : string {
-        return $this->argDescription;
-    }
-
-    /// Get the object instance GUID.
-    /// @return The unique instance GUID.
-    public function getInstanceGuid() : string {
-        return $this->instanceGuid;
+        parent::__construct($name,$desc);
     }
 
     /// Add a single valid literals.
@@ -229,63 +161,31 @@ class CommandArg {
         return $this->fileMustNotExist;
     }
 
-    /// Get the value of the last argument validated.
-    /// @return The value of the last argument validated.
-    public function getLastArgValue() : string {
-        return $this->lastArgValue;
-    }
-
-    /// Get all successfully validated argument values.
-    /// @return An array of successfully validated argument values.
-    public function getAllArgValues() {
-        return $this->allArgValues;
-    }
-
-    /// Clear all validated argument values.
-    public function clearAllArgValues() {
-        $this->allArgValues = array();
-    }
-
-    /// Get result of last validation.
-    /// @return true if the last validation was ok, else false.
-    public function getLastIsValid() : bool {
-        return $this->lastIsValid;
-    }
-
-    /// Get the last validation message. Explains why the
-    /// validation was ok or not.
-    /// @return true if the last validation was ok, else false.
-    public function getLastMessage() : string {
-        return $this->lastMessage;
-    }
-
     /// Test if an actual argument value meets the validation criteria
     /// of this command line argument.
     /// Also saves the value of the last argument validated and the
     /// validation result.
-    /// @param $argument - A string value, typically a specific token
-    ///   from the command line.
-    /// @return true if the argument is valid, else false.
-    public function validate(string $argument) : bool {
-        if($argument=="-") {
+    /// @param $param - A string parameter, typically a specific token
+    /// from the command line.
+    /// @return TRUE if $param is valid, else FALSE.
+    public function validate(string $param) : bool {
+        if($param=="-") {
             # replace "-" with default value
-            $argument = $this->defaultValue;
+            $param = $this->defaultValue;
         }
-        $this->lastArgValue = $argument;
-        $this->lastMessage  = "";
         $result = null;
-        if(is_null($result)) {
-            foreach($this->validLiterals as $literal) {
-                if ($argument==$literal) {
-                    $result = true;
-                    $this->lastMessage = "valid (matches valid literal).";
-                    break;
-                }
+        // try to validate with literals
+        foreach($this->validLiterals as $literal) {
+            if ($param==$literal) {
+                $result = true;
+                $message = "'$param' matches valid literal.";
+                break;
             }
         }
         if (is_null($result)) {
+            // try to validate with regular expressions
             foreach($this->validRegExs as $regEx) {
-                $check = preg_match($regEx,$argument);
+                $check = preg_match($regEx,$param);
                 if ($check===false) {
                     // @codeCoverageIgnoreStart
                     // Impossible path, but included for defensive programming.
@@ -293,63 +193,59 @@ class CommandArg {
                     // @codeCoverageIgnoreEnd
                 } elseif ($check==1) {
                     $result = true;
-                    $this->lastMessage = "valid (matches valid regex).";
+                    $message = "'$param' matches valid regex.";
                     break;
                 }
             }
         }
         if (is_null($result)) {
+            // check if no literals or regexs required.
             if(count($this->getValidLiterals())==0) {
                 if(count($this->getValidRegExs())==0) {
                     $result = true;
-                    $this->lastMessage = "valid (no special restrictions).";
+                    $message = "'$param' is ok (no special restrictions).";
                 }
             }
         }
         if (is_null($result)) {
+            // there were literals or regexs, but none matched
             $result = false;
-            $this->lastMessage = "invalid (no matching literals or patterns).";
+            $message = "'$param' did not match any literals or patterns.";
         }
         if($result===true) {
             if($this->isFilename===true) {
-                $fileExists = file_exists($argument);
+                $fileExists = file_exists($param);
                 if($this->fileMustExist==true) {
                     if ($fileExists!==true) {
                         $result = false;
-                        $this->lastMessage = "invalid (file does not exist).";
+                        $message = "'$param' does not exist.";
                     }
                 }
                 if($this->fileMustNotExist==true) {
                     if ($fileExists===true) {
                         $result = false;
-                        $this->lastMessage = "invalid (file already exists).";
+                        $message = "'$param' already exists.";
                     }
                 }
             }
         }
-        $this->lastIsValid = $result;
-        if ($result===true) {
-            $this->allArgValues[] = $argument;
-        }
+        $this->saveLastParam($param, $result, $message);
         return $result;
-    }
-
-    /// Set the argument display name for syntax help and so forth.
-    /// @param $name - The argument display name.
-    public function setDisplayName(string $name) {
-        $this->displayName = $name;
     }
 
     /// Get the argument display name for syntax help and so forth.
     /// @returns The previously set display name, or the general name
-    ///   if display name has not been explicitly set.
+    /// if display name has not been explicitly set. If the display name is
+    /// formed from the general name, the general name is enclosed
+    /// within '<' and '>' and any spaces are replaced with '_' underscores.
     public function getDisplayName() : string {
-        $name = $this->displayName;
-        if ($name == "") {
-            $name = '<' . trim($this->argName) . '>';
-            $name = str_replace(" ","_",$name);
+        if(is_null($this->displayName) or $this->displayName=="") {
+            $dispName = '<' . $this->getName() . '>';
+            $dispName = str_replace(" ","_",$dispName);
+        } else {
+            $dispName = $this->displayName;
         }
-        return $name;
+        return $dispName;
     }
 
     /// Set the argument default value.

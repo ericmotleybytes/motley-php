@@ -11,47 +11,20 @@ use Motley\GuidGenerator;
 use Motley\CommandOpt;
 
 /// Represent a command line option group.
-class CommandOptGrp {
+class CommandOptGrp extends CommandComponent {
 
-    protected $optGrpName        = "Options"; ///< Option group name.
-    protected $optGrpDescription =
-        "Command line options.";              ///< Option group description.
     protected $options           = array();   ///< CommandOpt objects in group.
     protected $switches          = array();   ///< Switches from all options.
-    protected $displayName       = "";        ///< Display name for option group.
 
     /// Class instance constructor.
     public function __construct(string $name=null, string $desc=null) {
         if(!is_null($name)) {
-            $this->optGrpName = $name;
+            $name = "Options";
         }
         if(!is_null($desc)) {
-            $this->optGrpDescription = $desc;
+            $desc = "Command line options.";
         }
-    }
-
-    /// Set the option group name.
-    /// @param $name - the option group name.
-    public function setOptGrpName(string $name) {
-        $this->optGrpName = $name;
-    }
-
-    /// Get the option group name.
-    /// @return the current option group name.
-    public function getOptGrpName() : string {
-        return $this->optGrpName;
-    }
-
-    /// Set the option group description.
-    /// @param $desc - the option group description.
-    public function setOptGrpDescription(string $desc) {
-        $this->optGrpDescription = $desc;
-    }
-
-    /// Get the option group description.
-    /// @return the current option group description.
-    public function getOptGrpDescription() : string {
-        return $this->optGrpDescription;
+        parent::__construct($name,$desc);
     }
 
     /// Add an option to the option group.
@@ -60,9 +33,9 @@ class CommandOptGrp {
     /// @param $option - A CommandOpt object to add to the group.
     /// @returns New number of options in group.
     public function addOption(CommandOpt $option) : int {
-        $optionName = $option->getOptName();
+        $optionName = $option->getName();
         foreach($this->options as $opt) {
-            if($optionName==$opt->getOptName()) {
+            if($optionName==$opt->getName()) {
                 $msg = "Option '$optionName' already in group.";
                 trigger_error($msg,E_USER_WARNING);
                 return count($this->options);
@@ -94,21 +67,5 @@ class CommandOptGrp {
         $this->switches = array();
     }
 
-    /// Set the option group display name for syntax help and so forth.
-    /// @param $name - The option group display name.
-    public function setDisplayName(string $name) {
-        $this->displayName = $name;
-    }
-
-    /// Get the option group display name for syntax help and so forth.
-    /// @returns The previously set display name, or the general name
-    ///   if display name has not been explicitly set.
-    public function getDisplayName() : string {
-        $name = $this->displayName;
-        if ($name == "") {
-            $name = $this->optGrpName;
-        }
-        return $name;
-    }
 }
 ?>

@@ -184,7 +184,7 @@ class Command {
             $fmt->setLeftIndent(2);
             foreach($masterArgList as $arg) {
                 $fmt->formatChunk($arg->getDisplayName());
-                $fmt->formatText($arg->getArgDescription(),$descCol);
+                $fmt->formatText($arg->getDescription(),$descCol);
                 $fmt->formatBreak();
             }
         }
@@ -199,7 +199,7 @@ class Command {
                 foreach($opts as $opt) {
                     $switchesString = $opt->getSwitchesString();
                     $fmt->formatChunk($switchesString);
-                    $desc = $opt->getOptDescription();
+                    $desc = $opt->getDescription();
                     $fmt->formatText($desc,$descCol);
                     $fmt->formatBreak();
                 }
@@ -214,7 +214,7 @@ class Command {
             foreach($masterOptList as $opt) {
                 $switchesString = $opt->getSwitchesString();
                 $fmt->formatChunk($switchesString);
-                $desc = $opt->getOptDescription();
+                $desc = $opt->getDescription();
                 $fmt->formatText($desc,$descCol);
                 $fmt->formatBreak();
             }

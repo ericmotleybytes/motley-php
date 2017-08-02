@@ -24,65 +24,6 @@ class CommandOptTest extends Testcase {
         $this->assertInstanceOf(CommandOpt::class,$opt3);
     }
 
-    /// Test cloning.
-    public function testClone() {
-        $opt1 = new CommandOpt("opt1","this is opt1");
-        $this->assertInstanceOf(CommandOpt::class,$opt1);
-        $opt2 = clone $opt1;
-        $this->assertInstanceOf(CommandOpt::class,$opt2);
-        $this->assertEquals($opt1->getOptName(),$opt2->getOptName());
-        $this->assertEquals($opt1->getOptDescription(),
-            $opt2->getOptDescription());
-        $this->assertNotEquals($opt1->getInstanceGuid(),
-            $opt2->getInstanceGuid());
-    }
-
-    /// Test copy functions.
-    public function testCopy() {
-        $opt1 = new CommandOpt("opt1","this is opt1");
-        $this->assertInstanceOf(CommandOpt::class,$opt1);
-        $opt2 = $opt1->copy();
-        $this->assertInstanceOf(CommandOpt::class,$opt2);
-        $this->assertEquals($opt1->getOptName(),$opt2->getOptName());
-        $this->assertEquals($opt1->getOptDescription(),
-            $opt2->getOptDescription());
-        $this->assertNotEquals($opt1->getInstanceGuid(),
-            $opt2->getInstanceGuid());
-        $opt3name = "opt3";
-        $opt3desc = "this is opt3";
-        $opt3 = $opt1->copy($opt3name,$opt3desc);
-        $this->assertEquals($opt3name,$opt3->getOptName());
-        $this->assertEquals($opt3desc,$opt3->getOptDescription());
-    }
-
-    /// Test setOptName/getOptName functions.
-    public function testSetGetOptName() {
-        $optName1a = "opt1a";
-        $optName1b = "opt1b";
-        $opt1 = new CommandOpt($optName1a);
-        $this->assertEquals($optName1a,$opt1->getOptName());
-        $opt1->setOptName($optName1b);
-        $this->assertEquals($optName1b,$opt1->getOptName());
-    }
-
-    /// Test setOptDescription/getOptDescription functions.
-    public function testSetGetOptDescription() {
-        $optDesc1a = "opt description 1a.";
-        $optDesc1b = "opt description 1b.";
-        $opt1 = new CommandOpt("opt1",$optDesc1a);
-        $this->assertEquals($optDesc1a,$opt1->getOptDescription());
-        $opt1->setOptDescription($optDesc1b);
-        $this->assertEquals($optDesc1b,$opt1->getOptDescription());
-    }
-
-    /// Test getInstanceGuid function.
-    public function testGetInstanceGuid() {
-        $opt1 = new CommandOpt();
-        $guid = $opt1->getInstanceGuid();
-        $this->assertEquals(32,strlen($guid));
-        $this->assertRegExp('/^[0-9a-f]{32}$/',$guid);
-    }
-
     /// Test checkOptionSwitch.
     public function testCheckOptSwitch() {
         $opt1 = new CommandOpt("opt1","opt1 description.");
@@ -127,10 +68,9 @@ class CommandOptTest extends Testcase {
         $opt1 = new CommandOpt("opt1","opt1 description.");
         $this->assertNull($opt1->getOptArg());
         $arg1a = new CommandArg("arg1","arg1 description.");
-        $arg1aGuid = $arg1a->getInstanceGuid();
         $opt1->setOptArg($arg1a);
         $arg1b = $opt1->getOptArg();
-        $this->assertEquals($arg1aGuid,$arg1b->getInstanceGuid());
+        $this->assertEquals($arg1a,$arg1b);
         $this->assertFalse($opt1->getOptArgOptional());
         $opt2 = new CommandOpt("opt2","opt2 description.");
         $arg2 = new CommandArg("arg2","arg2 description.");
@@ -167,6 +107,115 @@ class CommandOptTest extends Testcase {
         $exp='-a,-b <arg1>';
         $act = $opt1->getSwitchesString();
         $this->assertEquals($exp,$act);
+    }
+
+    // Test validate function.
+    public function testValidate() {
+        // do some tests with no associated argument.
+        $opt = new CommandOpt("opt1","Option a.");
+        $opt->addOptSwitches(array("-a","--aaa"));
+        $valids = array("-a","--aaa");
+        $invalids = array("-b","--bbb","bork","-","--","-a bork","--aaa=bork");
+        foreach($valids as $valid) {
+            $result = $opt->validate($valid);
+            $this->assertStringStartsWith("VALID",$opt->getLastParamMessage());
+            $this->assertTrue($result);
+            $this->assertTrue($opt->getLastParamIsValid());
+            $this->assertEquals($valid,$opt->getLastParamValue());
+            $this->assertStringStartsWith("VALID",$opt->getLastParamMessage());
+        }
+        foreach($invalids as $invalid) {
+            $result = $opt->validate($invalid);
+            $this->assertStringStartsWith("INVALID",$opt->getLastParamMessage());
+            $this->assertFalse($result);
+            $this->assertFalse($opt->getLastParamIsValid());
+            $this->assertEquals($invalid,$opt->getLastParamValue());
+            $this->assertStringStartsWith("INVALID",$opt->getLastParamMessage());
+        }
+        // now add a non-optional argument
+        $arg = new CommandArg("arg","Argument for unit testing.");
+        $arg->addValidLiteral("red"  ,"Red is a warm color.");
+        $arg->addValidLiteral("green","Green is a cool color.");
+        $arg->addValidLiteral("blue" ,"Blue is a very cool color.");
+        $arg->setDefaultValue("blue");
+        $opt->setOptArg($arg,false);
+        $valids = array("-a red","--aaa=green","-a -","--aaa=-");
+        $invalids = array("-a","-a purple","--aaa","--aaa=yellow");
+        foreach($valids as $valid) {
+            $result = $opt->validate($valid);
+            $this->assertStringStartsWith("VALID",$opt->getLastParamMessage());
+            $this->assertTrue($result);
+            $this->assertTrue($opt->getLastParamIsValid());
+            $params = $opt->getLastParamValue();
+            $this->assertTrue(is_array($params));
+        }
+        foreach($invalids as $invalid) {
+            $result = $opt->validate($invalid);
+            $this->assertStringStartsWith("INVALID",$opt->getLastParamMessage());
+            $this->assertFalse($result);
+            $this->assertFalse($opt->getLastParamIsValid());
+            $params = $opt->getLastParamValue();
+        }
+        $valid = "-a red";
+        $result = $opt->validate($valid);
+        $params = $opt->getLastParamValue();
+        $this->assertEquals("-a",$params[0]);
+        $this->assertEquals("red",$params[1]);
+        $valid = "--aaa=green";
+        $result = $opt->validate($valid);
+        $params = $opt->getLastParamValue();
+        $this->assertEquals("--aaa",$params[0]);
+        $this->assertEquals("green",$params[1]);
+        // now make the argument optional
+        $opt->setOptArg($arg,true);
+        $arg->setDefaultValue("blue");
+        $valids = array("-a red","--aaa=green","-a","--aaa","-a -","--aaa=-");
+        $invalids = array("-a purple","--aaa=yellow");
+        foreach($valids as $valid) {
+            $result = $opt->validate($valid);
+            $this->assertStringStartsWith("VALID",$opt->getLastParamMessage());
+            $this->assertTrue($result);
+            $this->assertTrue($opt->getLastParamIsValid());
+            $params = $opt->getLastParamValue();
+            $this->assertTrue(is_array($params));
+        }
+        foreach($invalids as $invalid) {
+            $result = $opt->validate($invalid);
+            $this->assertStringStartsWith("INVALID",$opt->getLastParamMessage());
+            $this->assertFalse($result);
+            $this->assertFalse($opt->getLastParamIsValid());
+            $params = $opt->getLastParamValue();
+        }
+        $valid = "-a red";
+        $result = $opt->validate($valid);
+        $params = $opt->getLastParamValue();
+        $this->assertEquals("-a",$params[0]);
+        $this->assertEquals("red",$params[1]);
+        $valid = "--aaa=green";
+        $result = $opt->validate($valid);
+        $params = $opt->getLastParamValue();
+        $this->assertEquals("--aaa",$params[0]);
+        $this->assertEquals("green",$params[1]);
+        $valid = "-a";
+        $result = $opt->validate($valid);
+        $params = $opt->getLastParamValue();
+        $this->assertEquals("-a",$params[0]);
+        $this->assertEquals("blue",$params[1]);
+        $valid = "--aaa";
+        $result = $opt->validate($valid);
+        $params = $opt->getLastParamValue();
+        $this->assertEquals("--aaa",$params[0]);
+        $this->assertEquals("blue",$params[1]);
+        $valid = "-a -";
+        $result = $opt->validate($valid);
+        $params = $opt->getLastParamValue();
+        $this->assertEquals("-a",$params[0]);
+        $this->assertEquals("blue",$params[1]);
+        $valid = "--aaa=-";
+        $result = $opt->validate($valid);
+        $params = $opt->getLastParamValue();
+        $this->assertEquals("--aaa",$params[0]);
+        $this->assertEquals("blue",$params[1]);
     }
 }
 ?>
