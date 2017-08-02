@@ -1,8 +1,11 @@
 <?php
-/// Unit test class source code file.
-/// @file
+/// Source code file for Motley::Test::GuidGeneratorTest unit testing class.
 /// @copyright Copyright (c) 2017, Eric Alan Christiansen.
-///   MIT License. See <https://opensource.org/licenses/MIT>.
+/// MIT License. See <https://opensource.org/licenses/MIT>.
+/// @file
+### Note: This file uses Uses doxygen style annotation comments.
+### Note: This file possibly includes some PHPUnit comment directives.
+namespace Motley\Test;
 
 use PHPUnit\Framework\Testcase;
 use Motley\GuidGenerator;
@@ -10,7 +13,7 @@ use Motley\GuidGenerator;
 /**
  * Tests the Motley::GuidGenerator class.
  */
-class T210_MotleyGuidGeneratorTest extends Testcase {
+class GuidGeneratorTest extends Testcase {
 
     /**
      * Test instantiating separate instances.

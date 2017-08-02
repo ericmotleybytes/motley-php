@@ -11,7 +11,7 @@
     syntaxCheck="true">
     <testsuites>
         <testsuite name="motley-php unit test suite">
-            <directory suffix="Test.php">./test</directory>
+            <directory suffix="Test.php">./phplib/Motley/Test</directory>
         </testsuite>
     </testsuites>
     <filter>

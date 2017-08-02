@@ -1,14 +1,17 @@
 <?php
-/// Unit test class source code file.
-/// @file
+/// Source code file for Motley::Test::CommandArgTest unit testing class.
 /// @copyright Copyright (c) 2017, Eric Alan Christiansen.
-///   MIT License. See <https://opensource.org/licenses/MIT>.
+/// MIT License. See <https://opensource.org/licenses/MIT>.
+/// @file
+### Note: This file uses Uses doxygen style annotation comments.
+### Note: This file possibly includes some PHPUnit comment directives.
+namespace Motley\Test;
 
 use PHPUnit\Framework\Testcase;
 use Motley\CommandArg;
 
 /// Tests the Motley::CommandArg class.
-class T220_MotleyCommandArgTest extends Testcase {
+class CommandArgTest extends Testcase {
 
     /// Test instantiation.
     public function testNew() {

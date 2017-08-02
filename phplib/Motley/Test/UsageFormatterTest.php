@@ -1,15 +1,18 @@
 <?php
-/// Unit test class source code file.
-/// @file
+/// Source code file for Motley::Test::UsageFormatterTest unit testing class.
 /// @copyright Copyright (c) 2017, Eric Alan Christiansen.
-///   MIT License. See <https://opensource.org/licenses/MIT>.
+/// MIT License. See <https://opensource.org/licenses/MIT>.
+/// @file
+### Note: This file uses Uses doxygen style annotation comments.
+### Note: This file possibly includes some PHPUnit comment directives.
+namespace Motley\Test;
 
 use PHPUnit\Framework\Testcase;
 use Motley\UsageFormatter;
 use Motley\UnitTestSupport;
 
 /// Tests the Motley::UsageFormatter class.
-class T210_MotleyUsageFormatterTest extends Testcase {
+class UsageFormatterTest extends Testcase {
 
     /// Test instantiation.
     public function testNew() {

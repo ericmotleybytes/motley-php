@@ -1,16 +1,20 @@
 <?php
-/// Unit test class source code file.
-/// @file
+/// Source code file for Motley::Test::UnitTestSupportTest unit testing class.
 /// @copyright Copyright (c) 2017, Eric Alan Christiansen.
-///   MIT License. See <https://opensource.org/licenses/MIT>.
+/// MIT License. See <https://opensource.org/licenses/MIT>.
+/// @file
+### Note: This file uses Uses doxygen style annotation comments.
+### Note: This file possibly includes some PHPUnit comment directives.
+namespace Motley\Test;
 
-require_once(__DIR__ . '/ZZZ_SampleClass.php');
+require_once(__DIR__ . '/ZzzSampleClass.php');
 
 use PHPUnit\Framework\Testcase;
 use Motley\UnitTestSupport;
+use Motley\Test\ZzzSampleClass;
 
 /// Tests the Motley::UnitTestSupport class.
-class T205_MotleyUnitTestSupportTest extends Testcase {
+class UnitTestSupportTest extends Testcase {
 
     protected $lastUnit = null;  ///< Last interesting UnitTestSupport instance.
 
@@ -28,18 +32,18 @@ class T205_MotleyUnitTestSupportTest extends Testcase {
 
     /// Test invokeFunction.
     public function testInvokeFunction() {
-        $sam = new ZZZ_SampleClass();
-        $this->assertEquals(ZZZ_SampleClass::PUBFUN,
+        $sam = new ZzzSampleClass();
+        $this->assertEquals(ZzzSampleClass::PUBFUN,
             UnitTestSupport::invokeFunction($sam,"publicFunction"));
-        $this->assertEquals(ZZZ_SampleClass::PROFUN,
+        $this->assertEquals(ZzzSampleClass::PROFUN,
             UnitTestSupport::invokeFunction($sam,"protectedFunction"));
-        $this->assertEquals(ZZZ_SampleClass::PRIFUN,
+        $this->assertEquals(ZzzSampleClass::PRIFUN,
             UnitTestSupport::invokeFunction($sam,"privateFunction"));
-        $this->assertEquals(ZZZ_SampleClass::STAPUBFUN,
+        $this->assertEquals(ZzzSampleClass::STAPUBFUN,
             UnitTestSupport::invokeFunction($sam,"staticPublicFunction"));
-        $this->assertEquals(ZZZ_SampleClass::STAPROFUN,
+        $this->assertEquals(ZzzSampleClass::STAPROFUN,
             UnitTestSupport::invokeFunction($sam,"staticProtectedFunction"));
-        $this->assertEquals(ZZZ_SampleClass::STAPRIFUN,
+        $this->assertEquals(ZzzSampleClass::STAPRIFUN,
             UnitTestSupport::invokeFunction($sam,"staticPrivateFunction"));
     }
 

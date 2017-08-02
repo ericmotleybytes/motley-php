@@ -1,17 +1,18 @@
 <?php
-/// Unit test class source code file.
+/// Source code file for Motley::Test::CheckerTest unit testing class.
 /// @copyright Copyright (c) 2017, Eric Alan Christiansen.
 /// MIT License. See <https://opensource.org/licenses/MIT>.
 /// @file
-
-require_once(__DIR__ . '/ZZZ_SampleClass.php');
+### Note: This file uses Uses doxygen style annotation comments.
+### Note: This file possibly includes some PHPUnit comment directives.
+namespace Motley\Test;
 
 use PHPUnit\Framework\Testcase;
 use Motley\Checker;
 use Motley\UnitTestSupport;
 
 /// Tests the Motley::Checker class.
-class T206_MotleyCheckerTest extends Testcase {
+class CheckerTest extends Testcase {
 
     /// A unit test tear-down function to clean up possible test
     /// error handlers.

@@ -1,8 +1,11 @@
 <?php
-/// Source code file for \T210_MotleyCommandMessengerTest unit testing class.
+/// Source code file for Motley::Test::CommandMessengerTest unit testing class.
 /// @copyright Copyright (c) 2017, Eric Alan Christiansen.
-///   MIT License. See <https://opensource.org/licenses/MIT>.
+/// MIT License. See <https://opensource.org/licenses/MIT>.
 /// @file
+### Note: This file uses Uses doxygen style annotation comments.
+### Note: This file possibly includes some PHPUnit comment directives.
+namespace Motley\Test;
 
 use PHPUnit\Framework\Testcase;
 use Motley\CommandMessenger;
@@ -10,7 +13,7 @@ use Motley\GuidGenerator;
 use Motley\UnitTestSupport;
 
 /// Tests the Motley::CommandMessenger class.
-class T210_MotleyCommandMessengerTest extends Testcase {
+class CommandMessengerTest extends Testcase {
     protected $tmpdir = __DIR__ . '/tmp';  ///< Root of temporary directory.
     protected $lastUnit = null;  ///< Last interesting UnitTestSupport instance.
 

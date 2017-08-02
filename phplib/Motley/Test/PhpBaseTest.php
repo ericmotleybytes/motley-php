@@ -1,14 +1,17 @@
 <?php
-/// Source code for PHPUnit::Framework::Testcase::T100_GenericSimpleTest.
-/// @file
+/// Source code file for Motley::Test::PhpBaseTest unit testing class.
 /// @copyright Copyright (c) 2017, Eric Alan Christiansen.
-///   MIT License. See <https://opensource.org/licenses/MIT>.
+/// MIT License. See <https://opensource.org/licenses/MIT>.
+/// @file
+### Note: This file uses Uses doxygen style annotation comments.
+### Note: This file possibly includes some PHPUnit comment directives.
+namespace Motley\Test;
 
 use PHPUnit\Framework\Testcase;
 
 /// Simple PHPUnit tests. Mostly just checks that the PHPUnit utility
 /// is properly installed and working.
-class T100_GenericSimpleTest extends Testcase {
+class PhpBaseTest extends Testcase {
 
     /// Test that array_push and array_pop work.
     public function testPushAndPop() {

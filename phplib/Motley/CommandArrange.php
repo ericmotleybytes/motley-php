@@ -5,7 +5,6 @@
 /// @file
 ### Note: This file uses Uses doxygen style annotation comments.
 ### Note: This file possibly includes some PHPUnit comment directives.
-
 namespace Motley;
 
 use Motley\GuidGenerator;
@@ -25,11 +24,18 @@ class CommandArrange {
     protected $displayName    = "";                 ///< Arrangement display name.
     /// Components of the arrangement. This is a simple array of hash arrays.
     /// The hash arrays have three entries each: "obj" for the instantiated
-    /// CommandArg, CommandOpt or CommandOptGrp object; "opt" for a boolean
-    /// optional flag; and "rep" for a boolean repeatable flag.
+    /// CommandArg, CommandOpt, CommandOptGrp. or CommandDoubleDash  object;
+    // "opt" for a boolean optional flag; and "rep" for a boolean repeatable flag.
     /// A repeatable CommandArg can repeat on the command line.
     /// A repeatable CommandOpt can be repeated on the command line.
-    protected $components     = array();            ///< CommandOptGrp and CommandArg list.
+    protected $components = array();
+    protected $argv       = array();  ///< Filled with command line args when parsing.
+    private   $nextCompIdx    = 0;    // Index into $components.
+    private   $nextArgvIdx    = 1;    // Index into $argv (skip entry 0).
+    private   $matchedComps   = array(); // Matched portion of $components.
+    private   $matchedArgvs   = array(); // Matched portion of $argv.
+    private   $matched        = false;   // True if $argv matched $components.
+    private   $mismatchReason = "";      // Reason for mismatch, if any.
 
     /// Class instance constructor.
     public function __construct(string $name=null, string $desc=null) {
@@ -146,9 +152,66 @@ class CommandArrange {
     /// @param The command line argument array.
     /// @return TRUE if command line argement match arrangement, else false.
     public function parse(array $argv) : bool {
-        $matched = false;
-        # TBD
-        return $matched;
+        $this->rewindParsing();
+        $ddFound = false;  // has "--" been found yet?
+        while(($param=$this->getNextArgv())!==false) {
+            $paramMatched = false;
+            while(($comp=$this->getNextComponent())!==false) {
+                // check for double dash
+                #if(is_a($comp,CommandDoubleDash)) {
+                #    $ddFound = true;
+                #    continue;  // get next component
+                #}
+                # TBD
+                
+            }
+            if($paramMatched===false) {
+                $this->mismatchReason = "Unexpected parameter '$param'.";
+                break;
+            }
+        }
+        return $this->matched;
+    }
+
+    private function rewindParsing() {
+        $this->matched        = false;
+        $this->nextCompIdx    = 0;
+        $this->nextArgvIdx    = 1;
+        $this->matchedComps   = array();
+        $this->matchedArgvs   = array($this->argv[0]);
+        $this->mismatchReason = "";
+    }
+
+    private function getNextComponent() {
+        if($this->nextCompIdx < count($this->components)) {
+            $result = $this->components[$this->nextCompIdx];
+            $this->nextCompIdx++;
+        } else {
+            $result = false;
+        }
+        return $result;
+    }
+
+    private function getNextArgv() {
+        if($this->nextArgvIdx < count($this->argv)) {
+            $result = $this->argv[$this->nextArgvIdx];
+            $this->nextArgvIdx++;
+        } else {
+            $result = false;
+        }
+        return $result;
+    }
+
+    private function remainingCompCount() : int {
+        $result = count($this->components) - $this->nextCompIdx;
+        $result = max(0,$result);
+        return $result;
+    }
+
+    private function remainingArgvCount() : int {
+        $result = count($this->argv) - $this->nextArgvIdx;
+        $result = max(0,$result);
+        return $result;
     }
 
 }

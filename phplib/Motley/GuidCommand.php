@@ -1,4 +1,10 @@
 <?php
+/// Source code file for the Motley::GuidCommand class.
+/// @copyright Copyright (c) 2017, Eric Alan Christiansen.\n
+/// MIT License. See <https://opensource.org/licenses/MIT>.
+/// @file
+### Note: This file uses Uses doxygen style annotation comments.
+### Note: This file possibly includes some PHPUnit comment directives.
 namespace Motley;
 require_once(__DIR__ . '/CommandDoubleDash.php');
 use Motley\Command;

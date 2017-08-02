@@ -1,8 +1,11 @@
 <?php
-/// Unit test class source code file.
-/// @file
+/// Source code file for Motley::Test::CommandArrangeTest unit testing class.
 /// @copyright Copyright (c) 2017, Eric Alan Christiansen.
-///   MIT License. See <https://opensource.org/licenses/MIT>.
+/// MIT License. See <https://opensource.org/licenses/MIT>.
+/// @file
+### Note: This file uses Uses doxygen style annotation comments.
+### Note: This file possibly includes some PHPUnit comment directives.
+namespace Motley\Test;
 
 use PHPUnit\Framework\Testcase;
 use Motley\CommandArrange;
@@ -13,7 +16,7 @@ use Motley\CommandDoubleDash;
 use Motley\UnitTestSupport;
 
 /// Tests the Motley::Command class.
-class T221_MotleyCommandArrangeTest extends Testcase {
+class CommandArrangeTest extends Testcase {
 
     /// Test instantiation.
     public function testNew() {

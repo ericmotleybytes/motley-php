@@ -30,6 +30,8 @@ class CommandArg {
     protected $defaultValue     = "";       ///< Argument default value.
 
     /// Class instance constructor.
+    /// @param $name - The object name.
+    /// @param $desc - The object description.
     public function __construct(string $name=null, string $desc=null) {
         if(!is_null($name)) {
             $this->argName = $name;

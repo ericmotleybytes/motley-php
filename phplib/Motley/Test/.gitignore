@@ -1,0 +1,5 @@
+*.cov.txt
+*.taplog
+*.tapchk
+*.testdox
+tmp/*

@@ -23,6 +23,7 @@ class Command {
     protected $cmdArrangements  = array();   ///< Command opt/arg layouts.
     protected $displayName      = "";        ///< Command display name.
     protected $userMessenger    = null;      ///< CommandMessage object instance.
+    protected $formatter        = null;      ///< UsageFormatter instance.
 
     /// Class instance constructor.
     /// @param $name - Command instance name.
@@ -34,7 +35,6 @@ class Command {
         if(!is_null($desc)) {
             $this->cmdDescription = $desc;
         }
-        $this->userMessenger = new CommandMessenger();
     }
 
     /// Set the command name.
@@ -95,12 +95,29 @@ class Command {
         $this->cmdArrangements = array();
     }
 
+    /// Get the user messenger object.
+    public function getMessenger() : CommandMessenger {
+        if (is_null($this->userMessenger)) {
+            $this->userMessenger = new CommandMessenger();
+        }
+        return $this->userMessenger;
+    }
+
+    /// Get the usage formatter object.
+    public function getUsageFormatter() : UsageFormatter {
+        if (is_null($this->formatter)) {
+            $this->formatter = new UsageFormatter();
+        }
+        return $this->formatter;
+    }
+
     /// Get textual help information.
     public function getHelp() : string {
         $masterArgList = array();
         $masterOptList = array();
         $masterOptGrpList = array();
-        $fmt = new UsageFormatter();
+        $fmt = $this->getUsageFormatter();
+        $fmt->clear();
         $colWidth = $fmt->getColumnWidth();
         $descCol = (int)($colWidth/3);
         $descCol = min($descCol,40);
@@ -209,11 +226,6 @@ class Command {
     /// See Motley::Command::getHelp for legal values.
     public function displayHelp() {
         echo($this->getHelp());
-    }
-
-    /// Get the user messenger object.
-    public function getMessenger() {
-        return $this->userMessenger;
     }
 
     /// Try to parse all defined arrangements against command line arguments.

@@ -1,14 +1,17 @@
 <?php
-/// Source code for PHPUnit::Framework::Testcase::T100_GenericStuffTest.
-/// @file
+/// Source code file for Motley::Test::PhpStuffTest unit testing class.
 /// @copyright Copyright (c) 2017, Eric Alan Christiansen.
-///   MIT License. See <https://opensource.org/licenses/MIT>.
+/// MIT License. See <https://opensource.org/licenses/MIT>.
+/// @file
+### Note: This file uses Uses doxygen style annotation comments.
+### Note: This file possibly includes some PHPUnit comment directives.
+namespace Motley\Test;
 
 use PHPUnit\Framework\Testcase;
 
 /// Simple PHPUnit tests. Mostly just checks that the PHPUnit utility
 /// is properly installed and working.
-class T100_GenericStuffTest extends Testcase {
+class PhpStuffTest extends Testcase {
 
     /// Test that basic hash arrays work.
     public function testHashArray() {

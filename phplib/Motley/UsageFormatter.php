@@ -1,8 +1,10 @@
 <?php
-/// Class source code file.
-/// @file
+/// Source code file for the Motley::UsageFormatter class.
 /// @copyright Copyright (c) 2017, Eric Alan Christiansen.\n
-///   MIT License. See <https://opensource.org/licenses/MIT>.
+/// MIT License. See <https://opensource.org/licenses/MIT>.
+/// @file
+### Note: This file uses Uses doxygen style annotation comments.
+### Note: This file possibly includes some PHPUnit comment directives.
 namespace Motley;
 
 /// Text formatter especially suited for usage explanations.

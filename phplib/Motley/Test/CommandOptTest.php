@@ -1,15 +1,18 @@
 <?php
-/// Unit test class source code file.
-/// @file
+/// Source code file for Motley::Test::CommandOptTest unit testing class.
 /// @copyright Copyright (c) 2017, Eric Alan Christiansen.
-///   MIT License. See <https://opensource.org/licenses/MIT>.
+/// MIT License. See <https://opensource.org/licenses/MIT>.
+/// @file
+### Note: This file uses Uses doxygen style annotation comments.
+### Note: This file possibly includes some PHPUnit comment directives.
+namespace Motley\Test;
 
 use PHPUnit\Framework\Testcase;
 use Motley\CommandArg;
 use Motley\CommandOpt;
 
 /// Tests the Motley::CommandOpt class.
-class T220_MotleyCommandOptTest extends Testcase {
+class CommandOptTest extends Testcase {
 
     /// Test instantiation.
     public function testNew() {

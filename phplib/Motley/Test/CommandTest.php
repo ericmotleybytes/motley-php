@@ -1,12 +1,17 @@
 <?php
-/// Source code file for \T222_MotleyCommandTest unit testing class.
+/// Source code file for Motley::Test::CommandArrangeTest unit testing class.
 /// @copyright Copyright (c) 2017, Eric Alan Christiansen.
-///   MIT License. See <https://opensource.org/licenses/MIT>.
+/// MIT License. See <https://opensource.org/licenses/MIT>.
 /// @file
+### Note: This file uses Uses doxygen style annotation comments.
+### Note: This file possibly includes some PHPUnit comment directives.
+namespace Motley\Test;
 
 use PHPUnit\Framework\Testcase;
 use Motley\Command;
 use Motley\CommandArrange;
+use Motley\CommandMessenger;
+use Motley\UsageFormatter;
 
 /// Tests the Motley::Command class.
 class T222_MotleyCommandTest extends Testcase {
@@ -69,5 +74,50 @@ class T222_MotleyCommandTest extends Testcase {
         $this->assertEquals($exparr,$cmd->getArrangements());
     }
 
+    /// Test the get messenger and get formatter functions.
+    public function testGetMessenger() {
+        $cmd = new Command("cmd","A command for unit testing.");
+        $msg = $cmd->getMessenger();
+        $this->assertInstanceOf(CommandMessenger::class,$msg);
+        $fmt = $cmd->getUsageFormatter();
+        $this->assertInstanceOf(UsageFormatter::class,$fmt);
+    }
+
+    /// Test help functions.
+    public function testHelp() {
+        # only a partial test. CommandDemo does more testing.
+        $cmd = new Command("cmd","A command for unit testing.");
+        $fmt = $cmd->getUsageFormatter();
+        $fmt->setColumnWidth(80);  # force width for testing
+        $expHelp  = 'Name:' . PHP_EOL;
+        $expHelp .= '  cmd - A command for unit testing.' . PHP_EOL;
+        $expHelp .= 'Usage:' . PHP_EOL;
+        $actHelp = $cmd->getHelp();
+        $this->assertEquals(strlen($expHelp),strlen($actHelp));
+        $this->assertEquals($expHelp,$actHelp);
+        ob_start();
+        ob_clean();
+        $cmd->displayHelp();
+        $actHelp = ob_get_contents();
+        ob_end_clean();
+        $this->assertEquals(strlen($expHelp),strlen($actHelp));
+        $this->assertEquals($expHelp,$actHelp);
+    }
+
+    /// Test parse.
+    public function testParse() {
+        # only a partial test. CommandDemo does more testing.
+        $cmd = new Command("cmd","A command for unit testing.");
+        $empty = $cmd->parse(array());
+        $this->assertTrue(is_array($empty));
+        $this->assertEquals(0,count($empty));
+    }
+
+    /// Test run.
+    public function testRun() {
+        $cmd = new Command("cmd","A command for unit testing.");
+        $statcode = $cmd->run(array(),false);
+        $this->assertEquals(1,$statcode);
+    }
 }
 ?>
