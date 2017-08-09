@@ -26,15 +26,14 @@ class CommandOptTest extends Testcase {
 
     /// Test checkOptionSwitch.
     public function testCheckOptSwitch() {
-        $opt1 = new CommandOpt("opt1","opt1 description.");
-        $this->assertTrue($opt1->checkOptSwitch('-v'));
-        $this->assertTrue($opt1->checkOptSwitch('--version'));
-        $this->assertTrue($opt1->checkOptSwitch('--a_big-wide-switch'));
-        $this->assertFalse($opt1->checkOptSwitch('-'));
-        $this->assertFalse($opt1->checkOptSwitch('--'));
-        $this->assertFalse($opt1->checkOptSwitch('---bogus'));
-        $this->assertFalse($opt1->checkOptSwitch('-abc'));
-        $this->assertFalse($opt1->checkOptSwitch(''));
+        $this->assertTrue(CommandOpt::checkOptSwitch('-v'));
+        $this->assertTrue(CommandOpt::checkOptSwitch('--version'));
+        $this->assertTrue(CommandOpt::checkOptSwitch('--a_big-wide-switch'));
+        $this->assertFalse(CommandOpt::checkOptSwitch('-'));
+        $this->assertFalse(CommandOpt::checkOptSwitch('--'));
+        $this->assertFalse(CommandOpt::checkOptSwitch('---bogus'));
+        $this->assertFalse(CommandOpt::checkOptSwitch('-abc'));
+        $this->assertFalse(CommandOpt::checkOptSwitch(''));
     }
 
     /// Test add/get/clear option switches.
@@ -109,7 +108,7 @@ class CommandOptTest extends Testcase {
         $this->assertEquals($exp,$act);
     }
 
-    // Test validate function.
+    /// Test validate function.
     public function testValidate() {
         // do some tests with no associated argument.
         $opt = new CommandOpt("opt1","Option a.");

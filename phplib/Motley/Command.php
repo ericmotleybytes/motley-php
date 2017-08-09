@@ -18,47 +18,50 @@ use Motley\UsageFormatter;
 /// Represent a command line option.
 class Command {
 
-    protected $cmdName          = "";        ///< Command name.
-    protected $cmdDescription   = "";        ///< Command description.
-    protected $cmdArrangements  = array();   ///< Command opt/arg layouts.
+    protected $name             = "";        ///< Command name.
+    protected $description      = "";        ///< Command description.
+    protected $arrangements     = array();   ///< Command opt/arg layouts.
     protected $displayName      = "";        ///< Command display name.
     protected $userMessenger    = null;      ///< CommandMessage object instance.
     protected $formatter        = null;      ///< UsageFormatter instance.
+    protected $argv             = null;      ///< Initialized to global $argv.
 
     /// Class instance constructor.
     /// @param $name - Command instance name.
     /// @param $desc - Command description.
     public function __construct(string $name=null, string $desc=null) {
+        global $argv;
+        $this->argv = $argv;
         if(!is_null($name)) {
-            $this->cmdName = $name;
+            $this->name = $name;
         }
         if(!is_null($desc)) {
-            $this->cmdDescription = $desc;
+            $this->description = $desc;
         }
     }
 
     /// Set the command name.
     /// @param $name - the command name.
-    public function setCmdName(string $name) {
-        $this->cmdName = $name;
+    public function setName(string $name) {
+        $this->name = $name;
     }
 
     /// Get the command name.
     /// @return the current command name.
-    public function getCmdName() : string {
-        return $this->cmdName;
+    public function getName() : string {
+        return $this->name;
     }
 
     /// Set the command description.
     /// @param $desc - the command description.
-    public function setCmdDescription(string $desc) {
-        $this->cmdDescription = $desc;
+    public function setDescription(string $desc) {
+        $this->description = $desc;
     }
 
     /// Get the command description.
     /// @return the current command description.
-    public function getCmdDescription() : string {
-        return $this->cmdDescription;
+    public function getDescription() : string {
+        return $this->description;
     }
 
     /// Set the command display name for syntax help and so forth.
@@ -73,26 +76,48 @@ class Command {
     public function getDisplayName() : string {
         $name = $this->displayName;
         if ($name == "") {
-            $name = $this->cmdName;
+            $name = $this->name;
         }
         return $name;
+    }
+
+    /// Set what the Command object uses as command line parameters.
+    /// Note that this is initialized to the global $argv array during instantiation.
+    /// @param $cmdv - An array of script name followed by command arguments.
+    public function setArgv(array $cmdv=array()) {
+        global $argv;
+        if(count($cmdv)==0) {
+            if($argv!==null) {
+                $this->argv = array($argv[0]);
+            } else {
+                $this->argv = array($this->getDisplayName());
+            }
+        } else {
+            $this->argv = $cmdv;
+        }
+    }
+
+    /// Get what the Command object is using as command line arguments.
+    /// @return As array of script name followed by command line arguments.
+    public function getArgv() {
+        return $this->argv;
     }
 
     /// Add command arrangement of option groups and arguments.
     /// @param $arrange - The command arrangement.
     public function addArrangement(CommandArrange $arrange) {
-        $this->cmdArrangements[] = $arrange;
+        $this->arrangements[] = $arrange;
     }
 
     /// Get all command arrangements.
     /// @returns All command arrangements.
     public function getArrangements() : array {
-        return $this->cmdArrangements;
+        return $this->arrangements;
     }
 
     /// Clear all command arrangements.
     public function clearArrangements() {
-        $this->cmdArrangements = array();
+        $this->arrangements = array();
     }
 
     /// Get the user messenger object.
@@ -128,47 +153,47 @@ class Command {
         $fmt->formatChunk("Name:");
         $fmt->formatBreak();
         $fmt->setLeftIndent(2);
-        $fmt->formatChunk($this->cmdName . " -");
-        $fmt->formatText($this->cmdDescription);
+        $fmt->formatChunk($this->name . " -");
+        $fmt->formatText($this->description);
         $fmt->formatBreak();
         $fmt->setLeftIndent(0);
         $fmt->formatChunk("Usage:");
         $fmt->formatBreak();
         $fmt->setLeftIndent(2);
-        foreach($this->cmdArrangements as $arrangement) {
+        foreach($this->arrangements as $arrangement) {
             $fmt->formatChunk($this->getDisplayName());
-            $components = $arrangement->getComponents();
-            foreach($components as $component) {
-                $obj = $component[CommandArrange::OBJ_KEY];
-                $opt = $component[CommandArrange::OPT_KEY];
-                $rep = $component[CommandArrange::REP_KEY];
-                if(is_a($obj,"\Motley\CommandArg")) {
-                    $masterArgList[] = $obj;
-                    $argString = $obj->getDisplayName();
-                    if($rep) {
+            $aComps = $arrangement->getArranComps();
+            foreach($aComps as $aComp) {
+                $comp  = $aComp->getCompObj();
+                $isOpt = $aComp->getIsOptional();
+                $isRep = $aComp->getIsRepeatable();
+                if(is_a($comp,"\Motley\CommandArg")) {
+                    $masterArgList[] = $comp;
+                    $argString = $comp->getDisplayName();
+                    if($isRep) {
                         $argString .= " ...";
                     }
-                    if($opt) {
+                    if($isOpt) {
                         $argString = '[' . $argString . ']';
                     }
                     $fmt->formatChunk($argString);
-                } elseif(is_a($obj,"\Motley\CommandOpt")) {
-                    $masterOptList[] = $obj;
-                    $switchesString = $obj->getSwitchesString();
-                    if($opt) {
+                } elseif(is_a($comp,"\Motley\CommandOpt")) {
+                    $masterOptList[] = $comp;
+                    $switchesString = $comp->getSwitchesString();
+                    if($isOpt) {
                         $switchesString = '[' . $switchesString . ']';
                     }
                     $fmt->formatChunk($switchesString);
-                } elseif(is_a($obj,"\Motley\CommandOptGrp")) {
-                    $masterOptGrpList[] = $obj;
-                    $grpString = $obj->getDisplayName();
-                    if($opt) {
+                } elseif(is_a($comp,"\Motley\CommandOptGrp")) {
+                    $masterOptGrpList[] = $comp;
+                    $grpString = $comp->getDisplayName();
+                    if($isOpt) {
                         $grpString = '[' . $grpString . ']';
                     }
                     $fmt->formatChunk($grpString);
-                } elseif(is_a($obj,"\Motley\CommandDoubleDash")) {
-                    $ddString = $obj->getDisplayName();
-                    if($opt) {
+                } elseif(is_a($comp,"\Motley\CommandDoubleDash")) {
+                    $ddString = $comp->getDisplayName();
+                    if($isOpt) {
                         $ddString = '[' . $ddString . ']';
                     }
                     $fmt->formatChunk($ddString);
@@ -229,11 +254,11 @@ class Command {
     }
 
     /// Try to parse all defined arrangements against command line arguments.
-    /// @param $argv - The command line argument array.
     /// @return An array of arrangements that match command line arguments.
-    public function parse(array $argv) : array {
+    public function parse() : array {
+        $argv = $this->argv;
         $result = array();
-        foreach($this->cmdArrangements as $arrangement) {
+        foreach($this->arrangements as $arrangement) {
             $matched = $arrangement->parse($argv);
             if ($matched===true) {
                 $result[] = $arrangement;
@@ -243,10 +268,10 @@ class Command {
     }
 
     /// Run a command using command line arguments.
-    /// @param $argv - The command line argument array.
     /// @param $exit - If TRUE, the function exits the program with a statcode.
     /// @return The final status code integer value, unless $exit.
-    public function run(array $argv, bool $exit=true) : int {
+    public function run(bool $exit=true) : int {
+        $argv = $this->argv;
         $matches = $this->parse($argv);
         if (count($matches)>0) {
             $statcode = 0;

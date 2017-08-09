@@ -45,6 +45,7 @@ class UnitTestSupport {
     /// @param $errstr - The error message.
     /// @param $errfile - The error file.
     /// @param $errline - The error line.
+    /// @return Always returns TRUE.
     public static function errorHandlerForCapturing(
         int $errno, string $errstr, string $errfile, int $errline) {
         $err = array();
@@ -58,6 +59,7 @@ class UnitTestSupport {
 
     /// Set the capture error handler as an active error handler.
     /// @param $error_types - AN error level mask for errors calling this handler.
+    /// @return Nothing returned.
     public static function engageCaptureHandler(int $error_types=E_ALL|E_STRICT) {
         self::$capturedErrors = array();
         self::$oldErrorHandler = set_error_handler(
@@ -66,6 +68,7 @@ class UnitTestSupport {
     }
 
     /// Disengage the capture handler and restore the original handler.
+    /// @return Nothing returned.
     public static function disengageCaptureHandler() {
         if(self::$captureHandlerSet===true) {
             restore_error_handler();
@@ -81,6 +84,7 @@ class UnitTestSupport {
     }
 
     /// Clear all captured errors.
+    /// @return Nothing returned.
     public static function clearCapturedErrors() {
         self::$capturedErrors = array();
     }

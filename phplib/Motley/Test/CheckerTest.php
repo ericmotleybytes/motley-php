@@ -25,6 +25,7 @@ class CheckerTest extends Testcase {
         }
     }
 
+    /// Test get/set checker error level.
     public function testGetSetErrorLevel() {
         $chk  = new Checker();
         $exp1 = E_USER_ERROR;
@@ -37,6 +38,7 @@ class CheckerTest extends Testcase {
         $this->assertEquals($exp2,$chk->getErrorLevel());
     }
 
+    /// Test various checker functions.
     public function testChecking() {
         // turn on error capturing
         UnitTestSupport::engageCaptureHandler(E_USER_NOTICE);
@@ -244,7 +246,7 @@ class CheckerTest extends Testcase {
         UnitTestSupport::disengageCaptureHandler();
     }
 
-    // Test the isAssociativeArray static function.
+    /// Test the isAssociativeArray static function.
     public function testIsAssociativeArray() {
         $this->assertFalse(Checker::isAssociativeArray(""));
         $this->assertFalse(Checker::isAssociativeArray("x"));
@@ -260,7 +262,7 @@ class CheckerTest extends Testcase {
         $this->assertTrue(Checker::isAssociativeArray(array("a"=>"A","b"=>"B")));
     }
 
-    // Test the describeVar static function.
+    /// Test the describeVar static function.
     public function testDescribeVar() {
         $this->assertEquals("(boolean/true)'1'",Checker::describeVar(true));
         $this->assertEquals("(boolean/false)''",Checker::describeVar(false));

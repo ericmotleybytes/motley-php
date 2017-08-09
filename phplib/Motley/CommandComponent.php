@@ -18,6 +18,7 @@ class CommandComponent {
     protected $lastParamValue   = "";    ///< The last param value.
     protected $lastParamIsValid = false; ///< Was the last param valid.
     protected $lastParamMessage = "";    ///< Possible error message about last param.
+    protected $validParamHist = array(); ///< All valid params validated since reset.
     protected $chkW             = null;  ///< Warning checker.
     protected $chkE             = null;  ///< Error checker.
 
@@ -76,10 +77,14 @@ class CommandComponent {
     }
 
     /// Save the last command line parameter processed.
+    /// @param $param - The command line parameter.
+    /// @param $isValid - True if $param meets validation requirements.
+    /// @param $message - Explain why $param is or is not valid.
     protected function saveLastParam($param, bool $isValid, string $message) {
         $this->lastParamValue   = $param;
         $this->lastParamIsValid = $isValid;
         if($isValid) {
+            $this->validParamHist[] = $param;
             $this->lastParamMessage = "VALID: $message";
         } else {
             $this->lastParamMessage = "INVALID: $message";
@@ -105,10 +110,41 @@ class CommandComponent {
     }
 
     /// Validate a command line parameter.
+    /// @param $param - A command line parameter.
+    /// @return TRUE if $param is valid, else FALSE.
     public function validate(string $param) : bool {
         $result  = false;
         $message = "All params invalid until child overrides validate function!";
         $this->saveLastParam($param,$result,$message);
+        return $result;
+    }
+
+    /// Get the valid params history.
+    /// @return Array of all valid params validated since last reset.
+    public function getValidParamHistory() {
+        return $this->validParamHist;
+    }
+
+    /// Reset the valid params history.
+    public function resetValidParamHistory() {
+        $this->validParamHist = array();
+    }
+
+    // Static functions...
+
+    /// Find component(s) by name from an array of Motley::CommandComponent objects.
+    /// @param $name - The name of the component.
+    /// @param $components - An array of Motley::CommandComponent objects.
+    /// This includes Motley::CommandArg, Motley::CommandOpt, Motley::CommandOptGrp,
+    /// and Motley::CommandDoubleDash.
+    /// @return An array of components that matched the name.
+    public static function findComponentByName(string $name, array $components) : array {
+        $result = array();
+        foreach ($components as $component) {
+            if($name==$component->getName()) {
+                $result[] = $component;
+            }
+        }
         return $result;
     }
 

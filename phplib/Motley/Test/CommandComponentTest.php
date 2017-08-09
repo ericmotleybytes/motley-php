@@ -78,5 +78,50 @@ class CommandComponentTest extends Testcase {
         $this->assertFalse($comp->getLastParamIsValid());
         $this->assertGreaterThan(0,strlen($comp->getLastParamValue()));
     }
+
+    /// Test validate and parameter history functions.
+    public function testParamHistory() {
+        $comp = new CommandComponent("comp1","Component for unit testing.");
+        $exp = array();
+        $hist = $comp->getValidParamHistory();
+        $this->assertEquals($exp,$hist);
+        $p1 = "thing";
+        $exp = array($p1);
+        UnitTestSupport::invokeFunction(
+            $comp,"saveLastParam",array($p1,true,"dummy")); // call protected function
+        $hist = $comp->getValidParamHistory();
+        $this->assertEquals($exp,$hist);
+        $p2 = "bad";
+        UnitTestSupport::invokeFunction(
+            $comp,"saveLastParam",array($p2,false,"dummy")); // call protected function
+        $hist = $comp->getValidParamHistory();
+        $this->assertEquals($exp,$hist);
+        $p3 = "stuff";
+        $exp[] = $p3;
+        UnitTestSupport::invokeFunction(
+            $comp,"saveLastParam",array($p3,true,"dummy")); // call protected function
+        $hist = $comp->getValidParamHistory();
+        $this->assertEquals($exp,$hist);
+        # clear history
+        $comp->resetValidParamHistory();
+        $exp = array();
+        $hist = $comp->getValidParamHistory();
+        $this->assertEquals($exp,$hist);
+    }
+
+    /// Test static function findComponentByName.
+    public function testFindComponentByName() {
+        $comp1  = new CommandComponent("comp1");
+        $comp2a = new CommandComponent("comp2");
+        $comp2b = new CommandComponent("comp2");
+        $comp3  = new CommandComponent("comp3");
+        $comps = array($comp1,$comp2a,$comp2b,$comp3);
+        $exp = array($comp1);
+        $this->assertEquals($exp,CommandComponent::findComponentByName("comp1",$comps));
+        $exp = array($comp2a,$comp2b);
+        $this->assertEquals($exp,CommandComponent::findComponentByName("comp2",$comps));
+        $exp = array($comp3);
+        $this->assertEquals($exp,CommandComponent::findComponentByName("comp3",$comps));
+    }
 }
 ?>

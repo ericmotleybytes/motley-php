@@ -1,5 +1,5 @@
 <?php
-/// Source code file for the Motley::Messenger class.
+/// Source code file for the Motley::CommandMessenger class.
 /// @copyright Copyright (c) 2017, Eric Alan Christiansen.\n
 /// MIT License. See <https://opensource.org/licenses/MIT>.
 /// @file
@@ -31,13 +31,13 @@ class CommandMessenger {
     const DEFAULT_VERBO_DEST = 'php://stdout'; ///< Default info message destination.
     const DEFAULT_DEBUG_DEST = 'php://stderr'; ///< Default debug message information.
 
-    protected $minDieLvl   = self::ERROR_ERROR_LVL; ///< Min err lvl which exits program.
+    protected $minDieLvl   = self::ERROR_DIE_LVL; ///< Min err lvl which exits program.
     protected $msgTypes    = array();        ///< Valid message types.
     protected $maxDispLvl  = array();        ///< Max message levels to display.
     protected $msgDest     = array();        ///< Message file destinations.
     protected $msgFH       = array();        ///< Message file handles.
-    protected $chkE        = null;           ///< Motley\Checker error instance.
-    protected $chkW        = null;           ///< Motley\Checker warning instance.
+    protected $chkE        = null;           ///< Motley::Checker error instance.
+    protected $chkW        = null;           ///< Motley::Checker warning instance.
 
     /// Class instance constructor.
     public function __construct() {

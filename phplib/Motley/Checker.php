@@ -10,15 +10,16 @@ namespace Motley;
 /// Check smoothly for error conditions.
 /// Checking via a separate package can also sometimes make it easier to
 /// acheive 100% unit test code coverage without resorting to code ignore blocks.
+/// @class Motley::Checker
 class Checker {
 
     protected $errorLevel = E_USER_ERROR;   ///< Error level to use for this instance.
     protected $failCount = 0;               ///< Number of check fails since reset.
     protected $passCount = 0;               ///< Number of check passes since reset.
 
-    // Class constructor.
-    // @param $errLvl - The php error level this instance will trigger us a check fails.
-    // Multiple class instances can be instantiated at different error levels.
+    /// Class constructor.
+    /// @param $errLvl - The php error level this instance will trigger us a check fails.
+    /// Multiple class instances can be instantiated at different error levels.
     public function __construct(int $errLvl=E_USER_ERROR) {
         $this->errorLevel = $errLvl;
     }
@@ -58,8 +59,8 @@ class Checker {
     }
 
     /// Check that a condition is exactly strictly true.
-    /// @cond - The condition to check.
-    /// @failMsg - The message to display if the check fails.
+    /// @param $cond - The condition to check.
+    /// @param $failMsg - The message to display if the check fails.
     public function checkTrue($cond, string $failMsg="") : bool {
         if($failMsg=="") {
             $failMsg = "Condition is unexpectedly not TRUE.";
@@ -75,8 +76,8 @@ class Checker {
     }
 
     /// Check that a condition is exactly strictly false.
-    /// @cond - The condition to check.
-    /// @failMsg - The message to display if the check fails.
+    /// @param $cond - The condition to check.
+    /// @param $failMsg - The message to display if the check fails.
      public function checkFalse($cond, string $failMsg="") : bool {
         if($failMsg=="") {
             $failMsg = "Condition is unexpectedly not FALSE.";
@@ -92,8 +93,8 @@ class Checker {
     }
 
     /// Check that a condition is exactly strictly not true.
-    /// @cond - The condition to check.
-    /// @failMsg - The message to display if the check fails.
+    /// @param $cond - The condition to check.
+    /// @param $failMsg - The message to display if the check fails.
     public function checkNotTrue($cond, string $failMsg="") : bool {
         if($failMsg=="") {
             $failMsg = "Condition is unexpectedly TRUE.";
@@ -109,8 +110,8 @@ class Checker {
     }
 
     /// Check that a condition is exactly strictly not false.
-    /// @cond - The condition to check.
-    /// @failMsg - The message to display if the check fails.
+    /// @param $cond - The condition to check.
+    /// @param $failMsg - The message to display if the check fails.
     public function checkNotFalse($cond, string $failMsg="") : bool {
         if($failMsg=="") {
             $failMsg = "Condition is unexpectedly FALSE.";
@@ -126,8 +127,8 @@ class Checker {
     }
 
     /// Check that a condition is zero.
-    /// @cond - The condition to check.
-    /// @failMsg - The message to display if the check fails.
+    /// @param $cond - The condition to check.
+    /// @param $failMsg - The message to display if the check fails.
     public function checkIsZero($cond, string $failMsg="") : bool {
         if($failMsg=="") {
             $failMsg = "Condition is unexpectedly not an integer 0 (zero).";
@@ -143,8 +144,8 @@ class Checker {
     }
 
     /// Check that a condition is null.
-    /// @cond - The condition to check.
-    /// @failMsg - The message to display if the check fails.
+    /// @param $cond - The condition to check.
+    /// @param $failMsg - The message to display if the check fails.
     public function checkIsNull($cond, string $failMsg="") : bool {
         if($failMsg=="") {
             $failMsg = "Condition is unexpectedly not NULL.";
@@ -160,8 +161,8 @@ class Checker {
     }
 
     /// Check that a condition is not null.
-    /// @cond - The condition to check.
-    /// @failMsg - The message to display if the check fails.
+    /// @param $cond - The condition to check.
+    /// @param $failMsg - The message to display if the check fails.
     public function checkIsNotNull($cond, string $failMsg="") : bool {
         if($failMsg=="") {
             $failMsg = "Condition is unexpectedly NULL.";

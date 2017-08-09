@@ -42,6 +42,8 @@ gen/doxygen/html/index.html : \
   $(wildcard phplib/Motley/*.php)
 	@echo "doxygen building documentation..."
 	doxygen $< > gen/doxygen/doxygen.log 2>&1
+	-grep -e '\(warning:\)\|\(error:\)' gen/doxygen/doxygen.log > gen/doxygen/doxygen.err
+	cat gen/doxygen/doxygen.err
 
 gen/doxygen/latex/refman.pdf : \
   gen/doxygen/html/index.html \
@@ -52,7 +54,7 @@ gen/doxygen/latex/refman.pdf : \
 #### Other stuff ####
 .PHONY: showdocwarn
 showdocwarn:
-	@grep -e '\(warning:\)\|\(error:\)' gen/doxygen/doxygen.log
+	@cat gen/doxygen/doxygen.err
 
 .PHONY: showcov
 showcov:

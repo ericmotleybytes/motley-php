@@ -41,17 +41,17 @@ class CommandMessengerTest extends Testcase {
         $this->assertInstanceOf(CommandMessenger::class,$msg);
     }
 
-    // Test set/get error exit level.
+    /// Test set/get error exit level.
     public function testSetGetErrorExitLevel() {
         $msg = new CommandMessenger();
-        $exp1 = CommandMessenger::ERROR_ERROR_LVL;
+        $exp1 = CommandMessenger::ERROR_DIE_LVL;
         $this->assertEquals($exp1,$msg->getErrorExitLevel());
-        $exp2 = CommandMessenger::ERROR_DIE_LVL;
+        $exp2 = CommandMessenger::ERROR_ERROR_LVL;
         $msg->setErrorExitLevel($exp2);
         $this->assertEquals($exp2,$msg->getErrorExitLevel());
     }
 
-    // test end-user message funtions.
+    /// test end-user message funtions.
     public function testEndUserMessaging() {
         $msg = new CommandMessenger();
         $unt = $this->lastUnit;

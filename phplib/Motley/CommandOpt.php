@@ -28,21 +28,6 @@ class CommandOpt extends CommandComponent {
         }
     }
 
-    /// Check option switch format.
-    /// @param $switch - The switch to check.
-    /// @return True is switch format is ok, else false.
-    public function checkOptSwitch(string $switch) : bool {
-        $pat1 = '/^\-[0-9a-zA-Z]{1}$/';
-        $pat2 = '/^\-\-[0-9a-zA-Z]+[0-9a-zA-Z\_\-]*$/';
-        if(preg_match($pat1,$switch)==1) {
-            return true;
-        } elseif (preg_match($pat2,$switch)==1) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     /// Add an array of switch synonyms.
     /// If a switch is already on the switch list, then
     /// it is ignored.
@@ -243,6 +228,21 @@ class CommandOpt extends CommandComponent {
         trigger_error("Unexpected path.",E_USER_ERROR);
         return false;
         // @codeCoverageIgnoreEnd
+    }
+
+    /// Check option switch format.
+    /// @param $switch - The switch to check.
+    /// @return True is switch format is ok, else false.
+    public static function checkOptSwitch(string $switch) : bool {
+        $pat1 = '/^\-[0-9a-zA-Z]{1}$/';
+        $pat2 = '/^\-\-[0-9a-zA-Z]+[0-9a-zA-Z\_\-]*$/';
+        if(preg_match($pat1,$switch)==1) {
+            return true;
+        } elseif (preg_match($pat2,$switch)==1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

@@ -9,8 +9,8 @@ namespace Motley;
 
 /// Static routines to support Motley autoloading.
 class Autoloader {
-    const AutoloadClassName    = "Motley\Autoloader";
-    const AutoloadFunctionName = "autoload";
+    const AutoloadClassName    = "Motley\Autoloader"; ///< Our autoloader class name.
+    const AutoloadFunctionName = "autoload";          ///< Out autoloader function name.
 
     /// Attempt to find source file from class name, and if found, include the file.
     /// @param $class_name - The string class name of a class.
@@ -38,7 +38,7 @@ class Autoloader {
         return $status;
     }
 
-    /// Registers the Motley\Autoloader\autoload routine as an autoloader.
+    /// Registers the Motley::Autoloader::autoload routine as an autoloader.
     /// @return TRUE on success, else FALSE.
     public static function register() : bool {
         if(self::isRegistered()===false) {
@@ -48,7 +48,7 @@ class Autoloader {
         return self::isRegistered();
     }
 
-    /// Un-registers the Motley\Autoloader\autoload routine as an autoloader.
+    /// Un-registers the Motley::Autoloader::autoload routine as an autoloader.
     /// @return TRUE on success, else FALSE.
     public static function unregister() : bool {
         if(self::isRegistered()===true) {
@@ -58,6 +58,8 @@ class Autoloader {
         return self::isRegistered();
     }
 
+    /// Check if Motley::Autoloader::autoload is SPL registered.
+    /// @return TRUE if registered
     public static function isRegistered() : bool {
         $result = false;
         $callable = array(self::AutoloadClassName,self::AutoloadFunctionName);

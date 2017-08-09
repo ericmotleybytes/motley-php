@@ -30,7 +30,7 @@ class UsageFormatter {
     const EOL           = "EOL";          ///< Param name for end-of-line chars.
 
     protected $params  = array();  ///< Associative array of formatting params.
-    protected $paramNames = array(); ///> Valid param names.
+    protected $paramNames = array(); ///< Valid param names.
     protected $eol   = PHP_EOL;    ///< End of line char(s).
     protected $textBuf  = "";      ///< Formatted text buffer.
     protected $newBreak = true;    ///< Is first line of a continuation group?
@@ -276,7 +276,7 @@ class UsageFormatter {
     }
 
     /// Set the left indentation.
-    /// @pamam $numCols - number of columns to indent on the left.
+    /// @param $numCols - number of columns to indent on the left.
     public function setLeftIndent(int $numCols) {
         $this->params[self::LEFT_INDENT] = $numCols;
     }
@@ -288,7 +288,7 @@ class UsageFormatter {
     }
 
     /// Set the right indentation.
-    /// @pamam $numCols - number of columns to indent on the right.
+    /// @param $numCols - number of columns to indent on the right.
     public function setRightIndent(int $numCols) {
         $this->params[self::RIGHT_INDENT] = $numCols;
     }
@@ -300,7 +300,7 @@ class UsageFormatter {
     }
 
     /// Set the continue indentation.
-    /// @pamam $numCols - number of additional columns to left indent continuation lines.
+    /// @param $numCols - number of additional columns to left indent continuation lines.
     public function setContinueIndent(int $numCols) {
         $this->params[self::CONT_INDENT] = $numCols;
     }

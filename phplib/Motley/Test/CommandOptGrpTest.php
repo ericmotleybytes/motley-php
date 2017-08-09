@@ -10,6 +10,7 @@ namespace Motley\Test;
 use PHPUnit\Framework\Testcase;
 use Motley\CommandOpt;
 use Motley\CommandOptGrp;
+use Motley\CommandArg;
 use Motley\UnitTestSupport;
 
 /// Tests the Motley::CommandOpt class.
@@ -63,5 +64,55 @@ class CommandOptGrpTest extends Testcase {
         $this->assertEquals($expOptions,$optGrp->getOptions());
     }
 
+    /// Test get switches for entire option group.
+    public function testGetSwitches() {
+        $optGrp = new CommandOptGrp("optGrp");
+        $sa1 = array("-a","--aa");
+        $sa2 = array("-b","--bb");
+        $exp  = array_merge($sa1,$sa2);
+        sort($exp);
+        $opt1 = new CommandOpt("opt1","",$sa1);
+        $opt2 = new CommandOpt("opt2","",$sa2);
+        $optGrp->addOption($opt1);
+        $optGrp->addOption($opt2);
+        $act = $optGrp->getSwitches();
+        sort($act);
+        $this->assertEquals($exp,$act);
+        # try finding option by swich
+        $opt3 = $optGrp->getOptionBySwitch("--zzz");
+        $this->assertNull($opt3);   // nothing found
+        $opt3 = $optGrp->getOptionBySwitch("-b");
+        $this->assertEquals($opt2,$opt3);   // found 2nd option
+        $opt3 = $optGrp->getOptionBySwitch("--aa");
+        $this->assertEquals($opt1,$opt3);   // found 1st option
+    }
+
+    /// Test validate functions.
+    public function testValidate() {
+        $optGrp = new CommandOptGrp("optGrp");
+        $sa1 = array("-a","--aa");
+        $sa2 = array("-b","--bb");
+        $opt1 = new CommandOpt("opt1","",$sa1);
+        $opt2 = new CommandOpt("opt2","",$sa2);
+        $arg  = new CommandArg("arg");
+        $opt2->setOptArg($arg,false);
+        $optGrp->addOption($opt1);
+        $optGrp->addOption($opt2);
+        $this->assertTrue($optGrp->validate("-a"));
+        $this->assertEquals($opt1,$optGrp->getLastValidOption());
+        $this->assertFalse($optGrp->validate("-z"));
+        $this->assertFalse($optGrp->validate("--zz"));
+        $this->assertTrue($optGrp->validate("--aa"));
+        $this->assertEquals($opt1,$optGrp->getLastValidOption());
+        $this->assertFalse($optGrp->validate("-a thing"));
+        $this->assertFalse($optGrp->validate("--aa=thing"));
+        $this->assertTrue($optGrp->validate("-b thing"));
+        $this->assertEquals($opt2,$optGrp->getLastValidOption());
+        $this->assertTrue($optGrp->validate("--bb=thing"));
+        $this->assertEquals($opt2,$optGrp->getLastValidOption());
+        $this->assertFalse($optGrp->validate("-b"));
+        $this->assertFalse($optGrp->validate("--bb"));
+        $this->assertFalse($optGrp->validate("--bb thing"));
+    }
 }
 ?>

@@ -6,14 +6,22 @@
 ### Note: This file uses Uses doxygen style annotation comments.
 ### Note: This file possibly includes some PHPUnit comment directives.
 namespace Motley;
+
 require_once(__DIR__ . '/CommandDoubleDash.php');
+
 use Motley\Command;
 use Motley\CommandArg;
 use Motley\CommandOpt;
 use Motley\CommandOptGrp;
 use Motley\CommandDoubleDash;
 use Motley\CommandArrange;
+
+/// Implement a GUID generating command.
 class GuidCommand extends Command {
+
+    /// Class constructor.
+    /// @param $name - The object name.
+    /// @param $desc - The object description.
     public function __construct(string $name, string $desc) {
         parent::__construct($name,$desc);
         # setup --help and --version
@@ -53,8 +61,13 @@ class GuidCommand extends Command {
         $versArrange->addOpt($versOpt);
         $this->addArrangement($versArrange);
     }
+
+    /// Run the command.
+    /// @param $argv - An array of command line parameters.
+    /// @return A status code.
     public function runcmd(array $argv) : int {
-        echo("Running " . $this->getCmdName() . PHP_EOL);
+        $argv = $this->argv;
+        echo("Running " . $this->getName() . PHP_EOL);
         $idx=0;
         foreach($argv as $arg) {
             echo("argv[$idx]='$argv[$idx]'.\n");

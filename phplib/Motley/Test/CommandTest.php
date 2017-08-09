@@ -26,24 +26,24 @@ class T222_MotleyCommandTest extends Testcase {
         $this->assertInstanceOf(Command::class,$cmd3);
     }
 
-    /// Test setCmdName/getCmdName functions.
-    public function testSetGetCmdName() {
+    /// Test setName/getName functions.
+    public function testSetGetName() {
         $cmdName1a = "cmd1a";
         $cmdName1b = "cmd1b";
         $cmd1 = new Command($cmdName1a);
-        $this->assertEquals($cmdName1a,$cmd1->getCmdName());
-        $cmd1->setCmdName($cmdName1b);
-        $this->assertEquals($cmdName1b,$cmd1->getCmdName());
+        $this->assertEquals($cmdName1a,$cmd1->getName());
+        $cmd1->setName($cmdName1b);
+        $this->assertEquals($cmdName1b,$cmd1->getName());
     }
 
-    /// Test setCmdDescription/getCmdDescription functions.
-    public function testSetGetCmdDescription() {
+    /// Test setDescription/getDescription functions.
+    public function testSetGetDescription() {
         $cmdDesc1a = "cmd description 1a.";
         $cmdDesc1b = "cmd description 1b.";
         $cmd1 = new Command("cmd1",$cmdDesc1a);
-        $this->assertEquals($cmdDesc1a,$cmd1->getCmdDescription());
-        $cmd1->setCmdDescription($cmdDesc1b);
-        $this->assertEquals($cmdDesc1b,$cmd1->getCmdDescription());
+        $this->assertEquals($cmdDesc1a,$cmd1->getDescription());
+        $cmd1->setDescription($cmdDesc1b);
+        $this->assertEquals($cmdDesc1b,$cmd1->getDescription());
     }
 
     /// Test set/get display name functions.
@@ -116,7 +116,8 @@ class T222_MotleyCommandTest extends Testcase {
     /// Test run.
     public function testRun() {
         $cmd = new Command("cmd","A command for unit testing.");
-        $statcode = $cmd->run(array(),false);
+        $cmd->setArgv(array($cmd->getName()));
+        $statcode = $cmd->run(false);
         $this->assertEquals(1,$statcode);
     }
 }
