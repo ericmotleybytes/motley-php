@@ -12,6 +12,9 @@ helpbuild:
 	@echo "Other:"
 	@echo "  make showdocwarn   # show documentation warnings."
 	@echo "  make showcov       # show coverage."
+	@echo "Web Publishing:"
+	@echo "  make pubdocs       # publish doxygen and phpunit stuff to docs."
+	@echo "  make cleanpub      # clean docs stuff."
 
 .PHONY: build
 build: bin \
@@ -71,6 +74,19 @@ showcov:
           | sed -e s/^\ S/S/g \
           | tail --lines=+3 \
           | head --lines=4
+
+#### publist to website stuff
+.PHONY: pubdocs
+pubdocs:
+	mkdir -p docs/doxygen
+	mkdir -p docs/phpunit
+	cp -a gen/doxygen/html docs/doxygen
+	cp -a gen/phpunit/html docs/phpunit
+
+.PHONY: cleanpub
+cleanpub:
+	rm -fr docs/doxygen
+	rm -fr docs/phpunit
 
 #### Cleaning built stuff ####
 

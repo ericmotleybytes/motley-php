@@ -3,5 +3,6 @@ gen/*
 scratch/*
 share/*
 vendor/*
+geektastic/*
 MyProject.komodoproject
 *.tmp
