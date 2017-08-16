@@ -1,0 +1,6 @@
+<map id="Motley\Test\UsageFormatterTest\testGetSetParam" name="Motley\Test\UsageFormatterTest\testGetSetParam">
+<area shape="rect" id="node2" href="$classMotley_1_1UnitTestSupport.html#a5ca0730de3d5493b62a5af4558bc846e" title="Disengage the capture handler and restore the original handler. " alt="" coords="243,5,419,46"/>
+<area shape="rect" id="node3" href="$classMotley_1_1UnitTestSupport.html#a965cdecc87c99ddee5beb767148ebb69" title="Set the capture error handler as an active error handler. " alt="" coords="251,70,411,111"/>
+<area shape="rect" id="node4" href="$classMotley_1_1UnitTestSupport.html#a893477a81ec6dfbe2e003339ae1c6e3f" title="Get all captured errors as an array of hash arrays. " alt="" coords="251,135,411,177"/>
+<area shape="rect" id="node5" href="$classMotley_1_1UnitTestSupport.html#a55a972c7645e66fc4e4127cadfe46a13" title="Call a protected or private function in a class under test. " alt="" coords="251,201,411,242"/>
+</map>

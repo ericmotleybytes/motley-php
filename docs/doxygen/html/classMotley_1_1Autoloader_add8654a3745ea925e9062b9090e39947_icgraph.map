@@ -1,0 +1,6 @@
+<map id="Motley\Autoloader\register" name="Motley\Autoloader\register">
+<area shape="rect" id="node2" href="$classMotley_1_1Autoloader.html#a5163029d9f8d5f2ba78cdb4f73ef073d" title="Check if Motley::Autoloader::autoload is SPL registered. " alt="" coords="230,5,434,32"/>
+<area shape="rect" id="node4" href="$classMotley_1_1Test_1_1AutoloaderTest.html#a59837d5b8c134c7b72634d9a6fb489ca" title="A unit test tear&#45;down function to possibly restore autoloaders. " alt="" coords="241,57,423,98"/>
+<area shape="rect" id="node5" href="$classMotley_1_1Test_1_1AutoloaderTest.html#a50a52bc4e6bac079cf5013745ccbd842" title="Test invoking autoload directly. " alt="" coords="241,122,423,163"/>
+<area shape="rect" id="node3" href="$classMotley_1_1Test_1_1AutoloaderTest.html#a5949fd5f5f31026835344ed616110c47" title="Test register and unregister. " alt="" coords="483,90,666,131"/>
+</map>

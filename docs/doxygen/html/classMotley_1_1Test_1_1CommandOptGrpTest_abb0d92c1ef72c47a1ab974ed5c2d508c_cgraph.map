@@ -1,0 +1,5 @@
+<map id="Motley\Test\CommandOptGrpTest\testAddGetClearOptSwitches" name="Motley\Test\CommandOptGrpTest\testAddGetClearOptSwitches">
+<area shape="rect" id="node2" href="$classMotley_1_1UnitTestSupport.html#a5ca0730de3d5493b62a5af4558bc846e" title="Disengage the capture handler and restore the original handler. " alt="" coords="277,5,453,46"/>
+<area shape="rect" id="node3" href="$classMotley_1_1UnitTestSupport.html#a965cdecc87c99ddee5beb767148ebb69" title="Set the capture error handler as an active error handler. " alt="" coords="285,70,445,111"/>
+<area shape="rect" id="node4" href="$classMotley_1_1UnitTestSupport.html#a893477a81ec6dfbe2e003339ae1c6e3f" title="Get all captured errors as an array of hash arrays. " alt="" coords="285,135,445,177"/>
+</map>

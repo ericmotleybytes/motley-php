@@ -1,0 +1,20 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node2" href="$classMotley_1_1Test_1_1AutoloaderTest.html" title="Tests the Motley::Autoloader class. " alt="" coords="167,5,350,32"/>
+<area shape="rect" id="node3" href="$classMotley_1_1Test_1_1CheckerTest.html" title="Tests the Motley::Checker class. " alt="" coords="173,56,344,83"/>
+<area shape="rect" id="node4" href="$classMotley_1_1Test_1_1CommandArgTest.html" title="Tests the Motley::CommandArg class. " alt="" coords="158,107,359,133"/>
+<area shape="rect" id="node5" href="$classMotley_1_1Test_1_1CommandArrangeCompTest.html" title="Tests the Motley::CommandArrangeComp class. " alt="" coords="159,158,359,199"/>
+<area shape="rect" id="node6" href="$classMotley_1_1Test_1_1CommandArrangeTest.html" title="Tests the Motley::CommandArrange class. " alt="" coords="145,224,372,251"/>
+<area shape="rect" id="node7" href="$classMotley_1_1Test_1_1CommandComponentTest.html" title="Tests the Motley::CommandComponent class. " alt="" coords="135,275,383,301"/>
+<area shape="rect" id="node8" href="$classMotley_1_1Test_1_1CommandDemoTest.html" title="Tests the Motley::CommandOpt class. " alt="" coords="151,325,367,352"/>
+<area shape="rect" id="node9" href="$classMotley_1_1Test_1_1CommandDoubleDashTest.html" title="Tests the Motley::CommandDoubleDash class. " alt="" coords="161,377,357,418"/>
+<area shape="rect" id="node10" href="$classMotley_1_1Test_1_1CommandMessengerTest.html" title="Tests the Motley::CommandMessenger class. " alt="" coords="136,443,381,469"/>
+<area shape="rect" id="node11" href="$classMotley_1_1Test_1_1CommandOptGrpTest.html" title="Tests the Motley::CommandOpt class. " alt="" coords="147,493,370,520"/>
+<area shape="rect" id="node12" href="$classMotley_1_1Test_1_1CommandOptTest.html" title="Tests the Motley::CommandOpt class. " alt="" coords="157,544,360,571"/>
+<area shape="rect" id="node13" href="$classMotley_1_1Test_1_1GuidGeneratorTest.html" title="Tests the Motley::GuidGenerator class. " alt="" coords="156,595,361,621"/>
+<area shape="rect" id="node14" href="$classMotley_1_1Test_1_1PhpBaseTest.html" title="Simple PHPUnit tests. " alt="" coords="171,645,346,672"/>
+<area shape="rect" id="node15" href="$classMotley_1_1Test_1_1PhpStuffTest.html" title="Simple PHPUnit tests. " alt="" coords="173,696,345,723"/>
+<area shape="rect" id="node16" href="$classMotley_1_1Test_1_1PhpSyntaxTest.html" title="Runs &#39;php –syntax&#45;check&#39; on all php files. " alt="" coords="166,747,351,773"/>
+<area shape="rect" id="node17" href="$classMotley_1_1Test_1_1T222__MotleyCommandTest.html" title="Tests the Motley::Command class. " alt="" coords="131,797,387,824"/>
+<area shape="rect" id="node18" href="$classMotley_1_1Test_1_1UnitTestSupportTest.html" title="Tests the Motley::UnitTestSupport class. " alt="" coords="151,848,367,875"/>
+<area shape="rect" id="node19" href="$classMotley_1_1Test_1_1UsageFormatterTest.html" title="Tests the Motley::UsageFormatter class. " alt="" coords="151,899,366,925"/>
+</map>

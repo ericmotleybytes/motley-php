@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /home/ericc/github/motley-php/phplib/Motley</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href=".css/bootstrap.min.css" rel="stylesheet">
+  <link href=".css/nv.d3.min.css" rel="stylesheet">
+  <link href=".css/style.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+  <script src=".js/html5shiv.min.js"></script>
+  <script src=".js/respond.min.js"></script>
+  <![endif]-->
+ </head>
+ <body>
+  <header>
+   <div class="container">
+    <div class="row">
+     <div class="col-md-12">
+      <ol class="breadcrumb">
+        <li><a href="index.html">/home/ericc/github/motley-php/phplib/Motley</a></li>
+        <li class="active">(Dashboard)</li>
+
+      </ol>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="GuidCommand.php.html#20">GuidCommand</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CommandArrange.php.html#18">CommandArrange</a></td><td class="text-right">66%</td></tr>
+       <tr><td><a href="Command.php.html#19">Command</a></td><td class="text-right">70%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="CommandArrange.php.html#18">CommandArrange</a></td><td class="text-right">180</td></tr>
+       <tr><td><a href="Command.php.html#19">Command</a></td><td class="text-right">104</td></tr>
+       <tr><td><a href="GuidCommand.php.html#20">GuidCommand</a></td><td class="text-right">12</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="CommandArrange.php.html#245"><abbr title="CommandArrange::getMatchingComponents">getMatchingComponents</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CommandArrange.php.html#251"><abbr title="CommandArrange::getMatchingReason">getMatchingReason</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CommandArrange.php.html#315"><abbr title="CommandArrange::getNextArranComp">getNextArranComp</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CommandArrange.php.html#325"><abbr title="CommandArrange::getNextArgv">getNextArgv</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CommandArrange.php.html#335"><abbr title="CommandArrange::remainingArranCompCount">remainingArranCompCount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="CommandArrange.php.html#341"><abbr title="CommandArrange::remainingArgvCount">remainingArgvCount</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GuidCommand.php.html#25"><abbr title="GuidCommand::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="GuidCommand.php.html#68"><abbr title="GuidCommand::runcmd">runcmd</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Command.php.html#87"><abbr title="Command::setArgv">setArgv</abbr></a></td><td class="text-right">57%</td></tr>
+       <tr><td><a href="Command.php.html#140"><abbr title="Command::getHelp">getHelp</abbr></a></td><td class="text-right">57%</td></tr>
+       <tr><td><a href="CommandArrange.php.html#261"><abbr title="CommandArrange::skipFulfilledUntilClass">skipFulfilledUntilClass</abbr></a></td><td class="text-right">68%</td></tr>
+       <tr><td><a href="CommandArrange.php.html#110"><abbr title="CommandArrange::parse">parse</abbr></a></td><td class="text-right">70%</td></tr>
+       <tr><td><a href="Command.php.html#273"><abbr title="Command::run">run</abbr></a></td><td class="text-right">83%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Command.php.html#140"><abbr title="Command::getHelp">getHelp</abbr></a></td><td class="text-right">47</td></tr>
+       <tr><td><a href="CommandArrange.php.html#110"><abbr title="CommandArrange::parse">parse</abbr></a></td><td class="text-right">34</td></tr>
+       <tr><td><a href="CommandArrange.php.html#261"><abbr title="CommandArrange::skipFulfilledUntilClass">skipFulfilledUntilClass</abbr></a></td><td class="text-right">16</td></tr>
+       <tr><td><a href="CommandArrange.php.html#251"><abbr title="CommandArrange::getMatchingReason">getMatchingReason</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="CommandArrange.php.html#315"><abbr title="CommandArrange::getNextArranComp">getNextArranComp</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="CommandArrange.php.html#325"><abbr title="CommandArrange::getNextArgv">getNextArgv</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="GuidCommand.php.html#68"><abbr title="GuidCommand::runcmd">runcmd</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Command.php.html#87"><abbr title="Command::setArgv">setArgv</abbr></a></td><td class="text-right">3</td></tr>
+       <tr><td><a href="Command.php.html#273"><abbr title="Command::run">run</abbr></a></td><td class="text-right">3</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 5.2.1</a> using <a href="https://secure.php.net/" target="_top">PHP 7.0.10</a> with <a href="https://xdebug.org/">Xdebug 2.5.5</a> and <a href="https://phpunit.de/">PHPUnit 6.2.3</a> at Wed Aug 16 1:04:20 UTC 2017.</small>
+    </p>
+   </footer>
+  </div>
+  <script src=".js/jquery.min.js" type="text/javascript"></script>
+  <script src=".js/bootstrap.min.js" type="text/javascript"></script>
+  <script src=".js/holder.min.js" type="text/javascript"></script>
+  <script src=".js/d3.min.js" type="text/javascript"></script>
+  <script src=".js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([1,0,0,0,0,0,0,1,1,0,0,32], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([8,0,0,0,0,0,2,1,1,1,0,264], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[100,13,"<a href=\"Autoloader.php.html#11\">Autoloader<\/a>"],[100,39,"<a href=\"Checker.php.html#14\">Checker<\/a>"],[70.422535211268,47,"<a href=\"Command.php.html#19\">Command<\/a>"],[100,44,"<a href=\"CommandArg.php.html#13\">CommandArg<\/a>"],[66.875,58,"<a href=\"CommandArrange.php.html#18\">CommandArrange<\/a>"],[100,7,"<a href=\"CommandArrangeComp.php.html#13\">CommandArrangeComp<\/a>"],[100,21,"<a href=\"CommandComponent.php.html#13\">CommandComponent<\/a>"],[100,9,"<a href=\"CommandDemo.php.html#15\">CommandDemo<\/a>"],[100,5,"<a href=\"CommandDoubleDash.php.html#16\">CommandDoubleDash<\/a>"],[100,29,"<a href=\"CommandMessenger.php.html#13\">CommandMessenger<\/a>"],[100,44,"<a href=\"CommandOpt.php.html#13\">CommandOpt<\/a>"],[100,22,"<a href=\"CommandOptGrp.php.html#14\">CommandOptGrp<\/a>"],[0,3,"<a href=\"GuidCommand.php.html#20\">GuidCommand<\/a>"],[100,16,"<a href=\"GuidGenerator.php.html#15\">GuidGenerator<\/a>"],[100,4,"<a href=\"Test\/AutoloaderTest.php.html#15\">AutoloaderTest<\/a>"],[100,6,"<a href=\"Test\/CheckerTest.php.html#15\">CheckerTest<\/a>"],[100,11,"<a href=\"Test\/CommandArgTest.php.html#14\">CommandArgTest<\/a>"],[100,2,"<a href=\"Test\/CommandArrangeCompTest.php.html#18\">CommandArrangeCompTest<\/a>"],[100,5,"<a href=\"Test\/CommandArrangeTest.php.html#19\">CommandArrangeTest<\/a>"],[100,8,"<a href=\"Test\/CommandComponentTest.php.html#15\">CommandComponentTest<\/a>"],[100,5,"<a href=\"Test\/CommandDemoTest.php.html#14\">CommandDemoTest<\/a>"],[100,3,"<a href=\"Test\/CommandDoubleDashTest.php.html#16\">CommandDoubleDashTest<\/a>"],[100,9,"<a href=\"Test\/CommandMessengerTest.php.html#16\">CommandMessengerTest<\/a>"],[100,4,"<a href=\"Test\/CommandOptGrpTest.php.html#17\">CommandOptGrpTest<\/a>"],[100,12,"<a href=\"Test\/CommandOptTest.php.html#15\">CommandOptTest<\/a>"],[100,9,"<a href=\"Test\/CommandTest.php.html#17\">T222_MotleyCommandTest<\/a>"],[100,4,"<a href=\"Test\/GuidGeneratorTest.php.html#16\">GuidGeneratorTest<\/a>"],[100,2,"<a href=\"Test\/PhpBaseTest.php.html#14\">PhpBaseTest<\/a>"],[100,2,"<a href=\"Test\/PhpStuffTest.php.html#14\">PhpStuffTest<\/a>"],[100,5,"<a href=\"Test\/PhpSyntaxTest.php.html#13\">PhpSyntaxTest<\/a>"],[100,8,"<a href=\"Test\/UnitTestSupportTest.php.html#17\">UnitTestSupportTest<\/a>"],[100,10,"<a href=\"Test\/UsageFormatterTest.php.html#15\">UsageFormatterTest<\/a>"],[100,7,"<a href=\"Test\/ZzzSampleClass.php.html#15\">ZzzSampleClass<\/a>"],[100,33,"<a href=\"UnitTestSupport.php.html#13\">UnitTestSupport<\/a>"],[100,51,"<a href=\"UsageFormatter.php.html#22\">UsageFormatter<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[100,3,"<a href=\"Autoloader.php.html#18\">Autoloader::autoload<\/a>"],[100,2,"<a href=\"Autoloader.php.html#43\">Autoloader::register<\/a>"],[100,2,"<a href=\"Autoloader.php.html#53\">Autoloader::unregister<\/a>"],[100,6,"<a href=\"Autoloader.php.html#63\">Autoloader::isRegistered<\/a>"],[100,1,"<a href=\"Checker.php.html#23\">Checker::__construct<\/a>"],[100,1,"<a href=\"Checker.php.html#29\">Checker::getErrorLevel<\/a>"],[100,1,"<a href=\"Checker.php.html#35\">Checker::setErrorLevel<\/a>"],[100,1,"<a href=\"Checker.php.html#41\">Checker::getFailCount<\/a>"],[100,1,"<a href=\"Checker.php.html#46\">Checker::resetFailCount<\/a>"],[100,1,"<a href=\"Checker.php.html#52\">Checker::getPassCount<\/a>"],[100,1,"<a href=\"Checker.php.html#57\">Checker::resetPassCount<\/a>"],[100,3,"<a href=\"Checker.php.html#64\">Checker::checkTrue<\/a>"],[100,3,"<a href=\"Checker.php.html#81\">Checker::checkFalse<\/a>"],[100,3,"<a href=\"Checker.php.html#98\">Checker::checkNotTrue<\/a>"],[100,3,"<a href=\"Checker.php.html#115\">Checker::checkNotFalse<\/a>"],[100,3,"<a href=\"Checker.php.html#132\">Checker::checkIsZero<\/a>"],[100,3,"<a href=\"Checker.php.html#149\">Checker::checkIsNull<\/a>"],[100,3,"<a href=\"Checker.php.html#166\">Checker::checkIsNotNull<\/a>"],[100,3,"<a href=\"Checker.php.html#185\">Checker::isAssociativeArray<\/a>"],[100,8,"<a href=\"Checker.php.html#201\">Checker::describeVar<\/a>"],[100,3,"<a href=\"Command.php.html#32\">Command::__construct<\/a>"],[100,1,"<a href=\"Command.php.html#45\">Command::setName<\/a>"],[100,1,"<a href=\"Command.php.html#51\">Command::getName<\/a>"],[100,1,"<a href=\"Command.php.html#57\">Command::setDescription<\/a>"],[100,1,"<a href=\"Command.php.html#63\">Command::getDescription<\/a>"],[100,1,"<a href=\"Command.php.html#69\">Command::setDisplayName<\/a>"],[100,2,"<a href=\"Command.php.html#76\">Command::getDisplayName<\/a>"],[57.142857142857,3,"<a href=\"Command.php.html#87\">Command::setArgv<\/a>"],[100,1,"<a href=\"Command.php.html#102\">Command::getArgv<\/a>"],[100,1,"<a href=\"Command.php.html#108\">Command::addArrangement<\/a>"],[100,1,"<a href=\"Command.php.html#114\">Command::getArrangements<\/a>"],[100,1,"<a href=\"Command.php.html#119\">Command::clearArrangements<\/a>"],[100,2,"<a href=\"Command.php.html#124\">Command::getMessenger<\/a>"],[100,2,"<a href=\"Command.php.html#132\">Command::getUsageFormatter<\/a>"],[57.303370786517,19,"<a href=\"Command.php.html#140\">Command::getHelp<\/a>"],[100,1,"<a href=\"Command.php.html#252\">Command::displayHelp<\/a>"],[100,3,"<a href=\"Command.php.html#258\">Command::parse<\/a>"],[83.333333333333,3,"<a href=\"Command.php.html#273\">Command::run<\/a>"],[100,1,"<a href=\"CommandArg.php.html#27\">CommandArg::__construct<\/a>"],[100,2,"<a href=\"CommandArg.php.html#37\">CommandArg::addValidLiteral<\/a>"],[100,1,"<a href=\"CommandArg.php.html#48\">CommandArg::getValidLiterals<\/a>"],[100,1,"<a href=\"CommandArg.php.html#54\">CommandArg::getValidLitDescs<\/a>"],[100,1,"<a href=\"CommandArg.php.html#59\">CommandArg::clearValidLiterals<\/a>"],[100,2,"<a href=\"CommandArg.php.html#69\">CommandArg::checkRegEx<\/a>"],[100,3,"<a href=\"CommandArg.php.html#90\">CommandArg::addValidRegEx<\/a>"],[100,1,"<a href=\"CommandArg.php.html#102\">CommandArg::getValidRegExs<\/a>"],[100,1,"<a href=\"CommandArg.php.html#108\">CommandArg::getValidRxDescs<\/a>"],[100,1,"<a href=\"CommandArg.php.html#113\">CommandArg::clearValidRegExs<\/a>"],[100,4,"<a href=\"CommandArg.php.html#124\">CommandArg::setIsFile<\/a>"],[100,1,"<a href=\"CommandArg.php.html#148\">CommandArg::getIsFile<\/a>"],[100,1,"<a href=\"CommandArg.php.html#154\">CommandArg::getFileMustExist<\/a>"],[100,1,"<a href=\"CommandArg.php.html#160\">CommandArg::getFileMustNotExist<\/a>"],[100,18,"<a href=\"CommandArg.php.html#171\">CommandArg::validate<\/a>"],[100,3,"<a href=\"CommandArg.php.html#241\">CommandArg::getDisplayName<\/a>"],[100,1,"<a href=\"CommandArg.php.html#253\">CommandArg::setDefaultValue<\/a>"],[100,1,"<a href=\"CommandArg.php.html#259\">CommandArg::getDefaultValue<\/a>"],[100,3,"<a href=\"CommandArrange.php.html#34\">CommandArrange::__construct<\/a>"],[100,1,"<a href=\"CommandArrange.php.html#46\">CommandArrange::setName<\/a>"],[100,1,"<a href=\"CommandArrange.php.html#52\">CommandArrange::getName<\/a>"],[100,1,"<a href=\"CommandArrange.php.html#58\">CommandArrange::setDescription<\/a>"],[100,1,"<a href=\"CommandArrange.php.html#64\">CommandArrange::getDescription<\/a>"],[100,1,"<a href=\"CommandArrange.php.html#70\">CommandArrange::setDisplayName<\/a>"],[100,2,"<a href=\"CommandArrange.php.html#77\">CommandArrange::getDisplayName<\/a>"],[100,1,"<a href=\"CommandArrange.php.html#89\">CommandArrange::addComponent<\/a>"],[100,1,"<a href=\"CommandArrange.php.html#97\">CommandArrange::getArranComps<\/a>"],[100,1,"<a href=\"CommandArrange.php.html#103\">CommandArrange::clearArranComps<\/a>"],[70.731707317073,22,"<a href=\"CommandArrange.php.html#110\">CommandArrange::parse<\/a>"],[0,1,"<a href=\"CommandArrange.php.html#245\">CommandArrange::getMatchingComponents<\/a>"],[0,2,"<a href=\"CommandArrange.php.html#251\">CommandArrange::getMatchingReason<\/a>"],[68.181818181818,12,"<a href=\"CommandArrange.php.html#261\">CommandArrange::skipFulfilledUntilClass<\/a>"],[100,2,"<a href=\"CommandArrange.php.html#303\">CommandArrange::rewindParsing<\/a>"],[0,2,"<a href=\"CommandArrange.php.html#315\">CommandArrange::getNextArranComp<\/a>"],[0,2,"<a href=\"CommandArrange.php.html#325\">CommandArrange::getNextArgv<\/a>"],[0,1,"<a href=\"CommandArrange.php.html#335\">CommandArrange::remainingArranCompCount<\/a>"],[0,1,"<a href=\"CommandArrange.php.html#341\">CommandArrange::remainingArgvCount<\/a>"],[100,1,"<a href=\"CommandArrangeComp.php.html#23\">CommandArrangeComp::__construct<\/a>"],[100,1,"<a href=\"CommandArrangeComp.php.html#32\">CommandArrangeComp::getCompObj<\/a>"],[100,1,"<a href=\"CommandArrangeComp.php.html#38\">CommandArrangeComp::getIsOptional<\/a>"],[100,1,"<a href=\"CommandArrangeComp.php.html#44\">CommandArrangeComp::getIsRepeatable<\/a>"],[100,3,"<a href=\"CommandArrangeComp.php.html#52\">CommandArrangeComp::getIsFulfilled<\/a>"],[100,3,"<a href=\"CommandComponent.php.html#28\">CommandComponent::__construct<\/a>"],[100,1,"<a href=\"CommandComponent.php.html#41\">CommandComponent::getName<\/a>"],[100,1,"<a href=\"CommandComponent.php.html#47\">CommandComponent::setName<\/a>"],[100,1,"<a href=\"CommandComponent.php.html#53\">CommandComponent::getDescription<\/a>"],[100,1,"<a href=\"CommandComponent.php.html#59\">CommandComponent::setDescription<\/a>"],[100,2,"<a href=\"CommandComponent.php.html#65\">CommandComponent::getDisplayName<\/a>"],[100,1,"<a href=\"CommandComponent.php.html#75\">CommandComponent::setDisplayName<\/a>"],[100,2,"<a href=\"CommandComponent.php.html#83\">CommandComponent::saveLastParam<\/a>"],[100,1,"<a href=\"CommandComponent.php.html#96\">CommandComponent::getLastParamValue<\/a>"],[100,1,"<a href=\"CommandComponent.php.html#102\">CommandComponent::getLastParamIsValid<\/a>"],[100,1,"<a href=\"CommandComponent.php.html#108\">CommandComponent::getLastParamMessage<\/a>"],[100,1,"<a href=\"CommandComponent.php.html#115\">CommandComponent::validate<\/a>"],[100,1,"<a href=\"CommandComponent.php.html#124\">CommandComponent::getValidParamHistory<\/a>"],[100,1,"<a href=\"CommandComponent.php.html#129\">CommandComponent::resetValidParamHistory<\/a>"],[100,3,"<a href=\"CommandComponent.php.html#141\">CommandComponent::findComponentByName<\/a>"],[100,1,"<a href=\"CommandDemo.php.html#23\">CommandDemo::__construct<\/a>"],[100,8,"<a href=\"CommandDemo.php.html#44\">CommandDemo::run<\/a>"],[100,3,"<a href=\"CommandDoubleDash.php.html#21\">CommandDoubleDash::__construct<\/a>"],[100,2,"<a href=\"CommandDoubleDash.php.html#31\">CommandDoubleDash::validate<\/a>"],[100,1,"<a href=\"CommandMessenger.php.html#43\">CommandMessenger::__construct<\/a>"],[100,3,"<a href=\"CommandMessenger.php.html#66\">CommandMessenger::__destruct<\/a>"],[100,7,"<a href=\"CommandMessenger.php.html#81\">CommandMessenger::genericMsg<\/a>"],[100,1,"<a href=\"CommandMessenger.php.html#116\">CommandMessenger::infoMessage<\/a>"],[100,1,"<a href=\"CommandMessenger.php.html#125\">CommandMessenger::verboseMessage<\/a>"],[100,1,"<a href=\"CommandMessenger.php.html#134\">CommandMessenger::warningMessage<\/a>"],[100,1,"<a href=\"CommandMessenger.php.html#145\">CommandMessenger::errorMessage<\/a>"],[100,1,"<a href=\"CommandMessenger.php.html#156\">CommandMessenger::dieMessage<\/a>"],[100,1,"<a href=\"CommandMessenger.php.html#165\">CommandMessenger::debugMessage<\/a>"],[100,1,"<a href=\"CommandMessenger.php.html#174\">CommandMessenger::verboseDebugMessage<\/a>"],[100,2,"<a href=\"CommandMessenger.php.html#186\">CommandMessenger::setDisplayLevel<\/a>"],[100,2,"<a href=\"CommandMessenger.php.html#201\">CommandMessenger::getDisplayLevel<\/a>"],[100,1,"<a href=\"CommandMessenger.php.html#215\">CommandMessenger::setErrorExitLevel<\/a>"],[100,1,"<a href=\"CommandMessenger.php.html#223\">CommandMessenger::getErrorExitLevel<\/a>"],[100,3,"<a href=\"CommandMessenger.php.html#233\">CommandMessenger::setOutputDestination<\/a>"],[100,2,"<a href=\"CommandMessenger.php.html#253\">CommandMessenger::getOutputDestination<\/a>"],[100,2,"<a href=\"CommandOpt.php.html#23\">CommandOpt::__construct<\/a>"],[100,4,"<a href=\"CommandOpt.php.html#36\">CommandOpt::addOptSwitches<\/a>"],[100,1,"<a href=\"CommandOpt.php.html#52\">CommandOpt::getOptSwitches<\/a>"],[100,1,"<a href=\"CommandOpt.php.html#57\">CommandOpt::clearOptSwitches<\/a>"],[100,1,"<a href=\"CommandOpt.php.html#64\">CommandOpt::setOptArg<\/a>"],[100,1,"<a href=\"CommandOpt.php.html#71\">CommandOpt::getOptArg<\/a>"],[100,1,"<a href=\"CommandOpt.php.html#77\">CommandOpt::getOptArgOptional<\/a>"],[100,16,"<a href=\"CommandOpt.php.html#83\">CommandOpt::getSwitchesString<\/a>"],[100,14,"<a href=\"CommandOpt.php.html#139\">CommandOpt::validate<\/a>"],[100,3,"<a href=\"CommandOpt.php.html#236\">CommandOpt::checkOptSwitch<\/a>"],[100,3,"<a href=\"CommandOptGrp.php.html#23\">CommandOptGrp::__construct<\/a>"],[100,5,"<a href=\"CommandOptGrp.php.html#38\">CommandOptGrp::addOption<\/a>"],[100,1,"<a href=\"CommandOptGrp.php.html#63\">CommandOptGrp::getOptions<\/a>"],[100,1,"<a href=\"CommandOptGrp.php.html#68\">CommandOptGrp::clearOptions<\/a>"],[100,4,"<a href=\"CommandOptGrp.php.html#75\">CommandOptGrp::getSwitches<\/a>"],[100,4,"<a href=\"CommandOptGrp.php.html#92\">CommandOptGrp::getOptionBySwitch<\/a>"],[100,3,"<a href=\"CommandOptGrp.php.html#113\">CommandOptGrp::validate<\/a>"],[100,1,"<a href=\"CommandOptGrp.php.html#130\">CommandOptGrp::getLastValidOption<\/a>"],[0,1,"<a href=\"GuidCommand.php.html#25\">GuidCommand::__construct<\/a>"],[0,2,"<a href=\"GuidCommand.php.html#68\">GuidCommand::runcmd<\/a>"],[100,3,"<a href=\"GuidGenerator.php.html#27\">GuidGenerator::__construct<\/a>"],[100,1,"<a href=\"GuidGenerator.php.html#43\">GuidGenerator::setUpperFlag<\/a>"],[100,1,"<a href=\"GuidGenerator.php.html#51\">GuidGenerator::getUpperFlag<\/a>"],[100,1,"<a href=\"GuidGenerator.php.html#58\">GuidGenerator::setDashesFlag<\/a>"],[100,1,"<a href=\"GuidGenerator.php.html#66\">GuidGenerator::getDashesFlag<\/a>"],[100,7,"<a href=\"GuidGenerator.php.html#74\">GuidGenerator::generateGuid<\/a>"],[100,2,"<a href=\"GuidGenerator.php.html#120\">GuidGenerator::getGlobalGuidGenerator<\/a>"],[100,1,"<a href=\"Test\/AutoloaderTest.php.html#18\">AutoloaderTest::setUp<\/a>"],[100,1,"<a href=\"Test\/AutoloaderTest.php.html#23\">AutoloaderTest::tearDown<\/a>"],[100,1,"<a href=\"Test\/AutoloaderTest.php.html#28\">AutoloaderTest::testRegisterFunction<\/a>"],[100,1,"<a href=\"Test\/AutoloaderTest.php.html#40\">AutoloaderTest::testAutoload<\/a>"],[100,2,"<a href=\"Test\/CheckerTest.php.html#19\">CheckerTest::tearDown<\/a>"],[100,1,"<a href=\"Test\/CheckerTest.php.html#29\">CheckerTest::testGetSetErrorLevel<\/a>"],[100,1,"<a href=\"Test\/CheckerTest.php.html#42\">CheckerTest::testChecking<\/a>"],[100,1,"<a href=\"Test\/CheckerTest.php.html#250\">CheckerTest::testIsAssociativeArray<\/a>"],[100,1,"<a href=\"Test\/CheckerTest.php.html#266\">CheckerTest::testDescribeVar<\/a>"],[100,1,"<a href=\"Test\/CommandArgTest.php.html#17\">CommandArgTest::testNew<\/a>"],[100,1,"<a href=\"Test\/CommandArgTest.php.html#27\">CommandArgTest::testGetDisplayName<\/a>"],[100,1,"<a href=\"Test\/CommandArgTest.php.html#38\">CommandArgTest::testValidLiterals<\/a>"],[100,1,"<a href=\"Test\/CommandArgTest.php.html#77\">CommandArgTest::testValidRegExs<\/a>"],[100,1,"<a href=\"Test\/CommandArgTest.php.html#121\">CommandArgTest::testSetGetIsFile<\/a>"],[100,1,"<a href=\"Test\/CommandArgTest.php.html#145\">CommandArgTest::testArgValues<\/a>"],[100,1,"<a href=\"Test\/CommandArgTest.php.html#173\">CommandArgTest::testGoodCheckRegEx<\/a>"],[100,1,"<a href=\"Test\/CommandArgTest.php.html#179\">CommandArgTest::testBadCheckRegEx<\/a>"],[100,1,"<a href=\"Test\/CommandArgTest.php.html#188\">CommandArgTest::testValidate<\/a>"],[100,1,"<a href=\"Test\/CommandArgTest.php.html#214\">CommandArgTest::testSetGetDisplayName<\/a>"],[100,1,"<a href=\"Test\/CommandArgTest.php.html#225\">CommandArgTest::testSetGetDefaultValue<\/a>"],[100,1,"<a href=\"Test\/CommandArrangeCompTest.php.html#21\">CommandArrangeCompTest::testNewGet<\/a>"],[100,1,"<a href=\"Test\/CommandArrangeCompTest.php.html#41\">CommandArrangeCompTest::testGetIsFulfilled<\/a>"],[100,1,"<a href=\"Test\/CommandArrangeTest.php.html#22\">CommandArrangeTest::testNew<\/a>"],[100,1,"<a href=\"Test\/CommandArrangeTest.php.html#32\">CommandArrangeTest::testSetGetName<\/a>"],[100,1,"<a href=\"Test\/CommandArrangeTest.php.html#42\">CommandArrangeTest::testSetGetDescription<\/a>"],[100,1,"<a href=\"Test\/CommandArrangeTest.php.html#52\">CommandArrangeTest::testSetGetDisplayName<\/a>"],[100,1,"<a href=\"Test\/CommandArrangeTest.php.html#62\">CommandArrangeTest::testDefineGetClearArrangement<\/a>"],[100,1,"<a href=\"Test\/CommandComponentTest.php.html#18\">CommandComponentTest::testNew<\/a>"],[100,1,"<a href=\"Test\/CommandComponentTest.php.html#24\">CommandComponentTest::testSetGetName<\/a>"],[100,1,"<a href=\"Test\/CommandComponentTest.php.html#34\">CommandComponentTest::testSetGetDescription<\/a>"],[100,1,"<a href=\"Test\/CommandComponentTest.php.html#44\">CommandComponentTest::testSetGetDisplayName<\/a>"],[100,1,"<a href=\"Test\/CommandComponentTest.php.html#54\">CommandComponentTest::testSaveLastParam<\/a>"],[100,1,"<a href=\"Test\/CommandComponentTest.php.html#73\">CommandComponentTest::testValiateGetLastParam<\/a>"],[100,1,"<a href=\"Test\/CommandComponentTest.php.html#83\">CommandComponentTest::testParamHistory<\/a>"],[100,1,"<a href=\"Test\/CommandComponentTest.php.html#113\">CommandComponentTest::testFindComponentByName<\/a>"],[100,1,"<a href=\"Test\/CommandDemoTest.php.html#17\">CommandDemoTest::testNew<\/a>"],[100,1,"<a href=\"Test\/CommandDemoTest.php.html#23\">CommandDemoTest::testRunDefaultHelp<\/a>"],[100,1,"<a href=\"Test\/CommandDemoTest.php.html#42\">CommandDemoTest::testRunHelp<\/a>"],[100,1,"<a href=\"Test\/CommandDemoTest.php.html#72\">CommandDemoTest::testRunVersion<\/a>"],[100,1,"<a href=\"Test\/CommandDemoTest.php.html#100\">CommandDemoTest::testRunBadSwitch<\/a>"],[100,1,"<a href=\"Test\/CommandDoubleDashTest.php.html#21\">CommandDoubleDashTest::testNewDoubleDash<\/a>"],[100,1,"<a href=\"Test\/CommandDoubleDashTest.php.html#28\">CommandDoubleDashTest::testGet<\/a>"],[100,1,"<a href=\"Test\/CommandDoubleDashTest.php.html#39\">CommandDoubleDashTest::testValidate<\/a>"],[100,1,"<a href=\"Test\/CommandMessengerTest.php.html#21\">CommandMessengerTest::setUp<\/a>"],[100,3,"<a href=\"Test\/CommandMessengerTest.php.html#26\">CommandMessengerTest::tearDown<\/a>"],[100,1,"<a href=\"Test\/CommandMessengerTest.php.html#39\">CommandMessengerTest::testNew<\/a>"],[100,1,"<a href=\"Test\/CommandMessengerTest.php.html#45\">CommandMessengerTest::testSetGetErrorExitLevel<\/a>"],[100,3,"<a href=\"Test\/CommandMessengerTest.php.html#55\">CommandMessengerTest::testEndUserMessaging<\/a>"],[100,1,"<a href=\"Test\/CommandOptGrpTest.php.html#20\">CommandOptGrpTest::testNew<\/a>"],[100,1,"<a href=\"Test\/CommandOptGrpTest.php.html#30\">CommandOptGrpTest::testAddGetClearOptSwitches<\/a>"],[100,1,"<a href=\"Test\/CommandOptGrpTest.php.html#68\">CommandOptGrpTest::testGetSwitches<\/a>"],[100,1,"<a href=\"Test\/CommandOptGrpTest.php.html#91\">CommandOptGrpTest::testValidate<\/a>"],[100,1,"<a href=\"Test\/CommandOptTest.php.html#18\">CommandOptTest::testNew<\/a>"],[100,1,"<a href=\"Test\/CommandOptTest.php.html#28\">CommandOptTest::testCheckOptSwitch<\/a>"],[100,1,"<a href=\"Test\/CommandOptTest.php.html#40\">CommandOptTest::testAddGetClearOptSwitches<\/a>"],[100,1,"<a href=\"Test\/CommandOptTest.php.html#66\">CommandOptTest::testSetGetOptArg<\/a>"],[100,1,"<a href=\"Test\/CommandOptTest.php.html#81\">CommandOptTest::testGetSwitchesString<\/a>"],[100,7,"<a href=\"Test\/CommandOptTest.php.html#112\">CommandOptTest::testValidate<\/a>"],[100,1,"<a href=\"Test\/CommandTest.php.html#20\">T222_MotleyCommandTest::testNew<\/a>"],[100,1,"<a href=\"Test\/CommandTest.php.html#30\">T222_MotleyCommandTest::testSetGetName<\/a>"],[100,1,"<a href=\"Test\/CommandTest.php.html#40\">T222_MotleyCommandTest::testSetGetDescription<\/a>"],[100,1,"<a href=\"Test\/CommandTest.php.html#50\">T222_MotleyCommandTest::testSetGetDisplayName<\/a>"],[100,1,"<a href=\"Test\/CommandTest.php.html#60\">T222_MotleyCommandTest::testAddGetClearArrangements<\/a>"],[100,1,"<a href=\"Test\/CommandTest.php.html#78\">T222_MotleyCommandTest::testGetMessenger<\/a>"],[100,1,"<a href=\"Test\/CommandTest.php.html#87\">T222_MotleyCommandTest::testHelp<\/a>"],[100,1,"<a href=\"Test\/CommandTest.php.html#108\">T222_MotleyCommandTest::testParse<\/a>"],[100,1,"<a href=\"Test\/CommandTest.php.html#117\">T222_MotleyCommandTest::testRun<\/a>"],[100,1,"<a href=\"Test\/GuidGeneratorTest.php.html#21\">GuidGeneratorTest::testNewGuidGenerator<\/a>"],[100,1,"<a href=\"Test\/GuidGeneratorTest.php.html#30\">GuidGeneratorTest::testGlobalGuidGenerator<\/a>"],[100,1,"<a href=\"Test\/GuidGeneratorTest.php.html#37\">GuidGeneratorTest::testLowerNoDashes<\/a>"],[100,1,"<a href=\"Test\/GuidGeneratorTest.php.html#54\">GuidGeneratorTest::testUpperNoDashes<\/a>"],[100,1,"<a href=\"Test\/PhpBaseTest.php.html#17\">PhpBaseTest::testPushAndPop<\/a>"],[100,1,"<a href=\"Test\/PhpBaseTest.php.html#28\">PhpBaseTest::testSimpleMath<\/a>"],[100,1,"<a href=\"Test\/PhpStuffTest.php.html#17\">PhpStuffTest::testHashArray<\/a>"],[100,1,"<a href=\"Test\/PhpStuffTest.php.html#28\">PhpStuffTest::testDouglasAdams<\/a>"],[100,5,"<a href=\"Test\/PhpSyntaxTest.php.html#23\">PhpSyntaxTest::testPhpSyntax<\/a>"],[100,3,"<a href=\"Test\/UnitTestSupportTest.php.html#23\">UnitTestSupportTest::tearDown<\/a>"],[100,1,"<a href=\"Test\/UnitTestSupportTest.php.html#36\">UnitTestSupportTest::testInvokeFunction<\/a>"],[100,1,"<a href=\"Test\/UnitTestSupportTest.php.html#53\">UnitTestSupportTest::testCaptureHandler<\/a>"],[100,3,"<a href=\"Test\/UnitTestSupportTest.php.html#81\">UnitTestSupportTest::testRecursiveDirectoryDelete<\/a>"],[100,1,"<a href=\"Test\/UsageFormatterTest.php.html#18\">UsageFormatterTest::testNew<\/a>"],[100,1,"<a href=\"Test\/UsageFormatterTest.php.html#24\">UsageFormatterTest::testClearOutput<\/a>"],[100,1,"<a href=\"Test\/UsageFormatterTest.php.html#41\">UsageFormatterTest::testFormatting<\/a>"],[100,1,"<a href=\"Test\/UsageFormatterTest.php.html#138\">UsageFormatterTest::testSetGetColumnWidth<\/a>"],[100,1,"<a href=\"Test\/UsageFormatterTest.php.html#147\">UsageFormatterTest::testSetGetLeftIndent<\/a>"],[100,1,"<a href=\"Test\/UsageFormatterTest.php.html#156\">UsageFormatterTest::testSetGetRightIndent<\/a>"],[100,1,"<a href=\"Test\/UsageFormatterTest.php.html#165\">UsageFormatterTest::testSetGetContIndent<\/a>"],[100,1,"<a href=\"Test\/UsageFormatterTest.php.html#174\">UsageFormatterTest::testSetGetMaxLength<\/a>"],[100,1,"<a href=\"Test\/UsageFormatterTest.php.html#188\">UsageFormatterTest::testSetGetEOL<\/a>"],[100,1,"<a href=\"Test\/UsageFormatterTest.php.html#196\">UsageFormatterTest::testGetSetParam<\/a>"],[100,1,"<a href=\"Test\/ZzzSampleClass.php.html#24\">ZzzSampleClass::__construct<\/a>"],[100,1,"<a href=\"Test\/ZzzSampleClass.php.html#28\">ZzzSampleClass::publicFunction<\/a>"],[100,1,"<a href=\"Test\/ZzzSampleClass.php.html#34\">ZzzSampleClass::protectedFunction<\/a>"],[100,1,"<a href=\"Test\/ZzzSampleClass.php.html#40\">ZzzSampleClass::privateFunction<\/a>"],[100,1,"<a href=\"Test\/ZzzSampleClass.php.html#46\">ZzzSampleClass::staticPublicFunction<\/a>"],[100,1,"<a href=\"Test\/ZzzSampleClass.php.html#52\">ZzzSampleClass::staticProtectedFunction<\/a>"],[100,1,"<a href=\"Test\/ZzzSampleClass.php.html#58\">ZzzSampleClass::staticPrivateFunction<\/a>"],[100,1,"<a href=\"UnitTestSupport.php.html#35\">UnitTestSupport::invokeFunction<\/a>"],[100,1,"<a href=\"UnitTestSupport.php.html#49\">UnitTestSupport::errorHandlerForCapturing<\/a>"],[100,1,"<a href=\"UnitTestSupport.php.html#63\">UnitTestSupport::engageCaptureHandler<\/a>"],[100,2,"<a href=\"UnitTestSupport.php.html#72\">UnitTestSupport::disengageCaptureHandler<\/a>"],[100,1,"<a href=\"UnitTestSupport.php.html#82\">UnitTestSupport::getCapturedErrors<\/a>"],[100,1,"<a href=\"UnitTestSupport.php.html#88\">UnitTestSupport::clearCapturedErrors<\/a>"],[100,1,"<a href=\"UnitTestSupport.php.html#101\">UnitTestSupport::__construct<\/a>"],[100,1,"<a href=\"UnitTestSupport.php.html#108\">UnitTestSupport::setTmpDirRoot<\/a>"],[100,1,"<a href=\"UnitTestSupport.php.html#114\">UnitTestSupport::getTmpDirRoot<\/a>"],[100,3,"<a href=\"UnitTestSupport.php.html#120\">UnitTestSupport::createTmpRootDir<\/a>"],[100,4,"<a href=\"UnitTestSupport.php.html#134\">UnitTestSupport::createTmpSubDir<\/a>"],[100,5,"<a href=\"UnitTestSupport.php.html#154\">UnitTestSupport::createTmpDummyFile<\/a>"],[100,1,"<a href=\"UnitTestSupport.php.html#176\">UnitTestSupport::getTmpDirsCreated<\/a>"],[100,1,"<a href=\"UnitTestSupport.php.html#182\">UnitTestSupport::getTmpFilesCreated<\/a>"],[100,5,"<a href=\"UnitTestSupport.php.html#187\">UnitTestSupport::cleanupTmp<\/a>"],[100,4,"<a href=\"UnitTestSupport.php.html#207\">UnitTestSupport::recursiveRmdir<\/a>"],[100,1,"<a href=\"UsageFormatter.php.html#39\">UsageFormatter::__construct<\/a>"],[100,1,"<a href=\"UsageFormatter.php.html#50\">UsageFormatter::clear<\/a>"],[100,1,"<a href=\"UsageFormatter.php.html#56\">UsageFormatter::formatBreak<\/a>"],[100,3,"<a href=\"UsageFormatter.php.html#70\">UsageFormatter::formatText<\/a>"],[100,23,"<a href=\"UsageFormatter.php.html#93\">UsageFormatter::formatChunk<\/a>"],[100,3,"<a href=\"UsageFormatter.php.html#232\">UsageFormatter::getFormattedText<\/a>"],[100,1,"<a href=\"UsageFormatter.php.html#244\">UsageFormatter::outputFormattedText<\/a>"],[100,1,"<a href=\"UsageFormatter.php.html#252\">UsageFormatter::setColumnWidth<\/a>"],[100,3,"<a href=\"UsageFormatter.php.html#260\">UsageFormatter::getColumnWidth<\/a>"],[100,1,"<a href=\"UsageFormatter.php.html#280\">UsageFormatter::setLeftIndent<\/a>"],[100,1,"<a href=\"UsageFormatter.php.html#286\">UsageFormatter::getLeftIndent<\/a>"],[100,1,"<a href=\"UsageFormatter.php.html#292\">UsageFormatter::setRightIndent<\/a>"],[100,1,"<a href=\"UsageFormatter.php.html#298\">UsageFormatter::getRightIndent<\/a>"],[100,1,"<a href=\"UsageFormatter.php.html#304\">UsageFormatter::setContinueIndent<\/a>"],[100,1,"<a href=\"UsageFormatter.php.html#310\">UsageFormatter::getContinueIndent<\/a>"],[100,1,"<a href=\"UsageFormatter.php.html#316\">UsageFormatter::setMaxLength<\/a>"],[100,1,"<a href=\"UsageFormatter.php.html#322\">UsageFormatter::getMaxLength<\/a>"],[100,1,"<a href=\"UsageFormatter.php.html#330\">UsageFormatter::setEOL<\/a>"],[100,1,"<a href=\"UsageFormatter.php.html#336\">UsageFormatter::getEOL<\/a>"],[100,2,"<a href=\"UsageFormatter.php.html#343\">UsageFormatter::setParam<\/a>"],[100,1,"<a href=\"UsageFormatter.php.html#355\">UsageFormatter::getParam<\/a>"],[100,1,"<a href=\"UsageFormatter.php.html#361\">UsageFormatter::getParams<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

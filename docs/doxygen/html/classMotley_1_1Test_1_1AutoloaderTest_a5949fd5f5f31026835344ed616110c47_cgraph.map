@@ -1,0 +1,5 @@
+<map id="Motley\Test\AutoloaderTest\testRegisterFunction" name="Motley\Test\AutoloaderTest\testRegisterFunction">
+<area shape="rect" id="node2" href="$classMotley_1_1Autoloader.html#a5163029d9f8d5f2ba78cdb4f73ef073d" title="Check if Motley::Autoloader::autoload is SPL registered. " alt="" coords="238,5,442,32"/>
+<area shape="rect" id="node3" href="$classMotley_1_1Autoloader.html#add8654a3745ea925e9062b9090e39947" title="Registers the Motley::Autoloader::autoload routine as an autoloader. " alt="" coords="491,31,666,57"/>
+<area shape="rect" id="node4" href="$classMotley_1_1Autoloader.html#a0f938dc3122a50aec1b2f03009cfd2a5" title="Un&#45;registers the Motley::Autoloader::autoload routine as an autoloader. " alt="" coords="246,107,434,133"/>
+</map>

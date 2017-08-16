@@ -1,0 +1,2335 @@
+<?xml version="1.0"?>
+<phpunit xmlns="http://schema.phpunit.de/coverage/1.0">
+  <file name="Checker.php" path="/">
+    <totals>
+      <lines total="240" comments="110" code="130" executable="99" executed="99" percent="100.00"/>
+      <methods count="16" tested="16" percent="100.00"/>
+      <functions count="0" tested="0" percent="0"/>
+      <classes count="1" tested="1" percent="100.00"/>
+      <traits count="0" tested="0" percent="0"/>
+    </totals>
+    <class name="Checker" start="14" executable="99" executed="99" crap="39">
+      <package full="" name="" sub="" category=""/>
+      <namespace name="Motley"/>
+      <method name="__construct" signature="__construct(int $errLvl=E_USER_ERROR)" start="23" end="25" crap="1" executable="2" executed="2" coverage="100"/>
+      <method name="getErrorLevel" signature="getErrorLevel() : int" start="29" end="31" crap="1" executable="1" executed="1" coverage="100"/>
+      <method name="setErrorLevel" signature="setErrorLevel(int $errLvl=E_USER_ERROR)" start="35" end="37" crap="1" executable="2" executed="2" coverage="100"/>
+      <method name="getFailCount" signature="getFailCount()" start="41" end="43" crap="1" executable="1" executed="1" coverage="100"/>
+      <method name="resetFailCount" signature="resetFailCount()" start="46" end="48" crap="1" executable="2" executed="2" coverage="100"/>
+      <method name="getPassCount" signature="getPassCount()" start="52" end="54" crap="1" executable="1" executed="1" coverage="100"/>
+      <method name="resetPassCount" signature="resetPassCount()" start="57" end="59" crap="1" executable="2" executed="2" coverage="100"/>
+      <method name="checkTrue" signature="checkTrue($cond, string $failMsg=&quot;&quot;) : bool" start="64" end="76" crap="3" executable="8" executed="8" coverage="100"/>
+      <method name="checkFalse" signature="checkFalse($cond, string $failMsg=&quot;&quot;) : bool" start="81" end="93" crap="3" executable="8" executed="8" coverage="100"/>
+      <method name="checkNotTrue" signature="checkNotTrue($cond, string $failMsg=&quot;&quot;) : bool" start="98" end="110" crap="3" executable="8" executed="8" coverage="100"/>
+      <method name="checkNotFalse" signature="checkNotFalse($cond, string $failMsg=&quot;&quot;) : bool" start="115" end="127" crap="3" executable="8" executed="8" coverage="100"/>
+      <method name="checkIsZero" signature="checkIsZero($cond, string $failMsg=&quot;&quot;) : bool" start="132" end="144" crap="3" executable="8" executed="8" coverage="100"/>
+      <method name="checkIsNull" signature="checkIsNull($cond, string $failMsg=&quot;&quot;) : bool" start="149" end="161" crap="3" executable="8" executed="8" coverage="100"/>
+      <method name="checkIsNotNull" signature="checkIsNotNull($cond, string $failMsg=&quot;&quot;) : bool" start="166" end="178" crap="3" executable="8" executed="8" coverage="100"/>
+      <method name="isAssociativeArray" signature="isAssociativeArray($var)" start="185" end="195" crap="3" executable="6" executed="6" coverage="100"/>
+      <method name="describeVar" signature="describeVar($var, int $maxLength=80) : string" start="201" end="238" crap="8" executable="26" executed="26" coverage="100"/>
+    </class>
+    <coverage>
+      <line nr="24">
+        <covered by="Motley\Test\CheckerTest::testGetSetErrorLevel"/>
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+        <covered by="Motley\Test\CommandArgTest::testNew"/>
+        <covered by="Motley\Test\CommandArgTest::testGetDisplayName"/>
+        <covered by="Motley\Test\CommandArgTest::testValidLiterals"/>
+        <covered by="Motley\Test\CommandArgTest::testValidRegExs"/>
+        <covered by="Motley\Test\CommandArgTest::testSetGetIsFile"/>
+        <covered by="Motley\Test\CommandArgTest::testArgValues"/>
+        <covered by="Motley\Test\CommandArgTest::testGoodCheckRegEx"/>
+        <covered by="Motley\Test\CommandArgTest::testBadCheckRegEx"/>
+        <covered by="Motley\Test\CommandArgTest::testValidate"/>
+        <covered by="Motley\Test\CommandArgTest::testSetGetDisplayName"/>
+        <covered by="Motley\Test\CommandArgTest::testSetGetDefaultValue"/>
+        <covered by="Motley\Test\CommandArrangeCompTest::testNewGet"/>
+        <covered by="Motley\Test\CommandArrangeCompTest::testGetIsFulfilled"/>
+        <covered by="Motley\Test\CommandArrangeTest::testNew"/>
+        <covered by="Motley\Test\CommandArrangeTest::testSetGetName"/>
+        <covered by="Motley\Test\CommandArrangeTest::testSetGetDescription"/>
+        <covered by="Motley\Test\CommandArrangeTest::testSetGetDisplayName"/>
+        <covered by="Motley\Test\CommandArrangeTest::testDefineGetClearArrangement"/>
+        <covered by="Motley\Test\CommandComponentTest::testNew"/>
+        <covered by="Motley\Test\CommandComponentTest::testSetGetName"/>
+        <covered by="Motley\Test\CommandComponentTest::testSetGetDescription"/>
+        <covered by="Motley\Test\CommandComponentTest::testSetGetDisplayName"/>
+        <covered by="Motley\Test\CommandComponentTest::testSaveLastParam"/>
+        <covered by="Motley\Test\CommandComponentTest::testValiateGetLastParam"/>
+        <covered by="Motley\Test\CommandComponentTest::testParamHistory"/>
+        <covered by="Motley\Test\CommandComponentTest::testFindComponentByName"/>
+        <covered by="Motley\Test\CommandDemoTest::testNew"/>
+        <covered by="Motley\Test\CommandDemoTest::testRunDefaultHelp"/>
+        <covered by="Motley\Test\CommandDemoTest::testRunHelp"/>
+        <covered by="Motley\Test\CommandDemoTest::testRunVersion"/>
+        <covered by="Motley\Test\CommandDemoTest::testRunBadSwitch"/>
+        <covered by="Motley\Test\CommandDoubleDashTest::testNewDoubleDash"/>
+        <covered by="Motley\Test\CommandDoubleDashTest::testGet"/>
+        <covered by="Motley\Test\CommandDoubleDashTest::testValidate"/>
+        <covered by="Motley\Test\CommandMessengerTest::testNew"/>
+        <covered by="Motley\Test\CommandMessengerTest::testSetGetErrorExitLevel"/>
+        <covered by="Motley\Test\CommandMessengerTest::testEndUserMessaging"/>
+        <covered by="Motley\Test\CommandOptGrpTest::testNew"/>
+        <covered by="Motley\Test\CommandOptGrpTest::testAddGetClearOptSwitches"/>
+        <covered by="Motley\Test\CommandOptGrpTest::testGetSwitches"/>
+        <covered by="Motley\Test\CommandOptGrpTest::testValidate"/>
+        <covered by="Motley\Test\CommandOptTest::testNew"/>
+        <covered by="Motley\Test\CommandOptTest::testAddGetClearOptSwitches"/>
+        <covered by="Motley\Test\CommandOptTest::testSetGetOptArg"/>
+        <covered by="Motley\Test\CommandOptTest::testGetSwitchesString"/>
+        <covered by="Motley\Test\CommandOptTest::testValidate"/>
+        <covered by="Motley\Test\T222_MotleyCommandTest::testAddGetClearArrangements"/>
+        <covered by="Motley\Test\T222_MotleyCommandTest::testGetMessenger"/>
+        <covered by="Motley\Test\UnitTestSupportTest::testRecursiveDirectoryDelete"/>
+      </line>
+      <line nr="25">
+        <covered by="Motley\Test\CheckerTest::testGetSetErrorLevel"/>
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+        <covered by="Motley\Test\CommandArgTest::testNew"/>
+        <covered by="Motley\Test\CommandArgTest::testGetDisplayName"/>
+        <covered by="Motley\Test\CommandArgTest::testValidLiterals"/>
+        <covered by="Motley\Test\CommandArgTest::testValidRegExs"/>
+        <covered by="Motley\Test\CommandArgTest::testSetGetIsFile"/>
+        <covered by="Motley\Test\CommandArgTest::testArgValues"/>
+        <covered by="Motley\Test\CommandArgTest::testGoodCheckRegEx"/>
+        <covered by="Motley\Test\CommandArgTest::testBadCheckRegEx"/>
+        <covered by="Motley\Test\CommandArgTest::testValidate"/>
+        <covered by="Motley\Test\CommandArgTest::testSetGetDisplayName"/>
+        <covered by="Motley\Test\CommandArgTest::testSetGetDefaultValue"/>
+        <covered by="Motley\Test\CommandArrangeCompTest::testNewGet"/>
+        <covered by="Motley\Test\CommandArrangeCompTest::testGetIsFulfilled"/>
+        <covered by="Motley\Test\CommandArrangeTest::testNew"/>
+        <covered by="Motley\Test\CommandArrangeTest::testSetGetName"/>
+        <covered by="Motley\Test\CommandArrangeTest::testSetGetDescription"/>
+        <covered by="Motley\Test\CommandArrangeTest::testSetGetDisplayName"/>
+        <covered by="Motley\Test\CommandArrangeTest::testDefineGetClearArrangement"/>
+        <covered by="Motley\Test\CommandComponentTest::testNew"/>
+        <covered by="Motley\Test\CommandComponentTest::testSetGetName"/>
+        <covered by="Motley\Test\CommandComponentTest::testSetGetDescription"/>
+        <covered by="Motley\Test\CommandComponentTest::testSetGetDisplayName"/>
+        <covered by="Motley\Test\CommandComponentTest::testSaveLastParam"/>
+        <covered by="Motley\Test\CommandComponentTest::testValiateGetLastParam"/>
+        <covered by="Motley\Test\CommandComponentTest::testParamHistory"/>
+        <covered by="Motley\Test\CommandComponentTest::testFindComponentByName"/>
+        <covered by="Motley\Test\CommandDemoTest::testNew"/>
+        <covered by="Motley\Test\CommandDemoTest::testRunDefaultHelp"/>
+        <covered by="Motley\Test\CommandDemoTest::testRunHelp"/>
+        <covered by="Motley\Test\CommandDemoTest::testRunVersion"/>
+        <covered by="Motley\Test\CommandDemoTest::testRunBadSwitch"/>
+        <covered by="Motley\Test\CommandDoubleDashTest::testNewDoubleDash"/>
+        <covered by="Motley\Test\CommandDoubleDashTest::testGet"/>
+        <covered by="Motley\Test\CommandDoubleDashTest::testValidate"/>
+        <covered by="Motley\Test\CommandMessengerTest::testNew"/>
+        <covered by="Motley\Test\CommandMessengerTest::testSetGetErrorExitLevel"/>
+        <covered by="Motley\Test\CommandMessengerTest::testEndUserMessaging"/>
+        <covered by="Motley\Test\CommandOptGrpTest::testNew"/>
+        <covered by="Motley\Test\CommandOptGrpTest::testAddGetClearOptSwitches"/>
+        <covered by="Motley\Test\CommandOptGrpTest::testGetSwitches"/>
+        <covered by="Motley\Test\CommandOptGrpTest::testValidate"/>
+        <covered by="Motley\Test\CommandOptTest::testNew"/>
+        <covered by="Motley\Test\CommandOptTest::testAddGetClearOptSwitches"/>
+        <covered by="Motley\Test\CommandOptTest::testSetGetOptArg"/>
+        <covered by="Motley\Test\CommandOptTest::testGetSwitchesString"/>
+        <covered by="Motley\Test\CommandOptTest::testValidate"/>
+        <covered by="Motley\Test\T222_MotleyCommandTest::testAddGetClearArrangements"/>
+        <covered by="Motley\Test\T222_MotleyCommandTest::testGetMessenger"/>
+        <covered by="Motley\Test\UnitTestSupportTest::testRecursiveDirectoryDelete"/>
+      </line>
+      <line nr="30">
+        <covered by="Motley\Test\CheckerTest::testGetSetErrorLevel"/>
+      </line>
+      <line nr="36">
+        <covered by="Motley\Test\CheckerTest::testGetSetErrorLevel"/>
+      </line>
+      <line nr="37">
+        <covered by="Motley\Test\CheckerTest::testGetSetErrorLevel"/>
+      </line>
+      <line nr="42">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="47">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="48">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="53">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="58">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="59">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="65">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+        <covered by="Motley\Test\CommandDemoTest::testRunBadSwitch"/>
+        <covered by="Motley\Test\CommandMessengerTest::testEndUserMessaging"/>
+        <covered by="Motley\Test\UnitTestSupportTest::testRecursiveDirectoryDelete"/>
+      </line>
+      <line nr="66">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+        <covered by="Motley\Test\CommandDemoTest::testRunBadSwitch"/>
+        <covered by="Motley\Test\CommandMessengerTest::testEndUserMessaging"/>
+      </line>
+      <line nr="68">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+        <covered by="Motley\Test\CommandDemoTest::testRunBadSwitch"/>
+        <covered by="Motley\Test\CommandMessengerTest::testEndUserMessaging"/>
+        <covered by="Motley\Test\UnitTestSupportTest::testRecursiveDirectoryDelete"/>
+      </line>
+      <line nr="69">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+        <covered by="Motley\Test\CommandDemoTest::testRunBadSwitch"/>
+        <covered by="Motley\Test\CommandMessengerTest::testEndUserMessaging"/>
+        <covered by="Motley\Test\UnitTestSupportTest::testRecursiveDirectoryDelete"/>
+      </line>
+      <line nr="70">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+        <covered by="Motley\Test\CommandDemoTest::testRunBadSwitch"/>
+        <covered by="Motley\Test\CommandMessengerTest::testEndUserMessaging"/>
+        <covered by="Motley\Test\UnitTestSupportTest::testRecursiveDirectoryDelete"/>
+      </line>
+      <line nr="72">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="73">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="74">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="82">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="83">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="85">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="86">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="87">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="89">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="90">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="91">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="99">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+        <covered by="Motley\Test\CommandMessengerTest::testEndUserMessaging"/>
+        <covered by="Motley\Test\UnitTestSupportTest::testRecursiveDirectoryDelete"/>
+      </line>
+      <line nr="100">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="102">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+        <covered by="Motley\Test\CommandMessengerTest::testEndUserMessaging"/>
+        <covered by="Motley\Test\UnitTestSupportTest::testRecursiveDirectoryDelete"/>
+      </line>
+      <line nr="103">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+        <covered by="Motley\Test\CommandMessengerTest::testEndUserMessaging"/>
+        <covered by="Motley\Test\UnitTestSupportTest::testRecursiveDirectoryDelete"/>
+      </line>
+      <line nr="104">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+        <covered by="Motley\Test\CommandMessengerTest::testEndUserMessaging"/>
+        <covered by="Motley\Test\UnitTestSupportTest::testRecursiveDirectoryDelete"/>
+      </line>
+      <line nr="106">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="107">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="108">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="116">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+        <covered by="Motley\Test\CommandArrangeTest::testDefineGetClearArrangement"/>
+        <covered by="Motley\Test\CommandDemoTest::testNew"/>
+        <covered by="Motley\Test\CommandDemoTest::testRunDefaultHelp"/>
+        <covered by="Motley\Test\CommandDemoTest::testRunHelp"/>
+        <covered by="Motley\Test\CommandDemoTest::testRunVersion"/>
+        <covered by="Motley\Test\CommandDemoTest::testRunBadSwitch"/>
+        <covered by="Motley\Test\CommandMessengerTest::testEndUserMessaging"/>
+        <covered by="Motley\Test\CommandOptGrpTest::testAddGetClearOptSwitches"/>
+        <covered by="Motley\Test\CommandOptGrpTest::testGetSwitches"/>
+        <covered by="Motley\Test\CommandOptGrpTest::testValidate"/>
+        <covered by="Motley\Test\CommandOptTest::testAddGetClearOptSwitches"/>
+        <covered by="Motley\Test\CommandOptTest::testGetSwitchesString"/>
+        <covered by="Motley\Test\CommandOptTest::testValidate"/>
+        <covered by="Motley\Test\UnitTestSupportTest::testRecursiveDirectoryDelete"/>
+      </line>
+      <line nr="117">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+        <covered by="Motley\Test\CommandMessengerTest::testEndUserMessaging"/>
+      </line>
+      <line nr="119">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+        <covered by="Motley\Test\CommandArrangeTest::testDefineGetClearArrangement"/>
+        <covered by="Motley\Test\CommandDemoTest::testNew"/>
+        <covered by="Motley\Test\CommandDemoTest::testRunDefaultHelp"/>
+        <covered by="Motley\Test\CommandDemoTest::testRunHelp"/>
+        <covered by="Motley\Test\CommandDemoTest::testRunVersion"/>
+        <covered by="Motley\Test\CommandDemoTest::testRunBadSwitch"/>
+        <covered by="Motley\Test\CommandMessengerTest::testEndUserMessaging"/>
+        <covered by="Motley\Test\CommandOptGrpTest::testAddGetClearOptSwitches"/>
+        <covered by="Motley\Test\CommandOptGrpTest::testGetSwitches"/>
+        <covered by="Motley\Test\CommandOptGrpTest::testValidate"/>
+        <covered by="Motley\Test\CommandOptTest::testAddGetClearOptSwitches"/>
+        <covered by="Motley\Test\CommandOptTest::testGetSwitchesString"/>
+        <covered by="Motley\Test\CommandOptTest::testValidate"/>
+        <covered by="Motley\Test\UnitTestSupportTest::testRecursiveDirectoryDelete"/>
+      </line>
+      <line nr="120">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+        <covered by="Motley\Test\CommandArrangeTest::testDefineGetClearArrangement"/>
+        <covered by="Motley\Test\CommandDemoTest::testNew"/>
+        <covered by="Motley\Test\CommandDemoTest::testRunDefaultHelp"/>
+        <covered by="Motley\Test\CommandDemoTest::testRunHelp"/>
+        <covered by="Motley\Test\CommandDemoTest::testRunVersion"/>
+        <covered by="Motley\Test\CommandDemoTest::testRunBadSwitch"/>
+        <covered by="Motley\Test\CommandMessengerTest::testEndUserMessaging"/>
+        <covered by="Motley\Test\CommandOptGrpTest::testAddGetClearOptSwitches"/>
+        <covered by="Motley\Test\CommandOptGrpTest::testGetSwitches"/>
+        <covered by="Motley\Test\CommandOptGrpTest::testValidate"/>
+        <covered by="Motley\Test\CommandOptTest::testAddGetClearOptSwitches"/>
+        <covered by="Motley\Test\CommandOptTest::testGetSwitchesString"/>
+        <covered by="Motley\Test\CommandOptTest::testValidate"/>
+        <covered by="Motley\Test\UnitTestSupportTest::testRecursiveDirectoryDelete"/>
+      </line>
+      <line nr="121">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+        <covered by="Motley\Test\CommandArrangeTest::testDefineGetClearArrangement"/>
+        <covered by="Motley\Test\CommandDemoTest::testNew"/>
+        <covered by="Motley\Test\CommandDemoTest::testRunDefaultHelp"/>
+        <covered by="Motley\Test\CommandDemoTest::testRunHelp"/>
+        <covered by="Motley\Test\CommandDemoTest::testRunVersion"/>
+        <covered by="Motley\Test\CommandDemoTest::testRunBadSwitch"/>
+        <covered by="Motley\Test\CommandMessengerTest::testEndUserMessaging"/>
+        <covered by="Motley\Test\CommandOptGrpTest::testAddGetClearOptSwitches"/>
+        <covered by="Motley\Test\CommandOptGrpTest::testGetSwitches"/>
+        <covered by="Motley\Test\CommandOptGrpTest::testValidate"/>
+        <covered by="Motley\Test\CommandOptTest::testAddGetClearOptSwitches"/>
+        <covered by="Motley\Test\CommandOptTest::testGetSwitchesString"/>
+        <covered by="Motley\Test\CommandOptTest::testValidate"/>
+        <covered by="Motley\Test\UnitTestSupportTest::testRecursiveDirectoryDelete"/>
+      </line>
+      <line nr="123">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+        <covered by="Motley\Test\CommandOptTest::testAddGetClearOptSwitches"/>
+      </line>
+      <line nr="124">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+        <covered by="Motley\Test\CommandOptTest::testAddGetClearOptSwitches"/>
+      </line>
+      <line nr="125">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+        <covered by="Motley\Test\CommandOptTest::testAddGetClearOptSwitches"/>
+      </line>
+      <line nr="133">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="134">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="136">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="137">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="138">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="140">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="141">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="142">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="150">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="151">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="153">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="154">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="155">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="157">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="158">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="159">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="167">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="168">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="170">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="171">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="172">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="174">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="175">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="176">
+        <covered by="Motley\Test\CheckerTest::testChecking"/>
+      </line>
+      <line nr="186">
+        <covered by="Motley\Test\CheckerTest::testIsAssociativeArray"/>
+        <covered by="Motley\Test\CheckerTest::testDescribeVar"/>
+      </line>
+      <line nr="187">
+        <covered by="Motley\Test\CheckerTest::testIsAssociativeArray"/>
+      </line>
+      <line nr="189">
+        <covered by="Motley\Test\CheckerTest::testIsAssociativeArray"/>
+        <covered by="Motley\Test\CheckerTest::testDescribeVar"/>
+      </line>
+      <line nr="190">
+        <covered by="Motley\Test\CheckerTest::testIsAssociativeArray"/>
+        <covered by="Motley\Test\CheckerTest::testDescribeVar"/>
+      </line>
+      <line nr="191">
+        <covered by="Motley\Test\CheckerTest::testIsAssociativeArray"/>
+        <covered by="Motley\Test\CheckerTest::testDescribeVar"/>
+      </line>
+      <line nr="193">
+        <covered by="Motley\Test\CheckerTest::testIsAssociativeArray"/>
+        <covered by="Motley\Test\CheckerTest::testDescribeVar"/>
+      </line>
+      <line nr="202">
+        <covered by="Motley\Test\CheckerTest::testDescribeVar"/>
+      </line>
+      <line nr="203">
+        <covered by="Motley\Test\CheckerTest::testDescribeVar"/>
+      </line>
+      <line nr="204">
+        <covered by="Motley\Test\CheckerTest::testDescribeVar"/>
+      </line>
+      <line nr="205">
+        <covered by="Motley\Test\CheckerTest::testDescribeVar"/>
+      </line>
+      <line nr="206">
+        <covered by="Motley\Test\CheckerTest::testDescribeVar"/>
+      </line>
+      <line nr="207">
+        <covered by="Motley\Test\CheckerTest::testDescribeVar"/>
+      </line>
+      <line nr="208">
+        <covered by="Motley\Test\CheckerTest::testDescribeVar"/>
+      </line>
+      <line nr="210">
+        <covered by="Motley\Test\CheckerTest::testDescribeVar"/>
+      </line>
+      <line nr="211">
+        <covered by="Motley\Test\CheckerTest::testDescribeVar"/>
+      </line>
+      <line nr="213">
+        <covered by="Motley\Test\CheckerTest::testDescribeVar"/>
+      </line>
+      <line nr="214">
+        <covered by="Motley\Test\CheckerTest::testDescribeVar"/>
+      </line>
+      <line nr="215">
+        <covered by="Motley\Test\CheckerTest::testDescribeVar"/>
+      </line>
+      <line nr="216">
+        <covered by="Motley\Test\CheckerTest::testDescribeVar"/>
+      </line>
+      <line nr="218">
+        <covered by="Motley\Test\CheckerTest::testDescribeVar"/>
+      </line>
+      <line nr="219">
+        <covered by="Motley\Test\CheckerTest::testDescribeVar"/>
+      </line>
+      <line nr="222">
+        <covered by="Motley\Test\CheckerTest::testDescribeVar"/>
+      </line>
+      <line nr="223">
+        <covered by="Motley\Test\CheckerTest::testDescribeVar"/>
+      </line>
+      <line nr="224">
+        <covered by="Motley\Test\CheckerTest::testDescribeVar"/>
+      </line>
+      <line nr="225">
+        <covered by="Motley\Test\CheckerTest::testDescribeVar"/>
+      </line>
+      <line nr="227">
+        <covered by="Motley\Test\CheckerTest::testDescribeVar"/>
+      </line>
+      <line nr="230">
+        <covered by="Motley\Test\CheckerTest::testDescribeVar"/>
+      </line>
+      <line nr="231">
+        <covered by="Motley\Test\CheckerTest::testDescribeVar"/>
+      </line>
+      <line nr="233">
+        <covered by="Motley\Test\CheckerTest::testDescribeVar"/>
+      </line>
+      <line nr="234">
+        <covered by="Motley\Test\CheckerTest::testDescribeVar"/>
+      </line>
+      <line nr="235">
+        <covered by="Motley\Test\CheckerTest::testDescribeVar"/>
+      </line>
+      <line nr="237">
+        <covered by="Motley\Test\CheckerTest::testDescribeVar"/>
+      </line>
+    </coverage>
+    <source>
+      <line no="1">
+        <token name="T_OPEN_TAG">&lt;?php</token>
+      </line>
+      <line no="2">
+        <token name="T_COMMENT">/// Source code file for the Motley::Checker class.</token>
+      </line>
+      <line no="3">
+        <token name="T_COMMENT">/// @copyright Copyright (c) 2017, Eric Alan Christiansen.\n</token>
+      </line>
+      <line no="4">
+        <token name="T_COMMENT">/// MIT License. See &lt;https://opensource.org/licenses/MIT&gt;.</token>
+      </line>
+      <line no="5">
+        <token name="T_COMMENT">/// @file</token>
+      </line>
+      <line no="6">
+        <token name="T_COMMENT">### Note: This file uses Uses doxygen style annotation comments.</token>
+      </line>
+      <line no="7">
+        <token name="T_COMMENT">### Note: This file possibly includes some PHPUnit comment directives.</token>
+      </line>
+      <line no="8">
+        <token name="T_NAMESPACE">namespace</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Motley</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="9"/>
+      <line no="10">
+        <token name="T_COMMENT">/// Check smoothly for error conditions.</token>
+      </line>
+      <line no="11">
+        <token name="T_COMMENT">/// Checking via a separate package can also sometimes make it easier to</token>
+      </line>
+      <line no="12">
+        <token name="T_COMMENT">/// acheive 100% unit test code coverage without resorting to code ignore blocks.</token>
+      </line>
+      <line no="13">
+        <token name="T_COMMENT">/// @class Motley::Checker</token>
+      </line>
+      <line no="14">
+        <token name="T_CLASS">class</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Checker</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="15"/>
+      <line no="16">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PROTECTED">protected</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$errorLevel</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">E_USER_ERROR</token>
+        <token name="T_SEMICOLON">;</token>
+        <token name="T_WHITESPACE">   </token>
+        <token name="T_COMMENT">///&lt; Error level to use for this instance.</token>
+      </line>
+      <line no="17">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PROTECTED">protected</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$failCount</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_LNUMBER">0</token>
+        <token name="T_SEMICOLON">;</token>
+        <token name="T_WHITESPACE">               </token>
+        <token name="T_COMMENT">///&lt; Number of check fails since reset.</token>
+      </line>
+      <line no="18">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PROTECTED">protected</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$passCount</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_LNUMBER">0</token>
+        <token name="T_SEMICOLON">;</token>
+        <token name="T_WHITESPACE">               </token>
+        <token name="T_COMMENT">///&lt; Number of check passes since reset.</token>
+      </line>
+      <line no="19"/>
+      <line no="20">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// Class constructor.</token>
+      </line>
+      <line no="21">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// @param $errLvl - The php error level this instance will trigger us a check fails.</token>
+      </line>
+      <line no="22">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// Multiple class instances can be instantiated at different error levels.</token>
+      </line>
+      <line no="23">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">__construct</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">int</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$errLvl</token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_STRING">E_USER_ERROR</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="24">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">errorLevel</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$errLvl</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="25">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="26"/>
+      <line no="27">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// Get the instance error level.</token>
+      </line>
+      <line no="28">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// @return The php error level used if a check fails.</token>
+      </line>
+      <line no="29">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">getErrorLevel</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">int</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="30">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">errorLevel</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="31">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="32"/>
+      <line no="33">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// Set the instance error level.</token>
+      </line>
+      <line no="34">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// @param $errLvl - The php error level used if a check fails.</token>
+      </line>
+      <line no="35">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">setErrorLevel</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">int</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$errLvl</token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_STRING">E_USER_ERROR</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="36">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">errorLevel</token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_VARIABLE">$errLvl</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="37">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="38"/>
+      <line no="39">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// Get the number of check fails since last reset.</token>
+      </line>
+      <line no="40">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// @return The number of check fails since last reset.</token>
+      </line>
+      <line no="41">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">getFailCount</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="42">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">failCount</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="43">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="44"/>
+      <line no="45">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// Reset the number of check fails to zero.</token>
+      </line>
+      <line no="46">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">resetFailCount</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="47">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">failCount</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_LNUMBER">0</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="48">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="49"/>
+      <line no="50">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// Get the number of check passes since last reset.</token>
+      </line>
+      <line no="51">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// @return The number of check passes since last reset.</token>
+      </line>
+      <line no="52">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">getPassCount</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="53">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">passCount</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="54">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="55"/>
+      <line no="56">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// Reset the number of check passes to zero.</token>
+      </line>
+      <line no="57">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">resetPassCount</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="58">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">passCount</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_LNUMBER">0</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="59">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="60"/>
+      <line no="61">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// Check that a condition is exactly strictly true.</token>
+      </line>
+      <line no="62">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// @param $cond - The condition to check.</token>
+      </line>
+      <line no="63">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// @param $failMsg - The message to display if the check fails.</token>
+      </line>
+      <line no="64">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">checkTrue</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$cond</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">string</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$failMsg</token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">""</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">bool</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="65">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$failMsg</token>
+        <token name="T_IS_EQUAL">==</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">""</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="66">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$failMsg</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">"Condition is unexpectedly not TRUE."</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="67">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="68">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$cond</token>
+        <token name="T_IS_IDENTICAL">===</token>
+        <token name="T_STRING">true</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="69">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">passCount</token>
+        <token name="T_INC">++</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="70">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">true</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="71">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ELSE">else</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="72">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">failCount</token>
+        <token name="T_INC">++</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="73">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_STRING">trigger_error</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$failMsg</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">errorLevel</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="74">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">false</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="75">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="76">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="77"/>
+      <line no="78">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// Check that a condition is exactly strictly false.</token>
+      </line>
+      <line no="79">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// @param $cond - The condition to check.</token>
+      </line>
+      <line no="80">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// @param $failMsg - The message to display if the check fails.</token>
+      </line>
+      <line no="81">
+        <token name="T_WHITESPACE">     </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">checkFalse</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$cond</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">string</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$failMsg</token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">""</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">bool</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="82">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$failMsg</token>
+        <token name="T_IS_EQUAL">==</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">""</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="83">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$failMsg</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">"Condition is unexpectedly not FALSE."</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="84">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="85">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$cond</token>
+        <token name="T_IS_IDENTICAL">===</token>
+        <token name="T_STRING">false</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="86">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">passCount</token>
+        <token name="T_INC">++</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="87">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">true</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="88">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ELSE">else</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="89">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">failCount</token>
+        <token name="T_INC">++</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="90">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_STRING">trigger_error</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$failMsg</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">errorLevel</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="91">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">false</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="92">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="93">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="94"/>
+      <line no="95">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// Check that a condition is exactly strictly not true.</token>
+      </line>
+      <line no="96">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// @param $cond - The condition to check.</token>
+      </line>
+      <line no="97">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// @param $failMsg - The message to display if the check fails.</token>
+      </line>
+      <line no="98">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">checkNotTrue</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$cond</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">string</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$failMsg</token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">""</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">bool</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="99">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$failMsg</token>
+        <token name="T_IS_EQUAL">==</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">""</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="100">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$failMsg</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">"Condition is unexpectedly TRUE."</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="101">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="102">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$cond</token>
+        <token name="T_IS_NOT_IDENTICAL">!==</token>
+        <token name="T_STRING">true</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="103">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">passCount</token>
+        <token name="T_INC">++</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="104">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">true</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="105">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ELSE">else</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="106">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">failCount</token>
+        <token name="T_INC">++</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="107">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_STRING">trigger_error</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$failMsg</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">errorLevel</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="108">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">false</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="109">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="110">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="111"/>
+      <line no="112">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// Check that a condition is exactly strictly not false.</token>
+      </line>
+      <line no="113">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// @param $cond - The condition to check.</token>
+      </line>
+      <line no="114">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// @param $failMsg - The message to display if the check fails.</token>
+      </line>
+      <line no="115">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">checkNotFalse</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$cond</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">string</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$failMsg</token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">""</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">bool</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="116">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$failMsg</token>
+        <token name="T_IS_EQUAL">==</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">""</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="117">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$failMsg</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">"Condition is unexpectedly FALSE."</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="118">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="119">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$cond</token>
+        <token name="T_IS_NOT_IDENTICAL">!==</token>
+        <token name="T_STRING">false</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="120">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">passCount</token>
+        <token name="T_INC">++</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="121">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">true</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="122">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ELSE">else</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="123">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">failCount</token>
+        <token name="T_INC">++</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="124">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_STRING">trigger_error</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$failMsg</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">errorLevel</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="125">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">false</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="126">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="127">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="128"/>
+      <line no="129">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// Check that a condition is zero.</token>
+      </line>
+      <line no="130">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// @param $cond - The condition to check.</token>
+      </line>
+      <line no="131">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// @param $failMsg - The message to display if the check fails.</token>
+      </line>
+      <line no="132">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">checkIsZero</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$cond</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">string</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$failMsg</token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">""</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">bool</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="133">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$failMsg</token>
+        <token name="T_IS_EQUAL">==</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">""</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="134">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$failMsg</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">"Condition is unexpectedly not an integer 0 (zero)."</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="135">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="136">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$cond</token>
+        <token name="T_IS_IDENTICAL">===</token>
+        <token name="T_LNUMBER">0</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="137">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">passCount</token>
+        <token name="T_INC">++</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="138">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">true</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="139">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ELSE">else</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="140">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">failCount</token>
+        <token name="T_INC">++</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="141">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_STRING">trigger_error</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$failMsg</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">errorLevel</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="142">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">false</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="143">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="144">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="145"/>
+      <line no="146">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// Check that a condition is null.</token>
+      </line>
+      <line no="147">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// @param $cond - The condition to check.</token>
+      </line>
+      <line no="148">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// @param $failMsg - The message to display if the check fails.</token>
+      </line>
+      <line no="149">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">checkIsNull</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$cond</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">string</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$failMsg</token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">""</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">bool</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="150">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$failMsg</token>
+        <token name="T_IS_EQUAL">==</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">""</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="151">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$failMsg</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">"Condition is unexpectedly not NULL."</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="152">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="153">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">is_null</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$cond</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="154">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">passCount</token>
+        <token name="T_INC">++</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="155">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">true</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="156">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ELSE">else</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="157">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">failCount</token>
+        <token name="T_INC">++</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="158">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_STRING">trigger_error</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$failMsg</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">errorLevel</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="159">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">false</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="160">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="161">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="162"/>
+      <line no="163">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// Check that a condition is not null.</token>
+      </line>
+      <line no="164">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// @param $cond - The condition to check.</token>
+      </line>
+      <line no="165">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// @param $failMsg - The message to display if the check fails.</token>
+      </line>
+      <line no="166">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">checkIsNotNull</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$cond</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">string</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$failMsg</token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">""</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">bool</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="167">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$failMsg</token>
+        <token name="T_IS_EQUAL">==</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">""</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="168">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$failMsg</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">"Condition is unexpectedly NULL."</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="169">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="170">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_EXCLAMATION_MARK">!</token>
+        <token name="T_STRING">is_null</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$cond</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="171">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">passCount</token>
+        <token name="T_INC">++</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="172">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">true</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="173">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ELSE">else</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="174">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">failCount</token>
+        <token name="T_INC">++</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="175">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_STRING">trigger_error</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$failMsg</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_VARIABLE">$this</token>
+        <token name="T_OBJECT_OPERATOR">-&gt;</token>
+        <token name="T_STRING">errorLevel</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="176">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">false</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="177">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="178">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="179"/>
+      <line no="180">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT"># define some static functions that often help checking.</token>
+      </line>
+      <line no="181"/>
+      <line no="182">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// Test if a variable in an associative array.</token>
+      </line>
+      <line no="183">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// @param $var - The variable to test.</token>
+      </line>
+      <line no="184">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// @return TRUE if $var is an associative array, else false.</token>
+      </line>
+      <line no="185">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STATIC">static</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">isAssociativeArray</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$var</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="186">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_EXCLAMATION_MARK">!</token>
+        <token name="T_STRING">is_array</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$var</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="187">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">false</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="188">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="189">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$compare</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">array_diff_key</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$var</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_STRING">array_keys</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">array_keys</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$var</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="190">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">count</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$compare</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_IS_EQUAL">==</token>
+        <token name="T_LNUMBER">0</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="191">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">false</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="192">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ELSE">else</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="193">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">true</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="194">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="195">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="196"/>
+      <line no="197">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// Describe a variable type and value(s) as a length limited string.</token>
+      </line>
+      <line no="198">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// @param $var - The variable to describe.</token>
+      </line>
+      <line no="199">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// @param $maxLength - Optional, the maximum length of the result.</token>
+      </line>
+      <line no="200">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_COMMENT">/// @return A string description of the variable, length limited.</token>
+      </line>
+      <line no="201">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STATIC">static</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">describeVar</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$var</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">int</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$maxLength</token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_LNUMBER">80</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">string</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="202">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$result</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">""</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="203">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">is_array</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$var</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="204">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_IF">if</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">self</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">isAssociativeArray</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$var</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="205">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_VARIABLE">$result</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONCAT_EQUAL">.=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'{'</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="206">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_VARIABLE">$parts</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ARRAY">array</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="207">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_FOREACH">foreach</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$var</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_AS">as</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$k</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_ARROW">=&gt;</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$v</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="208">
+        <token name="T_WHITESPACE">                    </token>
+        <token name="T_VARIABLE">$parts</token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">self</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">describeVar</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$k</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOT">.</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'=&gt;'</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOT">.</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">self</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">describeVar</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$v</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="209">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="210">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_VARIABLE">$result</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONCAT_EQUAL">.=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">implode</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">","</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_VARIABLE">$parts</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="211">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_VARIABLE">$result</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONCAT_EQUAL">.=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'}'</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="212">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CLOSE_CURLY">}</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ELSE">else</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="213">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_VARIABLE">$result</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONCAT_EQUAL">.=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'['</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="214">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_VARIABLE">$parts</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ARRAY">array</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="215">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_FOREACH">foreach</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$var</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_AS">as</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$v</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="216">
+        <token name="T_WHITESPACE">                    </token>
+        <token name="T_VARIABLE">$parts</token>
+        <token name="T_OPEN_SQUARE">[</token>
+        <token name="T_CLOSE_SQUARE">]</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">self</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">describeVar</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$v</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_VARIABLE">$maxLength</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="217">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="218">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_VARIABLE">$result</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONCAT_EQUAL">.=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">implode</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">","</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_VARIABLE">$parts</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="219">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_VARIABLE">$result</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONCAT_EQUAL">.=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">']'</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="220">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="221">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ELSE">else</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="222">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$typ</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">gettype</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$var</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="223">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_IF">if</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$typ</token>
+        <token name="T_IS_EQUAL">==</token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">"boolean"</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="224">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_IF">if</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$var</token>
+        <token name="T_IS_IDENTICAL">===</token>
+        <token name="T_STRING">true</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="225">
+        <token name="T_WHITESPACE">                    </token>
+        <token name="T_VARIABLE">$typ</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONCAT_EQUAL">.=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">"/true"</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="226">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CLOSE_CURLY">}</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ELSE">else</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="227">
+        <token name="T_WHITESPACE">                    </token>
+        <token name="T_VARIABLE">$typ</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONCAT_EQUAL">.=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">"/false"</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="228">
+        <token name="T_WHITESPACE">                </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="229">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="230">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$str</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">strval</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$var</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="231">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$result</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONCAT_EQUAL">.=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOUBLE_QUOTES">"</token>
+        <token name="T_ENCAPSED_AND_WHITESPACE">(</token>
+        <token name="T_VARIABLE">$typ</token>
+        <token name="T_ENCAPSED_AND_WHITESPACE">)'</token>
+        <token name="T_VARIABLE">$str</token>
+        <token name="T_ENCAPSED_AND_WHITESPACE">'</token>
+        <token name="T_DOUBLE_QUOTES">"</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="232">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="233">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$result</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">trim</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$result</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="234">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_IF">if</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">strlen</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$result</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_GT">&gt;</token>
+        <token name="T_VARIABLE">$maxLength</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="235">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$result</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">substr</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$result</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_LNUMBER">0</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_VARIABLE">$maxLength</token>
+        <token name="T_MINUS">-</token>
+        <token name="T_LNUMBER">3</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_DOT">.</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">"..."</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="236">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="237">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$result</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="238">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="239">
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="240">
+        <token name="T_CLOSE_TAG">?&gt;</token>
+      </line>
+      <line no="241"/>
+    </source>
+  </file>
+</phpunit>

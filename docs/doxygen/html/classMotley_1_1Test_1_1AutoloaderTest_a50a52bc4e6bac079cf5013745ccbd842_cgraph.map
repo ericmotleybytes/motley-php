@@ -1,0 +1,5 @@
+<map id="Motley\Test\AutoloaderTest\testAutoload" name="Motley\Test\AutoloaderTest\testAutoload">
+<area shape="rect" id="node2" href="$classMotley_1_1Autoloader.html#a63a2e4e9205c3d6560715bf698f867b3" title="Attempt to find source file from class name, and if found, include the file. " alt="" coords="242,5,422,32"/>
+<area shape="rect" id="node3" href="$classMotley_1_1Autoloader.html#add8654a3745ea925e9062b9090e39947" title="Registers the Motley::Autoloader::autoload routine as an autoloader. " alt="" coords="245,56,419,83"/>
+<area shape="rect" id="node4" href="$classMotley_1_1Autoloader.html#a0f938dc3122a50aec1b2f03009cfd2a5" title="Un&#45;registers the Motley::Autoloader::autoload routine as an autoloader. " alt="" coords="238,107,426,133"/>
+</map>
