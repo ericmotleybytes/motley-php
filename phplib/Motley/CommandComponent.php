@@ -12,6 +12,8 @@ use Motley\Checker;
 /// Represent a component of a command line arrangement.
 class CommandComponent {
 
+    const PhaseDefault = "default";  ///< Default callback phase name.
+
     protected $name        = "";     ///< Object name.
     protected $description = "";     ///< Object description.
     protected $displayName = null;   ///< Object display name.
@@ -19,8 +21,9 @@ class CommandComponent {
     protected $lastParamIsValid = false; ///< Was the last param valid.
     protected $lastParamMessage = "";    ///< Possible error message about last param.
     protected $validParamHist = array(); ///< All valid params validated since reset.
-    protected $chkW             = null;  ///< Warning checker.
-    protected $chkE             = null;  ///< Error checker.
+    protected $chkW      = null;    ///< Warning checker.
+    protected $chkE      = null;    ///< Error checker.
+    protected $callbacks = array(); ///< Hash array [phase]->callable.
 
     /// Class instance constructor.
     /// @param $name - The object name.
@@ -128,6 +131,68 @@ class CommandComponent {
     /// Reset the valid params history.
     public function resetValidParamHistory() {
         $this->validParamHist = array();
+    }
+
+    /// Register a callback function.
+    /// @param $callable - A PHP "callable"
+    /// @param $phase - The name of the associated callback phase.
+    /// @return TRUE if callable registered, FALSE if registration failed.
+    public function registerCallback($callable, string $phase=self::PhaseDefault) {
+        $callOk = is_callable($callable);
+        if($callOk===false) {
+            $this->chkW->checkFailed("Cannot register uncallable callable.");
+            return false;
+        }
+        $this->callbacks[$phase] = $callable;
+        return true;
+    }
+
+    /// Unregister a callback function.
+    /// @param $phase - The name of the associated callback phase.
+    /// @return TRUE.
+    public function unregisterCallback(string $phase=self::PhaseDefault) {
+        if(array_key_exists($phase,$this->callbacks)) {
+            unset($this->callbacks[$phase]);
+        }
+        return true;
+    }
+
+    /// Get a list of all registered callback phase names.
+    /// @returns An array of registered callback phase names.
+    public function getCallbackPhases() : array {
+        $result = array();
+        foreach($this->callbacks as $phase => $callable) {
+            $result[] = $phase;
+        }
+        sort($result);
+        return $result;
+    }
+
+    /// Get a registered callable callback.
+    /// @param $phase - The name of the associated callback phase.
+    /// @returns A PHP callable object, or false if no callable registered.
+    public function getCallback(string $phase) {
+        if(!array_key_exists($phase,$this->callbacks)) {
+            return false;  // no callback found for this phase
+        }
+        $callable = $this->callbacks[$phase];
+        return $callable;
+    }
+
+    /// Invoke a callback for a particular phase, if it exists.
+    /// Two parameters are passed into the callback. First, the current
+    /// component object instance ($this). Second, the current $phase phase name.
+    /// @param $phase - The name of the associated callback phase.
+    /// @param $xtraData - Associative array with extra custom named data items.
+    /// @return NULL if no callback registered, else return value from callback.
+    public function invokeCallback(
+        string $phase=self::PhaseDefault, $xtraData=array()) {
+        if(!array_key_exists($phase,$this->callbacks)) {
+            return null;  // no callback found for this phase
+        }
+        $callable = $this->callbacks[$phase];
+        $result = call_user_func($callable,$phase,$this,$xtraData);
+        return $result;
     }
 
     // Static functions...

@@ -22,6 +22,7 @@ class CommandArrange {
     protected $displayName    = "";                 ///< Arrangement display name.
     protected $arranComps = array();  ///< Array of Motley::CommandArrangeComp objects.
     private   $nextCompIdx    = 0;       // Index into $components.
+    private   $argv           = array(); // command args used by parse
     private   $nextArgvIdx    = 1;       // Index into $argv (skip entry 0).
     private   $matchingComps  = array(); // Matching args and options.
     private   $matched        = false;   // True if $argv matched $components.
@@ -165,17 +166,22 @@ class CommandArrange {
                     $longForm = false;  # -x short form
                     // look ahead for possible switch arg
                     $possible = array_shift($params);
-                    if($ddFound==false and !is_null($possible) and
-                        CommandOpt::checkOptSwitch($possible)) {
-                        # $possible is another switch, not a switch arg.
-                        # undo look ahead.
-                        array_unshift($params,$possible);
-                        $possible = null;
+                    if(is_null($possible)) {
                         $param1 = $param;
                         $param2 = null;
                     } else {
-                        $param1 = $param;
-                        $param2 = "$param $possible";
+                        if(CommandOpt::checkOptSwitch($possible)) {
+                            # $possible is another switch, not a switch arg.
+                            # undo look ahead.
+                            array_unshift($params,$possible);
+                            $possible = null;
+                            $param1 = $param;
+                            $param2 = null;
+                        } else {
+                            # possible is a possible switch argument
+                            $param1 = $param;
+                            $param2 = "$param $possible";
+                        }
                     }
                 }
                 $paramsToTry = array();
@@ -231,6 +237,11 @@ class CommandArrange {
                     $reason = "Argument '$param' not expected here.";
                     break;
                 }
+                $comp = $aComp->getCompObj();
+                if(!in_array($comp,$this->matchingComps)) {
+                    $this->matchingComps[] = $comp;
+                }
+                $param = array_shift($params);  // next command line param
             }
         }
         $this->matched = $match;
@@ -238,7 +249,7 @@ class CommandArrange {
         return $this->matched;
     }
 
-    /// Get an array of components that used for the last arrangement match.
+    /// Get an array of components that were used for the last arrangement match.
     /// Note that CommandOptGrp objects are not returned however, rather the
     /// underlying CommandOpt within the groups that actually matched.
     /// @return As array of components matched in the last arrangement match.
@@ -258,46 +269,96 @@ class CommandArrange {
         return $reason;
     }
 
+    /// Skip ok to skip components until a proper one found.
+    /// @param &$aComp - The current CommandArrangeComp, passed by ref.
+    /// @param &$aComps - All remaining CommandArrangeComp objects, passed by ref.
+    /// @param $classNames - Array of CommandComponent child classes.
+    /// @param &$param - Current command line parameter, passed by ref.
+    /// @return True if a proper validating CommandArrangeComp found.
     private function skipFulfilledUntilClass(&$aComp,&$aComps,$classNames,&$param) {
         if (!is_array($classNames)) { $className = array($classNames); }
         $result = false;
         while($aComp!==null) {
             $comp = $aComp->getCompObj();
             foreach($classNames as $className) {
+                $foundClassMatch = false;
                 if(is_a($comp,$className)) {
                     # Found matching class name.
-                    if($aComp->getIsRepeatable()) {
-                        # Is a repeater, but it still must validate param.
+                    $foundClassMatch = true;
+                    $isRep = $aComp->getIsRepeatable();
+                    $isOpt = $aComp->getIsOptional();
+                    $isFul = $aComp->getIsFulfilled();
+                    $hasVals = $aComp->getHasValidParamHistory();
+                    if(!$isOpt and !$isFul) {
+                        # we have a non-optional unfilled component, param must validate.
                         $stat = $comp->validate($param);
-                        if($stat===false) {
-                            break;  # out of foreach loop
+                        if($stat===true) {
+                            return true;   # validating match
+                        } else {
+                            return false;  # requirements not met
                         }
-                    } elseif($aComp->getIsFulfilled()===false) {
-                        # is not yet fulfilled, but it still must validate.
-                        $stat = $comp->validate($param);
-                        if($stat===false) {
-                            break;  # out of foreach loop
-                        }
-                    } else {
-                        # is a non-repeating and fulfilled component, we cannot use it.
-                        break; # out of foreach loop.
                     }
-                    if((!$aComp->getIsFulfilled()) or $aComp->getIsRepeatable()) {
+                    # not (non-optional and non-fulfilled)
+                    # ... optional or fulfilled
+                    if($isRep) {
+                        # we have an optional repeater or a fulfilled repeater
+                        # see if param validates
+                        $stat = $comp->validate($param);
+                        if($stat===true) {
+                            return true;   # validating match
+                        } else {
+                            if($isFul) {
+                                break;     # ok to skip because already fulfilled
+                            } else {
+                                // unfulfilled repeater
+                                // impossible path (repeat cond), but included for safety
+                                // @codeCoverageIgnoreStart
+                                return false;  # requirements not met
+                                // @codeCoverageIgnoreEnd
+                            }
+                        }
+                    }
+                    # not (non-optional and non-fulfilled)
+                    # ... optional or fulfilled
+                    # not repeatable
+                    if($hasVals) {
+                        # not repeatable, but already has values, skip it
+                        break;
+                    }
+                    # not (non-optional and non-fulfilled)
+                    # ... optional or fulfilled
+                    # not repeatable
+                    # has no values
+                    $stat = $comp->validate($param);
+                    if($stat===true) {
+                        # we just found a validating match
                         return true;
+                    } else {
+                        if($isOpt) {
+                            break;  # ok to skip optional non-repeater
+                        } else {
+                            // impossible path (repeat cond), but included for safety
+                            // @codeCoverageIgnoreStart
+                            return false;  # requirements not met, non-optional
+                            // @codeCoverageIgnoreEnd
+                        }
                     }
-                    # classname and validation are ok.
-                    return true;
+                    # we didn't find a good match or a good skip
+                    return false;
                 }
-            }
+            }  // end of class name for loop
             # Nothing found yet.
             # If current comp is fulfilled, skip to the next one, else mismatch!
             if($aComp->getIsFulfilled()) {
                 $aComp = array_shift($aComps);
             } else {
+                // impossible path (repeat cond), but included for safety
+                // @codeCoverageIgnoreStart
                 return false;
+                // @codeCoverageIgnoreEnd
             }
-        }
-        # Went through all remainig components, but nothing matched param.
+        } // end of CommandArrangeComp while loop.
+        # Went through all remaining components, but nothing matched param.
         return false;
     }
     private function rewindParsing() {
@@ -310,38 +371,6 @@ class CommandArrange {
             $comp = $aComp->getCompObj();
             $comp->resetValidParamHistory();
         }
-    }
-
-    private function getNextArranComp() {
-        if($this->nextCompIdx < count($this->arranComps)) {
-            $result = $this->components[$this->nextCompIdx];
-            $this->nextCompIdx++;
-        } else {
-            $result = false;
-        }
-        return $result;
-    }
-
-    private function getNextArgv() {
-        if($this->nextArgvIdx < count($this->argv)) {
-            $result = $this->argv[$this->nextArgvIdx];
-            $this->nextArgvIdx++;
-        } else {
-            $result = false;
-        }
-        return $result;
-    }
-
-    private function remainingArranCompCount() : int {
-        $result = count($this->arranComps) - $this->nextCompIdx;
-        $result = max(0,$result);
-        return $result;
-    }
-
-    private function remainingArgvCount() : int {
-        $result = count($this->argv) - $this->nextArgvIdx;
-        $result = max(0,$result);
-        return $result;
     }
 
 }

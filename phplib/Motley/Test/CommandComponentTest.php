@@ -109,6 +109,60 @@ class CommandComponentTest extends Testcase {
         $this->assertEquals($exp,$hist);
     }
 
+    /// Test callback functionality.
+    public function testCallbacks() {
+        $comp = new CommandComponent("testcomp");
+        $callable = array($this,"sampleCallback");
+        $stat = $comp->registerCallback($callable,"phase1");
+        $this->assertTrue($stat);
+        $this->assertEquals($callable,$comp->getCallback("phase1"));
+        $stat = $comp->registerCallback($callable,"phase2");
+        $this->assertTrue($stat);
+        $this->assertEquals($callable,$comp->getCallback("phase2"));
+        $this->assertFalse($comp->getCallback("phase9"));
+        $exp = array("phase1","phase2");
+        $act = $comp->getCallbackPhases();
+        $this->assertEquals($exp,$act);
+        $result = $comp->invokeCallback("phase1");
+        $this->assertEquals("phase1",$result["phase"]);
+        $this->assertEquals(get_class($comp),$result["classname"]);
+        $this->assertEquals("",$result["more"]);
+        $result = $comp->invokeCallback("phase2",array("more"=>"stuff"));
+        $this->assertEquals("phase2",$result["phase"]);
+        $this->assertEquals(get_class($comp),$result["classname"]);
+        $this->assertEquals("stuff",$result["more"]);
+        # unregister
+        $this->assertTrue($comp->unregisterCallback("phase1"));
+        $this->assertTrue($comp->unregisterCallback("phase2"));
+        $this->assertTrue($comp->unregisterCallback("phase9"));
+        $this->assertNull($comp->invokeCallback("phase1"));
+        # try to register a non-callable
+        // turn on error capturing
+        UnitTestSupport::engageCaptureHandler(E_USER_WARNING);
+        $badCallable = array("not","a","callable");
+        $stat = $comp->registerCallback($badCallable);
+        $this->assertFalse($stat);
+        $this->assertEquals(1,count(UnitTestSupport::getCapturedErrors()));
+        UnitTestSupport::clearCapturedErrors();
+        // turn off error capturing
+        UnitTestSupport::disengageCaptureHandler();
+    }
+
+    /// Define a callback function to be used by testCallbacks.
+    /// @param $phase - Associated phase name.
+    /// @param $xtraData - Extra data hash array.
+    /// @returns An associative array with named result fields.
+    public function sampleCallback(string $phase, $compObj, $xtraData) {
+        $result = array();
+        $result["more"] = "";
+        if(array_key_exists("more",$xtraData)) {
+            $result["more"] = $xtraData["more"];
+        }
+        $result["phase"] = $phase;
+        $result["classname"] = get_class($compObj);
+        return $result;
+    }
+
     /// Test static function findComponentByName.
     public function testFindComponentByName() {
         $comp1  = new CommandComponent("comp1");

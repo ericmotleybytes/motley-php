@@ -61,6 +61,7 @@ class Checker {
     /// Check that a condition is exactly strictly true.
     /// @param $cond - The condition to check.
     /// @param $failMsg - The message to display if the check fails.
+    /// @return True if check ok, false if check failed.
     public function checkTrue($cond, string $failMsg="") : bool {
         if($failMsg=="") {
             $failMsg = "Condition is unexpectedly not TRUE.";
@@ -78,6 +79,7 @@ class Checker {
     /// Check that a condition is exactly strictly false.
     /// @param $cond - The condition to check.
     /// @param $failMsg - The message to display if the check fails.
+    /// @return True if check ok, false if check failed.
      public function checkFalse($cond, string $failMsg="") : bool {
         if($failMsg=="") {
             $failMsg = "Condition is unexpectedly not FALSE.";
@@ -95,6 +97,7 @@ class Checker {
     /// Check that a condition is exactly strictly not true.
     /// @param $cond - The condition to check.
     /// @param $failMsg - The message to display if the check fails.
+    /// @return True if check ok, false if check failed.
     public function checkNotTrue($cond, string $failMsg="") : bool {
         if($failMsg=="") {
             $failMsg = "Condition is unexpectedly TRUE.";
@@ -112,6 +115,7 @@ class Checker {
     /// Check that a condition is exactly strictly not false.
     /// @param $cond - The condition to check.
     /// @param $failMsg - The message to display if the check fails.
+    /// @return True if check ok, false if check failed.
     public function checkNotFalse($cond, string $failMsg="") : bool {
         if($failMsg=="") {
             $failMsg = "Condition is unexpectedly FALSE.";
@@ -129,6 +133,7 @@ class Checker {
     /// Check that a condition is zero.
     /// @param $cond - The condition to check.
     /// @param $failMsg - The message to display if the check fails.
+    /// @return True if check ok, false if check failed.
     public function checkIsZero($cond, string $failMsg="") : bool {
         if($failMsg=="") {
             $failMsg = "Condition is unexpectedly not an integer 0 (zero).";
@@ -146,6 +151,7 @@ class Checker {
     /// Check that a condition is null.
     /// @param $cond - The condition to check.
     /// @param $failMsg - The message to display if the check fails.
+    /// @return True if check ok, false if check failed.
     public function checkIsNull($cond, string $failMsg="") : bool {
         if($failMsg=="") {
             $failMsg = "Condition is unexpectedly not NULL.";
@@ -163,6 +169,7 @@ class Checker {
     /// Check that a condition is not null.
     /// @param $cond - The condition to check.
     /// @param $failMsg - The message to display if the check fails.
+    /// @return True if check ok, false if check failed.
     public function checkIsNotNull($cond, string $failMsg="") : bool {
         if($failMsg=="") {
             $failMsg = "Condition is unexpectedly NULL.";
@@ -175,6 +182,25 @@ class Checker {
             trigger_error($failMsg,$this->errorLevel);
             return false;
         }
+    }
+
+    /// Report that a check failed.
+    /// @param $failMsg - The message to display.
+    /// @return False.
+    public function checkFailed(string $failMsg="") {
+        if($failMsg=="") {
+            $failMsg = "Check failed.";
+        }
+        $this->failCount++;
+        trigger_error($failMsg,$this->errorLevel);
+        return false;
+    }
+
+    /// Report that a check passed (updates counters).
+    /// @return True.
+    public function checkPassed() {
+        $this->passCount++;
+        return true;
     }
 
     # define some static functions that often help checking.

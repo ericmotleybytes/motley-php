@@ -1,5 +1,5 @@
 <?php
-/// Source code file for Motley::Test::CommandArrangeTest unit testing class.
+/// Source code file for Motley::Test::CommandTest unit testing class.
 /// @copyright Copyright (c) 2017, Eric Alan Christiansen.
 /// MIT License. See <https://opensource.org/licenses/MIT>.
 /// @file
@@ -10,11 +10,13 @@ namespace Motley\Test;
 use PHPUnit\Framework\Testcase;
 use Motley\Command;
 use Motley\CommandArrange;
+use Motley\CommandOpt;
 use Motley\CommandMessenger;
+use Motley\CommandIO;
 use Motley\UsageFormatter;
 
 /// Tests the Motley::Command class.
-class T222_MotleyCommandTest extends Testcase {
+class CommandTest extends Testcase {
 
     /// Test instantiation.
     public function testNew() {
@@ -83,6 +85,30 @@ class T222_MotleyCommandTest extends Testcase {
         $this->assertInstanceOf(UsageFormatter::class,$fmt);
     }
 
+    /// Test channel functions.
+    public function testChannels() {
+        $cmd = new Command("cmd","A command for unit testing.");
+        $channels = $cmd->getChannelIds();
+        $this->assertEquals(3,count($channels));
+        $this->assertTrue(in_array(Command::InputIO,$channels));
+        $this->assertTrue(in_array(Command::OutputIO,$channels));
+        $this->assertTrue(in_array(Command::ErrorIO,$channels));
+        $inputObj = $cmd->getChannel(Command::InputIO);
+        $this->assertInstanceOf(CommandIO::class,$inputObj);
+        $this->assertFalse($cmd->getChannel("bad_id"));
+        $memId = "MemoryIO";
+        $cmd->setChannel($memId,"php://memory","w+");
+        $memObj = $cmd->getChannel($memId);
+        $this->assertInstanceOf(CommandIO::class,$memObj);
+        $cmd->setChannel($memId,"php://temp","w+");
+        $memObj = $cmd->getChannel($memId);
+        $this->assertInstanceOf(CommandIO::class,$memObj);
+        $memObj = $cmd->getChannel($memId);  // get again on purpose for better coverage
+        $this->assertInstanceOf(CommandIO::class,$memObj);
+        $this->assertTrue($cmd->closeChannel($memId));
+        $this->assertFalse($cmd->closeChannel($memId));
+    }
+
     /// Test help functions.
     public function testHelp() {
         # only a partial test. CommandDemo does more testing.
@@ -104,6 +130,18 @@ class T222_MotleyCommandTest extends Testcase {
         $this->assertEquals($expHelp,$actHelp);
     }
 
+    /// Test argv functions.
+    public function testArgv() {
+        $cmd = new Command("cmd","A command for unit testing.");
+        $cmd->setArgv();
+        $a = $cmd->getArgv();
+        $this->assertGreaterThan(0,count($a));
+        $exp = array("dummy","one","two");
+        $cmd->setArgv($exp);
+        $act = $cmd->getArgv();
+        $this->assertEquals($exp,$act);
+    }
+
     /// Test parse.
     public function testParse() {
         # only a partial test. CommandDemo does more testing.
@@ -117,8 +155,15 @@ class T222_MotleyCommandTest extends Testcase {
     public function testRun() {
         $cmd = new Command("cmd","A command for unit testing.");
         $cmd->setArgv(array($cmd->getName()));
+        $opt = new CommandOpt("testopt","",array("--test"));
+        $arr = new CommandArrange("testarran","");
+        $arr->addComponent($opt,false,false);
+        $cmd->addArrangement($arr);
         $statcode = $cmd->run(false);
         $this->assertEquals(1,$statcode);
+        $cmd->setArgv(array($cmd->getName(),"--test"));
+        $statcode = $cmd->run(false);
+        $this->assertEquals(0,$statcode);
     }
 }
 ?>

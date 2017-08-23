@@ -12,11 +12,19 @@ use Motley\CommandOpt;
 use Motley\CommandOptGrp;
 use Motley\CommandDoubleDash;
 use Motley\CommandArrange;
+use Motley\CommandIO;
 use Motley\CommandMessenger;
 use Motley\UsageFormatter;
 
-/// Represent a command line option.
+/// Represent a command line program.
 class Command {
+
+    const InputIO     = "InputIO";   ///< 1st level key valuye for $ioChannels.
+    const OutputIO    = "OutputIO";  ///< 1st level key valuye for $ioChannels.
+    const ErrorIO     = "ErrorIO";   ///< 1st level key valuye for $ioChannels.
+    const FilenameKey = "filename";  ///< 2nd level key valuye for $ioChannels.
+    const ModeKey     = "mode";      ///< 2nd level key valuye for $ioChannels.
+    const ObjectKey   = "object";    ///< 2nd level key valuye for $ioChannels.
 
     protected $name             = "";        ///< Command name.
     protected $description      = "";        ///< Command description.
@@ -25,6 +33,7 @@ class Command {
     protected $userMessenger    = null;      ///< CommandMessage object instance.
     protected $formatter        = null;      ///< UsageFormatter instance.
     protected $argv             = null;      ///< Initialized to global $argv.
+    protected $ioChannels       = array();   ///< Hash array with CommandIO objects.
 
     /// Class instance constructor.
     /// @param $name - Command instance name.
@@ -38,6 +47,68 @@ class Command {
         if(!is_null($desc)) {
             $this->description = $desc;
         }
+        $this->setChannel(self::InputIO ,"php://stdin" ,"r");
+        $this->setChannel(self::OutputIO,"php://stdout","w");
+        $this->setChannel(self::ErrorIO ,"php://stderr","w");
+    }
+
+    /// Set the filename and mode for an io channel.
+    /// @param $channelId - Usually CommandIO::InputIO, OutputIO, or ErrorIO constant.
+    ///   If another user-created channel id is specified a new channel is created.
+    /// @param $filename  - The filename of the io channel.
+    /// @param $mode - The open file mode of the io channel.
+    public function setChannel(string $channelId, string $filename, string $mode) {
+        if(array_key_exists($channelId,$this->ioChannels)) {
+            $ioObj = $this->ioChannels[$channelId][self::ObjectKey];
+            if(!is_null($ioObj)) {
+                $ioObj->close();
+            }
+        }
+        $this->ioChannels[$channelId][self::FilenameKey] = $filename;
+        $this->ioChannels[$channelId][self::ModeKey]     = $mode;
+        $this->ioChannels[$channelId][self::ObjectKey]   = null;
+    }
+
+    /// Get an io channel object.
+    /// @param $channelId - CommandIO::InputIO, OutputIO, or ErrorIO constant.
+    /// @returns The Motley::CommandIO object for the channel, or false if not found.
+    public function getChannel(string $channelId) {
+        if(!array_key_exists($channelId,$this->ioChannels)) {
+            return false;
+        }
+        $filename = $this->ioChannels[$channelId][self::FilenameKey];
+        $mode     = $this->ioChannels[$channelId][self::ModeKey];
+        $ioObj    = $this->ioChannels[$channelId][self::ObjectKey];
+        if(is_null($ioObj)) {
+            $ioObj    = new CommandIO($filename,$mode);
+            $this->ioChannels[$channelId][self::ObjectKey] = $ioObj;
+            $result = $ioObj;
+        } else {
+            $result = $ioObj;
+        }
+        return $result;
+    }
+
+    /// Close an io channel.
+    /// @param $channelId - CommandIO::InputIO, OutputIO, or ErrorIO constant.
+    /// @returns TRUE on success, else FALSE.
+    public function closeChannel(string $channelId) {
+        if(!array_key_exists($channelId,$this->ioChannels)) {
+            return false;
+        }
+        $ioObj    = $this->ioChannels[$channelId][self::ObjectKey];
+        if(!is_null($ioObj)) {
+            $ioObj->close();
+        }
+        unset($this->ioChannels[$channelId]);
+        return true;
+    }
+
+    /// Get current channels.
+    /// @returns An array of channel name ids.
+    public function getChannelIds() {
+        $result = array_keys($this->ioChannels);
+        return $result;
     }
 
     /// Set the command name.

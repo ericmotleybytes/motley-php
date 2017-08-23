@@ -242,6 +242,23 @@ class CheckerTest extends Testcase {
         $chk->resetFailCount();
         $chk->resetPassCount();
         UnitTestSupport::clearCapturedErrors();
+        // check checkFailed and checkPassed,
+        $stat = $chk->checkFailed();
+        $this->assertFalse($stat);
+        $this->assertEquals(1,$chk->getFailCount());
+        $this->assertEquals(0,$chk->getPassCount());
+        $this->assertEquals(1,count(UnitTestSupport::getCapturedErrors()));
+        $chk->resetFailCount();
+        $chk->resetPassCount();
+        UnitTestSupport::clearCapturedErrors();
+        $stat = $chk->checkPassed();
+        $this->assertTrue($stat);
+        $this->assertEquals(0,$chk->getFailCount());
+        $this->assertEquals(1,$chk->getPassCount());
+        $this->assertEquals(0,count(UnitTestSupport::getCapturedErrors()));
+        $chk->resetFailCount();
+        $chk->resetPassCount();
+        UnitTestSupport::clearCapturedErrors();
         // turn off error capturing
         UnitTestSupport::disengageCaptureHandler();
     }

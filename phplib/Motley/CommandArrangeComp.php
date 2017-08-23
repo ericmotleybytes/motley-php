@@ -59,5 +59,17 @@ class CommandArrangeComp {
         }
         return $result;
     }
+
+    /// Get if underlying component already has validated values.
+    /// @return TRUE if underlying component has some validated param history.
+    public function getHasValidParamHistory() : bool {
+        $result = false;
+        $comp = $this->compObj;
+        $cnt = count($comp->getValidParamHistory());
+        if($cnt>0) {
+            $result = true;
+        }
+        return $result;
+    }
 }
 ?>
